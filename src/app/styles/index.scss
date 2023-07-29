@@ -1,0 +1,12 @@
+@import 'reset';
+@import 'variables/global';
+@import 'themes/dark';
+@import 'themes/normal';
+
+.app.dark {
+  background-color: red;
+}
+
+.app.light {
+  background-color: wheat;
+}
