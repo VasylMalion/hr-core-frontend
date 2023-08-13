@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "CeraProLight";
+  src: url("../public/fonts/Cera\ Pro\ Light.otf");
+}
+
+@font-face {
+  font-family: "CeraProMedium";
+  src: url("../public/fonts/Cera\ Pro\ Medium.otf");
+}
+
+@font-face {
+  font-family: "CeraProBold";
+  src: url("../public/fonts/Cera\ Pro\ Bold.otf");
+}
+
+
+@layer base {
+  html {
+    font-family: ceraProMedium;
+  }
+}

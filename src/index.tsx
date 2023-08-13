@@ -1,17 +1,16 @@
 import { render } from "react-dom";
-import "app/styles/index.scss";
-import App from "app/App";
+import App from "./containers/App";
 import { BrowserRouter } from "react-router-dom";
 import { Suspense } from "react";
-import { ThemeProvider } from "app/providers/ThemeProvider";
+import './index.css';
+
+import './i18n'
 
 render(
   <Suspense fallback={<div>Loading...</div>}>
-    <ThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Suspense>,
   document.getElementById("root")
 );

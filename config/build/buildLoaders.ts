@@ -3,7 +3,7 @@ import { RuleSetRule } from "webpack";
 import { BuildOptions } from "./types/config";
 
 export const buildLoaders = ({ isDev }: BuildOptions): Array<RuleSetRule> => {
-  const cssLoader = {
+  const scssLoader = {
     test: /\.s[ac]ss$/i,
     use: [
       isDev ? "style-loader" : MiniCssExtractPlugin.loader,
@@ -18,24 +18,37 @@ export const buildLoaders = ({ isDev }: BuildOptions): Array<RuleSetRule> => {
           },
         },
       },
-      "sass-loader",
+      'sass-loader',
     ],
   };
 
+  // const JSONLoader = {
+  //   test: /\.json$/,
+  //   use: 'json-loader',
+  // }
+
+  const SVGLoader = {
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+  };
+
+
+  const cssLoader =
+  {
+    test: /\.css$/i,
+    use: ['style-loader', 'css-loader', 'postcss-loader'],
+  }
+
   const tsLoader = {
     test: /\.tsx?$/,
-    use: "ts-loader",
+    use: 'ts-loader',
     exclude: /node_modules/,
   };
 
   const fileLoader = {
-    test: /\.(png|jpe?g|gif)$/i,
-    use: [
-      {
-        loader: 'file-loader',
-      },
-    ],
+    test: /\.(png|jpe?g|gif|svg)$/i,
+    use: 'file-loader',
   }
 
-  return [tsLoader, cssLoader, fileLoader];
+  return [tsLoader, SVGLoader, cssLoader, scssLoader, fileLoader];
 };
