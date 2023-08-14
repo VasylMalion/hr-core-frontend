@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className='h-[5rem] w-full border-b border-b-[#091e4214]'>
       <Button onClick={() => i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)}>dfsdf</Button>
-      Header
+      Header22222222222
     </div>
   )
 }
