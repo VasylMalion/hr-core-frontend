@@ -7,6 +7,12 @@
     "APPLIED": "Applied",
     "NOT_APPLIED": "Not Applied"
   },
+  "tabs": {
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "hiringTeam": "Hiring Team"
+  },
   "name": "Candidate Name",
   "rating": "Rating",
   "stagesTitle": "Stages",

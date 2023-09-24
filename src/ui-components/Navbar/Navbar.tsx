@@ -10,6 +10,7 @@ import { ToolTip } from "ui-components";
 
 import { ReactComponent as MessageIcon } from "assets/svgs/message.svg"
 import { ReactComponent as DashboardIcon } from "assets/svgs/dashboard.svg"
+import { ReactComponent as UserIcon } from "assets/svgs/user.svg"
 import { ReactComponent as CalendarIcon } from "assets/svgs/calendar.svg"
 import { ReactComponent as JobIcon } from "assets/svgs/job.svg"
 import { ReactComponent as CandidatesIcon } from "assets/svgs/candidates.svg"
@@ -60,9 +61,9 @@ const handleCollapsedClick = () => {
     //   icon: <MessageIcon />
     // },
     {
-      title: 'calendar',
-      path: RoutePaths.CALENDAR,
-      icon: <CalendarIcon className='fill-current' />
+      title: 'profile',
+      path: RoutePaths.PROFILE,
+      icon: <UserIcon className='fill-current w-[20px] h-[20px] fill-[#787878]' />
     }
   ]
 

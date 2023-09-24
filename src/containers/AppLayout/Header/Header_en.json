@@ -1,1 +1,10 @@
-{}
+{
+  "language": "Українська",
+  "dashboard": "Dashboard",
+  "profile": "Profile",
+  "jobs": "Jobs",
+  "candidates": "Candidates",
+  "employees": "Employees",
+  "structure": "Structure",
+  "logout": "Log out"
+}

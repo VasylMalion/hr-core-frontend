@@ -7,6 +7,8 @@ import { ReactComponent as PlusIcon } from "assets/svgs/plus.svg"
 import jobItemEn from './JobsList_en.json'
 import jobItemUa from './JobsList_ua.json'
 import { Job } from "common/types/common";
+import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "containers/AppRouter";
 
 type JobItemProps = {
   job?: Job
@@ -15,8 +17,10 @@ type JobItemProps = {
 
 const JobItem: FunctionComponent<JobItemProps> = ({ job, isNew = false }) => {
 
+  const navigate= useNavigate()
+
   if (isNew) {
-    return <div className='cursor-pointer min-h-[16rem] w-[16rem] p-[1.5rem] rounded-[5px] flex flex-col border border-dashed	border-border justify-center items-center text-green'>
+    return <div onClick = {() => navigate(RoutePaths.JOB_CREATION)} className='cursor-pointer min-h-[16rem] w-[16rem] p-[1.5rem] rounded-[5px] flex flex-col border border-dashed	border-border justify-center items-center text-green'>
       <PlusIcon />
       <div>Create new job</div>
   </div>

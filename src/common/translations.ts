@@ -7,6 +7,12 @@ export enum TranslationNamespace {
   header = 'header',
   candidates = 'candidates',
   jobsList = 'jobsList',
+  jobDetails = 'jobDetails',
+  jobCreation = 'jobCreation',
+  login = 'login',
+  profile = 'profile',
+  employeesList = 'employeesList',
+  employeeAdding = 'employeeAdding',
 }
 
 export const addTranslationNamespace = (namespace: TranslationNamespace, langEn: {}, langUa: {}) => {

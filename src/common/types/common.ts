@@ -35,3 +35,17 @@ export type Job = {
   description: string
   candidatesCount: number
 }
+
+export type UserInfo = {
+  email: string,
+  phone: string,
+  name: string
+  surname: string
+  birthDate: string 
+  gender: string 
+  address: string 
+  department: string 
+  position: string 
+  role: string 
+  startDate: string 
+}

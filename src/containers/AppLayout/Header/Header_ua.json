@@ -1,1 +1,10 @@
-{}
+{
+  "language": "English",
+  "dashboard": "Панель",
+  "profile": "Профіль",
+  "jobs": "Вакансії",
+  "candidates": "Кандидати",
+  "employees": "Співробітники",
+  "structure": "Структура",
+  "logout": "Вихід"
+}

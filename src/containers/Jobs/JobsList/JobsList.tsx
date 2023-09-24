@@ -1,10 +1,13 @@
 import { TranslationNamespace, addTranslationNamespace } from "common/translations";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 
 import jobsListEn from './JobsList_en.json'
 import jobsListUa from './JobsList_ua.json'
 import { Job } from "common/types/common";
 import JobItem from "./JobItem";
+import TabNavigation from "ui-components/TabOptions/TabNavigation";
+import { useTranslation } from "react-i18next";
+import { useGetAllJobsQuery } from "services/JobService";
 
 const jobs: Array<Job> = [
   {
@@ -49,13 +52,50 @@ const jobs: Array<Job> = [
   }
 ]
 
+enum TabNavigationTypes {
+  CANDIDATES = 'CANDIDATES',
+  JOB_DETAILS = 'JOB_DETAILS',
+  TIMELINE = 'TIMELINE',
+  HIRING_TEAM = 'HIRING_TEAM',
+}
+
 const JobsList: FunctionComponent = () => {
+
+  const { t } = useTranslation(TranslationNamespace.jobsList)
 
   const list = jobs.map(item => <JobItem job={item} />)
 
-  return <div className='flex flex-wrap gap-[2rem]'>
-    {list}
-    <JobItem isNew />
+  const aaa = useGetAllJobsQuery({})
+
+  console.log(aaa)
+
+  const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
+
+  const options = [
+    {
+      title: t('tabs.all'),
+      type: TabNavigationTypes.CANDIDATES
+    },
+    {
+      title: t('tabs.active'),
+      type: TabNavigationTypes.JOB_DETAILS
+    },
+    {
+      title: t('tabs.completed'),
+      type: TabNavigationTypes.TIMELINE
+    },
+  ]
+
+  return <div>
+    <TabNavigation
+      options={options}
+      value={tab}
+      onChange={setTab}
+    />
+    <div className='flex flex-wrap gap-[2rem] mt-8'>
+      {list}
+      <JobItem isNew />
+    </div>
   </div>
 }
 
