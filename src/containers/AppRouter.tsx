@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRouter";
 import JobCreation from "./Jobs/JobCreate/JobCreate";
 import Profile from "./Profile/Profile";
 import EmployeesList from "./Employees/EmployeesList";
+import EmployeeAdding from "./Employees/EmployeeAdding/EmployeeAdding";
+import EmployeeDetails from "./Employees/EmployeeDetails/EmployeeDetails";
 
 export enum  AppRoutes {
   LOGIN = 'LOGIN',
@@ -26,6 +28,7 @@ export enum  AppRoutes {
   SETTINGS = 'SETTINGS',
   JOB_CREATION = 'JOB_CREATION',
   EMPLOYEE_ADDING = 'EMPLOYEE_ADDING',
+  EMPLOYEE_DETAILS = 'EMPLOYEE_DETAILS',
 }
 
 export const RoutePaths: Record<AppRoutes, string> = {
@@ -44,6 +47,7 @@ export const RoutePaths: Record<AppRoutes, string> = {
   [AppRoutes.REPORT]: '/report',
   [AppRoutes.SETTINGS]: '/settings',
   [AppRoutes.EMPLOYEE_ADDING]: '/employees/add',
+  [AppRoutes.EMPLOYEE_DETAILS]: '/employees/:id',
 }
 
 export const routeConfig: Array<RouteProps> = [
@@ -77,7 +81,11 @@ export const routeConfig: Array<RouteProps> = [
   },
   {
     path: RoutePaths.EMPLOYEE_ADDING,
-    element: <EmployeesList />
+    element: <EmployeeAdding />
+  },
+  {
+    path: RoutePaths.EMPLOYEE_DETAILS,
+    element: <EmployeeDetails />
   },
   {
     path: '*',

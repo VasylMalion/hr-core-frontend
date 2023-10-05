@@ -41,11 +41,21 @@ export type UserInfo = {
   phone: string,
   name: string
   surname: string
-  birthDate: string 
+  birthDate: Date 
   gender: string 
   address: string 
   department: string 
   position: string 
   role: string 
-  startDate: string 
+  startDate: Date 
+}
+
+export enum GenderTypes {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+
+export enum RoleTypes {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }

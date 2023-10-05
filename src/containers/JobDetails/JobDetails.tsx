@@ -4,7 +4,7 @@ import Typography from "ui-components/Typography/Typography";
 
 import jobDetailsEn from './JobDetails_en.json'
 import jobDetailsUa from './JobDetails_ua.json'
-import { useGetAllJobsQuery } from "services/JobService";
+// import { GetAllJobsQuery } from "services/JobService";
 import TabNavigation from "ui-components/TabOptions/TabNavigation";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +22,7 @@ const JobDetails: FunctionComponent = () => {
 
   console.log(tab)
 
-  const ss = useGetAllJobsQuery({})
+  // const ss = useGetAllJobsQuery({})
 
   const options = [
     {

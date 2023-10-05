@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { FieldValues } from "react-hook-form"
 
-type InputProps = {
+type DebounceInputProps = {
   label?: string
   placeholder?: string
   value?: string
@@ -11,7 +11,7 @@ type InputProps = {
   error?: FieldValues
 }
 
-const Input: FunctionComponent<InputProps> = ({
+const DebounceInput: FunctionComponent<DebounceInputProps> = ({
   label,
   placeholder,
   value,
@@ -30,14 +30,16 @@ const Input: FunctionComponent<InputProps> = ({
         placeholder={placeholder}
         className={`
           min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 
-          font-[ceraProLight] text-xl rounded-md border border-strock mt-2 
+          font-[ceraProLight] text-xl rounded-md border border-strock mt-2
+          relative 
           ${className} ${error?.type && '!border-red'}
           `}
         {...validation}
       />
+      <div className='absolute'>123</div>
       <span className='text-red text-sm'>{error?.type}</span>
     </div>
   )
 }
 
-export default Input
+export default DebounceInput

@@ -13,6 +13,7 @@ export enum TranslationNamespace {
   profile = 'profile',
   employeesList = 'employeesList',
   employeeAdding = 'employeeAdding',
+  employeeDetails = 'employeeDetails',
 }
 
 export const addTranslationNamespace = (namespace: TranslationNamespace, langEn: {}, langUa: {}) => {

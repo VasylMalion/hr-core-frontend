@@ -97,11 +97,26 @@ const sizing = {
 }
 
 module.exports = {
-content: ["./src/**/*.{html,tsx}"],
+  content: ["./src/**/*.{html,tsx}"],
 
-theme: {
-  colors: colors
-},
+  theme: {
+    colors: colors,
+    extend: {
+      keyframes: {
+        load: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(360deg)'
+          },
+        }
+      },
+      animation: {
+        'loading': 'load 1s linear infinite',
+      },
+    },
+  },
 
   colors: colors,
 
@@ -302,7 +317,6 @@ theme: {
     '40': 40,
     '50': 50,
   },
-
   opacity: {
     '0': '0',
     '25': '0.25',

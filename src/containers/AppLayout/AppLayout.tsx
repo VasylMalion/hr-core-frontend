@@ -3,6 +3,7 @@ import AppRouter, { AppRoutes, RoutePaths } from "containers/AppRouter";
 import Header from "./Header/Header";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "containers/Login/Login";
+import AuthVerify from "./Auth";
 
 const AppLayout: FunctionComponent = () => {
 
@@ -11,6 +12,7 @@ const AppLayout: FunctionComponent = () => {
 
   return (
     <div>
+      <AuthVerify />
       {
         isLoginPage ? (
           <Routes>
