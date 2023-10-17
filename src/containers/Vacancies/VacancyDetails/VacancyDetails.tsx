@@ -1,29 +1,24 @@
-import { TranslationNamespace, addTranslationNamespace } from "common/translations";
 import { FunctionComponent, useState } from "react";
-import Typography from "ui-components/Typography/Typography";
-
-import jobDetailsEn from './JobDetails_en.json'
-import jobDetailsUa from './JobDetails_ua.json'
-// import { GetAllJobsQuery } from "services/JobService";
-import TabNavigation from "ui-components/TabOptions/TabNavigation";
 import { useTranslation } from "react-i18next";
-import Candidates from "./components/Candidates/JobDetails";
+
+import { TranslationNamespace, addTranslationNamespace } from "common/translations";
+import Typography from "ui-components/Typography/Typography";
+import TabNavigation from "ui-components/TabOptions/TabNavigation";
+
+import Candidates from "./components/Candidates/Candidates";
+import vacancyDetailsEn from './VacancyDetails_en.json'
+import vacancyDetailsUa from './VacancyDetails_ua.json'
 
 enum TabNavigationTypes {
   CANDIDATES = 'CANDIDATES',
   JOB_DETAILS = 'JOB_DETAILS',
   TIMELINE = 'TIMELINE',
-  HIRING_TEAM = 'HIRING_TEAM',
 }
 
-const JobDetails: FunctionComponent = () => {
-  const { t } = useTranslation(TranslationNamespace.jobDetails)
+const VacancyDetails: FunctionComponent = () => {
+  const { t } = useTranslation(TranslationNamespace.vacancyDetails)
 
   const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
-
-  console.log(tab)
-
-  // const ss = useGetAllJobsQuery({})
 
   const options = [
     {
@@ -37,10 +32,6 @@ const JobDetails: FunctionComponent = () => {
   {
     title: t('tabs.timeline'),
     type: TabNavigationTypes.TIMELINE
-  },
-  {
-    title: t('tabs.hiringTeam'),
-    type: TabNavigationTypes.HIRING_TEAM
   },
 ]
 
@@ -62,6 +53,6 @@ const JobDetails: FunctionComponent = () => {
   </div>
 }
 
-export default JobDetails
+export default VacancyDetails
 
-addTranslationNamespace(TranslationNamespace.jobDetails, jobDetailsEn, jobDetailsUa)
+addTranslationNamespace(TranslationNamespace.vacancyDetails, vacancyDetailsEn, vacancyDetailsUa)

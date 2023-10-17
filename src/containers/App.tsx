@@ -17,15 +17,16 @@ const App: FunctionComponent = () => {
   const isLoginPage = location.pathname === RoutePaths[AppRoutes.LOGIN]
 
   return (
-    <div className={`grid bg-white ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[16rem_1fr]'}`}>
+    <div className={`grid bg-white ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[auto_1fr]'}`}>
       {!isLoginPage && !isPhoneLarge && <Navbar />}
       <div>
         <AppLayout setIsSidebarOpen={setIsSidebarOpen} isSidebarOpen={isSidebarOpen} />
       </div>
       {
         !isLoginPage && isPhoneLarge && (
-          <div className={`${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
-        fixed bg-white top-[5rem] transition-all	duration-150 ease-in`}
+          <div 
+            className={`${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
+          fixed bg-white top-[5rem] transition-all	duration-150 ease-in`}
           >
             <Navbar />
           </div>

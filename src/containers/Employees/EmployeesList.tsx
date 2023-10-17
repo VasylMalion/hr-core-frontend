@@ -42,7 +42,7 @@ const EmployeesList: FunctionComponent = () => {
   };
 
   const rows = data && data.users.map(item => (
-    <TableRow key={item._id} className='cursor-pointer' onClick={() => routeChange(item._id)}>
+    <TableRow key={item.id} className='cursor-pointer' onClick={() => routeChange(item.id)}>
       <TableCell>{`${item.name} ${item.surname}`}</TableCell>
       <TableCell>{item.address}</TableCell>
       <TableCell>{item.position}</TableCell>

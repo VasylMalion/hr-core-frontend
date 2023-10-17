@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-
 import { RouteProps } from "react-router-dom"
+
 import Dashboard from "./Dashboard/Dashboard";
 import Candidates from "./Candidates/Candidates";
-import JobsList from "./Jobs/JobsList/JobsList";
-import JobDetails from "./JobDetails/JobDetails";
+import Vacancies from "./Vacancies/Vacancies";
+import VacancyDetails from "./Vacancies/VacancyDetails/VacancyDetails";
 import PrivateRoute from "./PrivateRouter";
-import JobCreation from "./Jobs/JobCreate/JobCreate";
+import VacancyAdding from "./Vacancies/VacancyAdding/VacancyAdding";
 import Profile from "./Profile/Profile";
 import EmployeesList from "./Employees/EmployeesList";
 import EmployeeAdding from "./Employees/EmployeeAdding/EmployeeAdding";
@@ -17,8 +17,9 @@ export enum  AppRoutes {
   DASHBOARD = 'DASHBOARD',
   MESSAGES = 'MESSAGES',
   PROFILE = 'PROFILE',
-  JOBS = 'JOBS',
-  JOB_DETAILS = 'JOB_DETAILS',
+  VACANCIES = 'VACANCIES',
+  VACANCY_ADDING = 'VACANCY_ADDING',
+  VACANCY_DETAILS = 'VACANCY_DETAILS',
   CANDIDATES = 'CANDIDATES',
   REFERRALS = 'REFERRALS',
   CAREER = 'CAREER',
@@ -26,7 +27,6 @@ export enum  AppRoutes {
   STRUCTURE = 'STRUCTURE',
   REPORT = 'REPORT',
   SETTINGS = 'SETTINGS',
-  JOB_CREATION = 'JOB_CREATION',
   EMPLOYEE_ADDING = 'EMPLOYEE_ADDING',
   EMPLOYEE_DETAILS = 'EMPLOYEE_DETAILS',
 }
@@ -36,9 +36,9 @@ export const RoutePaths: Record<AppRoutes, string> = {
   [AppRoutes.DASHBOARD]: '/',
   [AppRoutes.MESSAGES]: '/messages',
   [AppRoutes.PROFILE]: '/profile',
-  [AppRoutes.JOBS]: '/jobs',
-  [AppRoutes.JOB_DETAILS]: '/jobs/:id',
-  [AppRoutes.JOB_CREATION]: '/jobs/creation',
+  [AppRoutes.VACANCIES]: '/vacancies',
+  [AppRoutes.VACANCY_DETAILS]: '/vacancy/:id',
+  [AppRoutes.VACANCY_ADDING]: '/vacancy/adding',
   [AppRoutes.CANDIDATES]: '/candidates',
   [AppRoutes.REFERRALS]: '/referrals',
   [AppRoutes.CAREER]: '/career',
@@ -60,20 +60,20 @@ export const routeConfig: Array<RouteProps> = [
     element: <Profile />
   },
   {
-    path: RoutePaths.JOBS,
-    element: <JobsList />
+    path: RoutePaths.VACANCIES,
+    element: <Vacancies />
   },
   {
     path: RoutePaths.CANDIDATES,
     element: <Candidates />
   },
   {
-    path: RoutePaths.JOB_DETAILS,
-    element: <JobDetails />
+    path: RoutePaths.VACANCY_DETAILS,
+    element: <VacancyDetails />
   },
   {
-    path: RoutePaths.JOB_CREATION,
-    element: <JobCreation />
+    path: RoutePaths.VACANCY_ADDING,
+    element: <VacancyAdding />
   },
   {
     path: RoutePaths.EMPLOYEES,

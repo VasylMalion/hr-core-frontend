@@ -2,8 +2,7 @@
   "tabs": {
     "candidates": "Candidates",
     "jobDetails": "Job Details",
-    "timeline": "Timeline & Notes",
-    "hiringTeam": "Hiring Team"
+    "timeline": "Timeline & Notes"
   },
   "name": "Candidate Name",
   "rating": "Rating",
