@@ -1,0 +1,31 @@
+{
+  "title": "Додавання нового співробітника",
+  "personalInfo": "Персональна інформація",
+  "contactInfo": "Контактна інформація",
+  "workInfo": "Робоча інформація",
+  "name": "Ім'я",
+  "surname": "Прізвище",
+  "birthDate": "Дата народження",
+  "genderTitle": "Стать",
+  "email": "Електронна пошта",
+  "mobile": "Номер телефону",
+  "address": "Адреса",
+  "department": "Відділ",
+  "position": "Посада",
+  "role": "Тип",
+  "startDate": "Дата найму",
+  "add": "Додати",
+  "gender": {
+    "male": "Чоловіча",
+    "female": "Жіноча"
+  },
+  "roles": {
+    "user": "Користувач",
+    "admin": "Адмін"
+  },
+  "successTitle": "Успіх!",
+  "failTitle": "Помилка!",
+  "failDescription": "Упс. Щось пішло не так.",
+  "successDescription": "Співробітника успішно додано.",
+  "ok": "Ок"
+}

@@ -13,7 +13,7 @@ const Typography: FunctionComponent<TypographyProps> = ({ tag = 'p', appearance,
   const TypographyTag = tag
 
   return <TypographyTag className={
-    `font-[ceraProBold]
+    `font-[ceraProBold] mb-4
     ${className}
     ${appearance === 'title' ? 'text-2xl' : 'text-lg'}
     ${color === 'light' ? '' : ''}

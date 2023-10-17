@@ -10,6 +10,7 @@ import { ToolTip } from "ui-components";
 
 import { ReactComponent as MessageIcon } from "assets/svgs/message.svg"
 import { ReactComponent as DashboardIcon } from "assets/svgs/dashboard.svg"
+import { ReactComponent as UserIcon } from "assets/svgs/user.svg"
 import { ReactComponent as CalendarIcon } from "assets/svgs/calendar.svg"
 import { ReactComponent as JobIcon } from "assets/svgs/job.svg"
 import { ReactComponent as CandidatesIcon } from "assets/svgs/candidates.svg"
@@ -18,6 +19,10 @@ import { ReactComponent as CareerIcon } from "assets/svgs/career.svg"
 import { ReactComponent as DoubleArrowLeftIcon } from "assets/svgs/double-arrow-left.svg"
 import { ReactComponent as DoubleArrowRightIcon } from "assets/svgs/double-arrow-right.svg"
 import { TranslationNamespace, addTranslationNamespace } from "common/translations";
+import { ReactComponent as LogOutIcon } from "assets/svgs/exit.svg"
+import { ReactComponent as HamburgerIcon } from "assets/svgs/hamburger.svg"
+
+import { ReactComponent as LanguageIcon } from "assets/svgs/language.svg"
 
 import navbarEn from './Navbar_en.json'
 import navbarUa from './Navbar_ua.json'
@@ -25,6 +30,9 @@ import { useTranslation } from "react-i18next";
 import { IS_COLLAPSED_SIDEBAR } from "common/constants";
 import i18n from "i18n";
 import { Lang } from "common/types/common";
+import { useScreenResolution } from "hooks/useScreenResolution";
+import { logOut } from "store/slices/authSlice";
+import { useAppDispatch } from "hooks/redux";
 
 type Links = Array<{
   title: string
@@ -34,19 +42,24 @@ type Links = Array<{
 
 const Navbar: FunctionComponent = () => {
 
+  const dispatch = useAppDispatch()
+  const handleLang = () => i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
+
+
   const isCollapsedStore = JSON.parse(localStorage.getItem(IS_COLLAPSED_SIDEBAR))
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(!!isCollapsedStore)
 
-console.log(i18n.language)
+  console.log(i18n.language)
 
-const handleCollapsedClick = () => {
-  localStorage.setItem(IS_COLLAPSED_SIDEBAR, String(!isCollapsedStore))
-  setIsCollapsed(!isCollapsedStore)
-}
+  const handleCollapsedClick = () => {
+    localStorage.setItem(IS_COLLAPSED_SIDEBAR, String(!isCollapsedStore))
+    setIsCollapsed(!isCollapsedStore)
+  }
 
   const navigate = useNavigate()
   const { t } = useTranslation(TranslationNamespace.navbar)
+  const { isPhoneLarge } = useScreenResolution()
 
   const menuLinks: Links = [
     {
@@ -60,9 +73,9 @@ const handleCollapsedClick = () => {
     //   icon: <MessageIcon />
     // },
     {
-      title: 'calendar',
-      path: RoutePaths.CALENDAR,
-      icon: <CalendarIcon className='fill-current' />
+      title: 'profile',
+      path: RoutePaths.PROFILE,
+      icon: <UserIcon className='fill-current w-[20px] h-[20px] fill-[#787878]' />
     }
   ]
 
@@ -139,8 +152,8 @@ const handleCollapsedClick = () => {
 
   return (
     <div className={
-      `flex flex-col justify-between h-screen sticky top-0 py-8 border-r border-r-[#091e4214]
-        ${isCollapsed ? 'w-[4rem] px-[0.5rem]' : 'w-64 px-3'}`
+      `flex flex-col justify-between sticky top-0 py-8 border-r border-r-[#091e4214] ${isPhoneLarge ? 'h-[calc(100vh_-_5rem)]' : 'h-screen'}
+        ${(isCollapsed && !isPhoneLarge) ? 'w-[4rem] px-[0.5rem]' : 'w-64 px-3'}`
     }
     >
       <div>
@@ -154,21 +167,41 @@ const handleCollapsedClick = () => {
           {getSection(t('organization'), organizationLinks)}
         </div>
       </div>
-      <div onClick={handleCollapsedClick}>
-        {isCollapsed ? (
-          <ToolTip text={isCollapsed && t('expandSidebar')}>
-            <Button
-              icon={<DoubleArrowRightIcon className='fill-current' />}
-              className='!min-w-[2rem] px-[1rem] flex justify-center hover:bg-[#091e4214]'
-              type='secondary'
-            />
-          </ToolTip>
-        ) : (
-          <Button icon={<DoubleArrowLeftIcon className='fill-current' />} type='secondary' >
-            {t('collapseSidebar')}
+      {isPhoneLarge ? (
+        <div className='flex flex-col gap-1'>
+          <Button
+            icon={<LanguageIcon className='w-[20px] h-[20px]' />}
+            type='secondary'
+            onClick={handleLang}
+            className='text-[#58abc8]'
+          >
+            {t('language')}
           </Button>
-        )}
-      </div>
+          <Button
+            icon={<LogOutIcon className='w-[20px] h-[20px]' />}
+            type='secondary'
+            onClick={() => dispatch(logOut())}
+          >
+            {t('logout')}
+          </Button>
+        </div>
+      ) : (
+        <div onClick={handleCollapsedClick}>
+          {isCollapsed ? (
+            <ToolTip text={isCollapsed && t('expandSidebar')}>
+              <Button
+                icon={<DoubleArrowRightIcon className='fill-current' />}
+                className='!min-w-[2rem] px-[1rem] flex justify-center hover:bg-[#091e4214]'
+                type='secondary'
+              />
+            </ToolTip>
+          ) : (
+            <Button icon={<DoubleArrowLeftIcon className='fill-current' />} type='secondary' >
+              {t('collapseSidebar')}
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   )
 }

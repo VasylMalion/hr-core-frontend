@@ -1,0 +1,9 @@
+{
+  "title": "Employees",
+  "addEmployee": "Add Employee",
+  "employee": "Employee",
+  "location": "Location",
+  "position": "Position",
+  "birthdate": "Birth Date",
+  "mobileNumber": "Mobile Number"
+}

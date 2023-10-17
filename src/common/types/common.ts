@@ -27,11 +27,53 @@ export type Candidate = {
 
 export type Job = {
   id: number
-  img: string
-  createdAt: string,
   type: string
   position: string
   location: string
+  department: string
   description: string
   candidatesCount: number
+  status: JobStatus
+  createdBy: {
+    id: string
+    name: string
+    surname: string
+  }
+  assignedTo: {
+    id: string
+    name: string
+    surname: string
+  }
+  createdAt: Date
+  updatedAt: Date
+}
+
+export enum JobStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
+
+
+export type UserInfo = {
+  email: string,
+  phone: string,
+  name: string
+  surname: string
+  birthDate: Date 
+  gender: string 
+  address: string 
+  department: string 
+  position: string 
+  role: string 
+  startDate: Date 
+}
+
+export enum GenderTypes {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+
+export enum RoleTypes {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }

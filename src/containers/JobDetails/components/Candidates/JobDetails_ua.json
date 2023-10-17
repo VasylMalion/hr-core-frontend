@@ -1,0 +1,13 @@
+{
+  "tabs": {
+    "candidates": "Candidates",
+    "jobDetails": "Job Details",
+    "timeline": "Timeline & Notes",
+    "hiringTeam": "Hiring Team"
+  },
+  "name": "Candidate Name",
+  "rating": "Rating",
+  "stagesTitle": "Stages",
+  "appliedDate": "Applied Date",
+  "owner": "Owner"
+}

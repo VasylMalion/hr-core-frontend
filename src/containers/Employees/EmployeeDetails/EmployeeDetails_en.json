@@ -1,0 +1,27 @@
+{
+  "title": "Adding a new employee",
+  "personalInfo": "Personal information",
+  "contactInfo": "Contact information",
+  "workInfo": "Work information",
+  "name": "Name",
+  "surname": "Surname",
+  "birthDate": "Birth date",
+  "genderTitle": "Gender",
+  "email": "Email",
+  "mobile": "Phone number",
+  "address": "Address",
+  "department": "Department",
+  "position": "Position",
+  "role": "Role",
+  "startDate": "Start date",
+  "add": "Add",
+  "gender": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "roles": {
+    "user": "User",
+    "admin": "Admin"
+  },
+  "successTitle": ""
+}

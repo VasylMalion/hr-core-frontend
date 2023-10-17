@@ -1,6 +1,6 @@
 {
   "dashboard": "Панель",
-  "calendar": "Календар",
+  "profile": "Профіль",
   "jobs": "Вакансії",
   "candidates": "Кандидати",
   "employees": "Співробітники",
@@ -9,5 +9,7 @@
   "expandSidebar": "Розгорнути панель",
   "menu": "Меню",
   "recruitment": "Рекрутинг",
-  "organization": "Організація"
+  "organization": "Організація",
+  "language": "English",
+  "logout": "Вихід"
 }

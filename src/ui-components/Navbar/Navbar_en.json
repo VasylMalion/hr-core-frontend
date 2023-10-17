@@ -1,6 +1,6 @@
 {
   "dashboard": "Dashboard",
-  "calendar": "Calendar",
+  "profile": "Profile",
   "jobs": "Jobs",
   "candidates": "Candidates",
   "employees": "Employees",
@@ -9,5 +9,7 @@
   "expandSidebar": "Expand Sidebar",
   "menu": "Menu",
   "recruitment": "Recruitment",
-  "organization": "Organization"
+  "organization": "Organization",
+  "language": "Українська",
+  "logout": "Log out"
 }

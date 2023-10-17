@@ -7,6 +7,11 @@
     "APPLIED": "Applied",
     "NOT_APPLIED": "Not Applied"
   },
+  "tabs": {
+    "ALL": "All",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive"
+  },
   "name": "Candidate Name",
   "rating": "Rating",
   "stagesTitle": "Stages",

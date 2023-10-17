@@ -1,0 +1,10 @@
+{
+  "validation": {
+    "min": "",
+    "email": "Email isn't valid"
+  },
+  "errors": {
+    "GENERAL_ERROR": "Sorry, something went wrong",
+    "INVALID_BODY": "Неправильні дані"
+  }
+}
