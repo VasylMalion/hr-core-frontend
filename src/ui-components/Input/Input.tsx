@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { FieldValues } from "react-hook-form"
 
-type InputProps = {
+export type InputProps = {
   label?: string
   placeholder?: string
   value?: string
@@ -9,6 +9,7 @@ type InputProps = {
   className?: string
   validation?: any
   error?: FieldValues
+  type?: string
 }
 
 const Input: FunctionComponent<InputProps> = ({
@@ -19,12 +20,14 @@ const Input: FunctionComponent<InputProps> = ({
   className,
   validation,
   error,
+  type = 'text',
 }) => {
 
   return (
     <div>
       <label>{label}</label>
       <input
+        type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

@@ -8,6 +8,8 @@ import candidatesEn from './Candidates_en.json'
 import candidatesUa from './Candidates_ua.json'
 import { Candidate, Stage } from "common/types/common";
 import { useTranslation } from "react-i18next";
+import { RoutePaths } from "containers/AppRouter";
+import { useNavigate } from "react-router-dom";
 
 type ListProps = {
   candidates: Array<Candidate>
@@ -45,6 +47,8 @@ const StageComp: FunctionComponent<StageCompProps> = ({ title, color, stage }) =
 const ListItem: FunctionComponent<ListItemProps> = ({ item }) => {
 
   const { t } = useTranslation(TranslationNamespace.candidates)
+  
+  const navigate = useNavigate()
 
   const getStage = () => {
     switch (item.stages) {
@@ -66,7 +70,7 @@ const ListItem: FunctionComponent<ListItemProps> = ({ item }) => {
   }
 
   return (
-    <div className='bg-white text-natural grid gap-2 grid-cols-5 items-center py-[0.75rem] px-[1.5rem] border-b border-strock last:border-0'>
+    <div className='bg-white text-natural grid gap-2 grid-cols-5 items-center py-[0.75rem] px-[1.5rem] border-b border-strock last:border-0' onClick={() => navigate(RoutePaths.JOB_DETAILS)}>
       <div className='text-natural'>{`${item.name} ${item.surname}`}</div>
       <div className='flex gap-[6px] items-center px-[8px] py-[6px] rounded-[5px] border border-strock w-min'>
         <StarIcon className={item.rating ? 'fill-yellow' : 'fill-greyLight'} />

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { BASE_URL } from 'common/constants';
 import { UserInfo } from 'common/types/common';
 
-type LoginParams = {
+export type LoginParams = {
   email: string;
   password: string;
 }
@@ -26,4 +26,4 @@ export const AuthApi = createApi({
   })
 })
 
-export const { useLoginMutation } = AuthApi
+export const { useLoginMutation, util } = AuthApi

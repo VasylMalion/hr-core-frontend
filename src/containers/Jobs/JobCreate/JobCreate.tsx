@@ -1,31 +1,31 @@
-import { TranslationNamespace, addTranslationNamespace } from "common/translations";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from "react"
+import { TranslationNamespace, addTranslationNamespace } from "common/translations"
+
+import Input from "ui-components/Input/Input"
+import { useTranslation } from "react-i18next"
+import Typography from "ui-components/Typography/Typography"
+import { Button } from "ui-components"
+import { useAddJobMutation } from "services/JobService"
+import { FindEmployeeResponse } from "services/EmployeeService"
+import FindInput from "ui-components/FindInput/FindInput"
 
 import jobCreateEn from './JobCreate_en.json'
 import jobCreateUa from './JobCreate_ua.json'
-import Input from "ui-components/Input/Input";
-import { useTranslation } from "react-i18next";
-import Typography from "ui-components/Typography/Typography";
-import { Button } from "ui-components";
-import { useAddJobMutation } from "services/JobService";
 
-type JobCreationProps = {}
-
-const JobCreation: FunctionComponent<JobCreationProps> = () => {
+const JobCreation: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.jobCreation)
 
   const [department, setDepartment] = useState<string>('')
   const [position, setPosition] = useState<string>('')
   const [location, setLocation] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+  const [assignedTo, setAssignedTo] = useState<FindEmployeeResponse>()
 
-  const [addJob, data] = useAddJobMutation()
+  const [addJob, { isLoading }] = useAddJobMutation()
 
   const handleClick = () => addJob({
-    department, position, location, description
+    department, position, location, description, assignedTo
   })
-
-  console.log(data)
 
   return (
     <>
@@ -41,7 +41,8 @@ const JobCreation: FunctionComponent<JobCreationProps> = () => {
           <Input label={t('location')} value={location} onChange={setLocation} className='w-full' />
           <Input label={t('description')} value={description} onChange={setDescription} className='w-full' />
         </div>
-        <Button textAlign='center' className='flex justify-self-start' onClick={handleClick}>
+        <FindInput label={t('name')} onSuccessFind={(item) => setAssignedTo(item)} />
+        <Button textAlign='center' className='flex justify-self-start' onClick={handleClick} isLoading={isLoading}>
           {t('send')}
         </Button>
       </div>

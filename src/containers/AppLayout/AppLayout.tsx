@@ -5,7 +5,12 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "containers/Login/Login";
 import AuthVerify from "./Auth";
 
-const AppLayout: FunctionComponent = () => {
+type AppLayoutProps = {
+  isSidebarOpen: boolean
+  setIsSidebarOpen: (value: boolean) => void
+}
+
+const AppLayout: FunctionComponent<AppLayoutProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   const location = useLocation()
   const isLoginPage = location.pathname === RoutePaths[AppRoutes.LOGIN]
@@ -20,8 +25,8 @@ const AppLayout: FunctionComponent = () => {
           </Routes>
         ) : (
           <>
-            <Header />
-            <div className='p-12 bg-purpleLight min-h-[calc(100vh_-_80px)]'>
+            <Header isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+            <div className='p-12 bg-purpleLight mt-[5rem] min-h-[calc(100vh_-_5rem)]'>
               <AppRouter />
             </div>
           </>

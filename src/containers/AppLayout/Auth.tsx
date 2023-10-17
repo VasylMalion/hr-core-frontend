@@ -10,7 +10,7 @@ const AuthVerify = () => {
 
   useEffect(() => {
     const token = parseJwt(localStorage.getItem('token'))
-      if (+token?.exp * 1000 < +Date.now()) dispatch(logOut())
+      if (!token || +token?.exp * 1000 < +Date.now()) dispatch(logOut())
   }, [location]);
 
   const parseJwt = (token: string) => {

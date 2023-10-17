@@ -3,86 +3,50 @@ import { FunctionComponent, useState } from "react";
 
 import jobsListEn from './JobsList_en.json'
 import jobsListUa from './JobsList_ua.json'
-import { Job } from "common/types/common";
+import { Job, JobStatus } from "common/types/common";
 import JobItem from "./JobItem";
 import TabNavigation from "ui-components/TabOptions/TabNavigation";
 import { useTranslation } from "react-i18next";
 import { useGetAllJobsQuery } from "services/JobService";
 
-const jobs: Array<Job> = [
-  {
-    id: 2,
-    img: '123',
-    createdAt: '6 July',
-    type: 'Design',
-    position: 'Senior Product Designer',
-    location: 'Lviv',
-    description: 'We are looking for a programmer with a keen eye for design for the position of UI UX designer king for a programmer with a keen eye for design for the position of UI UX designer',
-    candidatesCount: 20,
-  },
-  {
-    id: 2,
-    img: '123',
-    createdAt: '6 July',
-    type: 'Design',
-    position: 'Senior Product Designer qweqweqweqweqwe',
-    location: 'Lviv',
-    description: 'We are looking for a programmer with a keen eye for design for the pos',
-    candidatesCount: 20,
-  },
-  {
-    id: 2,
-    img: '123',
-    createdAt: '6 July',
-    type: 'Design',
-    position: 'Senior Product Designer',
-    location: 'Lviv',
-    description: 'We are looking for a programmer with a keen eye for design for the position of UI UX designer king for a programmer with a keen eye for design for the position of UI UX designer',
-    candidatesCount: 20,
-  },
-  {
-    id: 2,
-    img: '123',
-    createdAt: '6 July',
-    type: 'Design',
-    position: 'Senior Product Designer',
-    location: 'Lviv',
-    description: 'We are looking for a programmer with a keen eye for design for the position of UI UX designer king for a programmer with a keen eye for design for the position of UI UX designer',
-    candidatesCount: 20,
-  }
-]
-
 enum TabNavigationTypes {
-  CANDIDATES = 'CANDIDATES',
-  JOB_DETAILS = 'JOB_DETAILS',
-  TIMELINE = 'TIMELINE',
-  HIRING_TEAM = 'HIRING_TEAM',
+  ALL = 'ALL',
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
 }
 
 const JobsList: FunctionComponent = () => {
 
   const { t } = useTranslation(TranslationNamespace.jobsList)
 
-  const list = jobs.map(item => <JobItem job={item} />)
+  const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.ALL)
 
-  const aaa = useGetAllJobsQuery({})
+  const jobs = useGetAllJobsQuery({ status: tab !== TabNavigationTypes.ALL ? tab as unknown as JobStatus : null })
 
-  console.log(aaa)
+  const list = jobs.data && jobs.data.map((item: Job) => <JobItem job={item} />)
 
-  const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
+  // if (tab === TabNavigationTypes.ALL) {
+  //   let list = jobs.data && jobs.data.map((item: Job) => <JobItem job={item} />)
+  // }
+  // if (tab === TabNavigationTypes.ACTIVE) {
+  //   let list = jobs.data && jobs.data.map((item: Job) => <JobItem job={item} />)
+  // }
+  // if (tab === TabNavigationTypes.INACTIVE) {
+  //   let list = jobs.data && jobs.data.map((item: Job) => <JobItem job={item} />)
+  // }
 
   const options = [
     {
-      title: t('tabs.all'),
-      type: TabNavigationTypes.CANDIDATES
+      title: t('tabs.ALL'),
+      type: TabNavigationTypes.ALL
     },
     {
-      title: t('tabs.active'),
-      type: TabNavigationTypes.JOB_DETAILS
+      title: t('tabs.ACTIVE'),
+      type: TabNavigationTypes.ACTIVE
     },
     {
-      title: t('tabs.completed'),
-      type: TabNavigationTypes.TIMELINE
+      title: t('tabs.INACTIVE'),
+      type: TabNavigationTypes.INACTIVE
     },
   ]
 

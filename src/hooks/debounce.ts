@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 const DEBOUNCE_TIME = 500
 
 type useDebounceProps = {
-  inputValue: string
+  value: string
 }
 
-export const useDebounce = ({ inputValue }: useDebounceProps): string => {
+export const useDebounce = ({ value }: useDebounceProps): string => {
 
   const [debouncedInputValue, setDebouncedInputValue] = useState('')
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setDebouncedInputValue(inputValue)
+      setDebouncedInputValue(value)
     }, DEBOUNCE_TIME)
     return () => clearTimeout(timeoutId)
-  }, [inputValue])
+  }, [value])
 
   return debouncedInputValue
 }

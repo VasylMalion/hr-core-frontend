@@ -1,23 +1,38 @@
-import { FunctionComponent, useEffect } from "react";
-import AppLayout from "./AppLayout/AppLayout";
+import { FunctionComponent, useState } from "react";
+
 import { Navbar } from "ui-components";
-import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
+import { useScreenResolution } from "hooks/useScreenResolution";
+
+import AppLayout from "./AppLayout/AppLayout";
 import { AppRoutes, RoutePaths } from "./AppRouter";
 
 const App: FunctionComponent = () => {
 
-  const {t} = useTranslation()
-
   const location = useLocation()
+  const { isPhoneLarge } = useScreenResolution()
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
+
   const isLoginPage = location.pathname === RoutePaths[AppRoutes.LOGIN]
 
-    return <div className='grid grid-cols-[auto_1fr] bg-white'>
-      {!isLoginPage && <Navbar />}
-        <div>
-          <AppLayout />
-        </div>
+  return (
+    <div className={`grid bg-white ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[16rem_1fr]'}`}>
+      {!isLoginPage && !isPhoneLarge && <Navbar />}
+      <div>
+        <AppLayout setIsSidebarOpen={setIsSidebarOpen} isSidebarOpen={isSidebarOpen} />
+      </div>
+      {
+        !isLoginPage && isPhoneLarge && (
+          <div className={`${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
+        fixed bg-white top-[5rem] transition-all	duration-150 ease-in`}
+          >
+            <Navbar />
+          </div>
+        )
+      }
     </div>
+  )
 }
 
 export default App

@@ -1,6 +1,7 @@
 {
-  "title": "Вхід до системи",
+  "title": "Log in to the system",
   "email": "Email",
   "password": "Password",
-  "login": "Log in"
+  "login": "Log in",
+  "INVALID_BODY": "Invalid email or password"
 }

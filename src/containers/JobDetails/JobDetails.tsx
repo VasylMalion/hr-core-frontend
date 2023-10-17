@@ -7,6 +7,7 @@ import jobDetailsUa from './JobDetails_ua.json'
 // import { GetAllJobsQuery } from "services/JobService";
 import TabNavigation from "ui-components/TabOptions/TabNavigation";
 import { useTranslation } from "react-i18next";
+import Candidates from "./components/Candidates/JobDetails";
 
 enum TabNavigationTypes {
   CANDIDATES = 'CANDIDATES',
@@ -43,7 +44,7 @@ const JobDetails: FunctionComponent = () => {
   },
 ]
 
-  return <div>
+  return <div draggable={true}>
     <Typography appearance='title'>
       Candidates
     </Typography>
@@ -56,6 +57,7 @@ const JobDetails: FunctionComponent = () => {
       value={tab}
       onChange={setTab}
     />
+    <Candidates />
     </div>
   </div>
 }

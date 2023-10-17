@@ -1,6 +1,7 @@
 {
   "title": "Вхід до системи",
-  "email": "Email",
-  "password": "Password",
-  "login": "Log in"
+  "email": "Електронна пошта",
+  "password": "Пароль",
+  "login": "Ввійти",
+  "INVALID_BODY": "Неправильні електронна пошта або пароль"
 }

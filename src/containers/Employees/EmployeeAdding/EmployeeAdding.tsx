@@ -65,58 +65,12 @@ const EmployeeAdding: FunctionComponent = () => {
 
   const onFailClose = () => dispatch(util.resetApiState())
 
-  const [inputValue, setInputValue] = useState("");
-
-  const debouncedInputValue = useDebounce({ inputValue })
-
-  console.log('s', debouncedInputValue)
-
-  const data = useFindEmployeeQuery({
-    username: debouncedInputValue
-  })
-
-  const users = data.data && data.data.map(item => (
-    <div key={item.id}
-      onClick={() => {
-        setHrPartner(item)
-        setInputValue(item.name + ' ' + item.surname)
-      }}
-      className='cursor-pointer px-[0.5rem] py-[0.25rem] hover:bg-greyLight'>{item.name + ' ' + item.surname}</div>
-  ))
-
-  //   <div className='relative'>
-  //   <Input
-  //     label={t('name')}
-  //     className='w-full'
-  //     value={inputValue}
-  //     onChange={setInputValue}
-  //   />
-  //   {inputValue && (
-  //     <div className='absolute w-[15rem] bg-white max-h-[10rem] top-[5.75rem] rounded overflow-y-auto'>
-  //       {users}
-  //     </div>
-  //   )}
-  // </div>
-
   return (
     <>
       <div className='grid gap-6 max-w-[50rem]'>
         <Typography appearance='title'>
           {t('title')}
         </Typography>
-           <div className='relative'>
-     <Input
-      label={t('name')}
-      className='w-full'
-      value={inputValue}
-      onChange={setInputValue}
-    />
-    {inputValue && (
-      <div className='absolute w-[15rem] bg-white max-h-[10rem] top-[5.75rem] rounded overflow-y-auto'>
-        {users}
-      </div>
-    )}
-  </div>
         <div>
           <Typography appearance='subtitle'>
             {t('personalInfo')}

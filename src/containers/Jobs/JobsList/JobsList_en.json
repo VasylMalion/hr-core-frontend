@@ -8,10 +8,9 @@
     "NOT_APPLIED": "Not Applied"
   },
   "tabs": {
-    "all": "All",
-    "active": "Active",
-    "completed": "Completed",
-    "hiringTeam": "Hiring Team"
+    "ALL": "All",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive"
   },
   "name": "Candidate Name",
   "rating": "Rating",
