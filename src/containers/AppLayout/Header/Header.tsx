@@ -27,8 +27,9 @@ import { ReactComponent as LanguageIcon } from "assets/svgs/language.svg"
 import { useLocation } from "react-router-dom"
 import { RoutePaths } from "containers/AppRouter"
 import { logOut } from "store/slices/authSlice"
-import { useAppDispatch } from "hooks/redux"
+import { useAppDispatch, useAppSelector } from "hooks/redux"
 import { useScreenResolution } from "hooks/useScreenResolution"
+import { IS_COLLAPSED_SIDEBAR } from "common/constants"
 
 
 type HeaderProps = {
@@ -58,7 +59,7 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
           icon: <UserIcon className='fill-current w-[20px] h-[20px]' />
         }
       }
-      case RoutePaths.JOBS: {
+      case RoutePaths.VACANCIES: {
         return {
           title: t('jobs'),
           icon: <JobIcon className='fill-current' />
@@ -90,8 +91,11 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
 
   const { isPhoneLarge } = useScreenResolution()
 
+  const isCollapsed = useAppSelector(state => state.auth.isCollapsed)
+  const canBeCollapsed = isCollapsed && !isPhoneLarge
+
   return (
-    <div className={`fixed h-[5rem] top-0 bg-white flex items-center ${isPhoneLarge ? 'w-full' : 'w-[calc(100vw_-_16rem)]'} border-b border-b-[#091e4214] px-[2rem] py-[1rem] z-50`}>
+    <div className={`fixed h-[5rem] top-0 bg-white flex items-center ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-[calc(100vw_-_4rem)]' : 'w-[calc(100vw_-_16rem)]'} border-b border-b-[#091e4214] px-[2rem] py-[1rem] z-50`}>
       {isPhoneLarge && <HamburgerIcon className='w-[2rem] h-[2rem]' onClick={() => setIsSidebarOpen((prev: boolean) => !prev)}/>}
       <div className='flex gap-2 items-center mx-auto'>
         <span>{icon}</span>

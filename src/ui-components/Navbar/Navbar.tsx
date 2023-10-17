@@ -31,8 +31,8 @@ import { IS_COLLAPSED_SIDEBAR } from "common/constants";
 import i18n from "i18n";
 import { Lang } from "common/types/common";
 import { useScreenResolution } from "hooks/useScreenResolution";
-import { logOut } from "store/slices/authSlice";
-import { useAppDispatch } from "hooks/redux";
+import { collapseNavbar, logOut } from "store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
 
 type Links = Array<{
   title: string
@@ -45,21 +45,15 @@ const Navbar: FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const handleLang = () => i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
 
+  const { isPhoneLarge } = useScreenResolution()
+  const isCollapsed = useAppSelector(state => state.auth.isCollapsed)
 
-  const isCollapsedStore = JSON.parse(localStorage.getItem(IS_COLLAPSED_SIDEBAR))
+  const canBeCollapsed = isCollapsed && !isPhoneLarge
 
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(!!isCollapsedStore)
-
-  console.log(i18n.language)
-
-  const handleCollapsedClick = () => {
-    localStorage.setItem(IS_COLLAPSED_SIDEBAR, String(!isCollapsedStore))
-    setIsCollapsed(!isCollapsedStore)
-  }
+  const handleCollapsedClick = () => dispatch(collapseNavbar())
 
   const navigate = useNavigate()
   const { t } = useTranslation(TranslationNamespace.navbar)
-  const { isPhoneLarge } = useScreenResolution()
 
   const menuLinks: Links = [
     {
@@ -81,8 +75,8 @@ const Navbar: FunctionComponent = () => {
 
   const recruitmentLinks = [
     {
-      title: 'jobs',
-      path: RoutePaths.JOBS,
+      title: 'vacancies',
+      path: RoutePaths.VACANCIES,
       icon: <JobIcon className='fill-current' />
     },
     {
@@ -118,7 +112,7 @@ const Navbar: FunctionComponent = () => {
   const getSection = (title: string, links: Links) => (
     <div className='mt-4'>
       {
-        !isCollapsed && (
+        !canBeCollapsed && (
           <Typography appearance="subtitle" className='pl-6 mb-2 text-[#333333]'>
             {title}
           </Typography>
@@ -131,16 +125,16 @@ const Navbar: FunctionComponent = () => {
             to={item.path}
           >
             {({ isActive }) => (
-              <ToolTip text={isCollapsed ? t(item.title) : ''}>
+              <ToolTip text={canBeCollapsed ? t(item.title) : ''}>
                 <Button
                   icon={item.icon}
                   type={isActive ? 'primary' : 'secondary'}
                   className={
-                    isCollapsed ? `${!isActive && 'hover:bg-[#091e4214]'} 
+                    canBeCollapsed ? `${!isActive && 'hover:bg-[#091e4214]'} 
                     !min-w-[2rem] px-[1rem] flex justify-center` : 'w-full'
                   }
                 >
-                  {!isCollapsed && t(item.title)}
+                  {!canBeCollapsed && t(item.title)}
                 </Button>
               </ToolTip>
             )}
@@ -153,12 +147,12 @@ const Navbar: FunctionComponent = () => {
   return (
     <div className={
       `flex flex-col justify-between sticky top-0 py-8 border-r border-r-[#091e4214] ${isPhoneLarge ? 'h-[calc(100vh_-_5rem)]' : 'h-screen'}
-        ${(isCollapsed && !isPhoneLarge) ? 'w-[4rem] px-[0.5rem]' : 'w-64 px-3'}`
+        ${canBeCollapsed ? 'w-[4rem] px-[0.5rem]' : 'w-64 px-3'}`
     }
     >
       <div>
-        <img src={isCollapsed ? LogoLightMini : LogoLight}
-          className={`${isCollapsed ? 'px-2' : 'px-6'} mx-auto cursor-pointer mb-6`}
+        <img src={canBeCollapsed ? LogoLightMini : LogoLight}
+          className={`${canBeCollapsed ? 'px-2' : 'px-6'} mx-auto cursor-pointer mb-6`}
           onClick={() => navigate(RoutePaths.DASHBOARD)}
         />
         <div>
@@ -187,8 +181,8 @@ const Navbar: FunctionComponent = () => {
         </div>
       ) : (
         <div onClick={handleCollapsedClick}>
-          {isCollapsed ? (
-            <ToolTip text={isCollapsed && t('expandSidebar')}>
+          {canBeCollapsed ? (
+            <ToolTip text={canBeCollapsed && t('expandSidebar')}>
               <Button
                 icon={<DoubleArrowRightIcon className='fill-current' />}
                 className='!min-w-[2rem] px-[1rem] flex justify-center hover:bg-[#091e4214]'

@@ -2,8 +2,8 @@ import { TranslationNamespace, addTranslationNamespace } from "common/translatio
 import { FunctionComponent, useState } from "react";
 import Typography from "ui-components/Typography/Typography";
 
-import jobDetailsEn from './JobDetails_en.json'
-import jobDetailsUa from './JobDetails_ua.json'
+import candidatesEn from './Candidates_en.json'
+import candidatesUa from './Candidates_ua.json'
 // import { GetAllJobsQuery } from "services/JobService";
 import TabNavigation from "ui-components/TabOptions/TabNavigation";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ type BoardProps = {
 }
 
 const Candidates: FunctionComponent = () => {
-  const { t } = useTranslation(TranslationNamespace.jobDetails)
+  const { t } = useTranslation(TranslationNamespace.candidates)
 
   const [boardsMock, setBoardsMock] = useState([
     { id: 1, title: '1', items: [{ id: 1, title: '1' }, { id: 2, title: '2' }, { id: 3, title: '3' }] },
@@ -172,4 +172,4 @@ const Candidates: FunctionComponent = () => {
 
 export default Candidates
 
-addTranslationNamespace(TranslationNamespace.jobDetails, jobDetailsEn, jobDetailsUa)
+addTranslationNamespace(TranslationNamespace.candidates, candidatesEn, candidatesEn)

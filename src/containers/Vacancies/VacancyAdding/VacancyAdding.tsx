@@ -1,19 +1,19 @@
 import { FunctionComponent, useState } from "react"
 import { TranslationNamespace, addTranslationNamespace } from "common/translations"
+import { useTranslation } from "react-i18next"
 
 import Input from "ui-components/Input/Input"
-import { useTranslation } from "react-i18next"
 import Typography from "ui-components/Typography/Typography"
 import { Button } from "ui-components"
-import { useAddJobMutation } from "services/JobService"
+import { useAddVacancyMutation } from "services/VacancyService"
 import { FindEmployeeResponse } from "services/EmployeeService"
 import FindInput from "ui-components/FindInput/FindInput"
 
-import jobCreateEn from './JobCreate_en.json'
-import jobCreateUa from './JobCreate_ua.json'
+import vacancyAddingEn from './VacancyAdding_en.json'
+import vacancyAddingUa from './VacancyAdding_ua.json'
 
-const JobCreation: FunctionComponent = () => {
-  const { t } = useTranslation(TranslationNamespace.jobCreation)
+const VacancyAdding: FunctionComponent = () => {
+  const { t } = useTranslation(TranslationNamespace.vacancyAdding)
 
   const [department, setDepartment] = useState<string>('')
   const [position, setPosition] = useState<string>('')
@@ -21,7 +21,7 @@ const JobCreation: FunctionComponent = () => {
   const [description, setDescription] = useState<string>('')
   const [assignedTo, setAssignedTo] = useState<FindEmployeeResponse>()
 
-  const [addJob, { isLoading }] = useAddJobMutation()
+  const [addJob, { isLoading }] = useAddVacancyMutation()
 
   const handleClick = () => addJob({
     department, position, location, description, assignedTo
@@ -50,6 +50,6 @@ const JobCreation: FunctionComponent = () => {
   )
 }
 
-export default JobCreation
+export default VacancyAdding
 
-addTranslationNamespace(TranslationNamespace.jobCreation, jobCreateEn, jobCreateUa)
+addTranslationNamespace(TranslationNamespace.vacancyAdding, vacancyAddingEn, vacancyAddingUa)

@@ -40,7 +40,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
   }
 
   const pageNumbers = pages.map(page =>
-    <PaginationItem onClick={() => handlePageClick(page)} isActive={page === currentPage} value={page} />
+    <PaginationItem key={page} onClick={() => handlePageClick(page)} isActive={page === currentPage} value={page} />
   )
 
   const handlePrevClick = () => onChange(currentPage - 1)

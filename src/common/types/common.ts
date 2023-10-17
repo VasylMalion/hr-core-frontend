@@ -25,7 +25,7 @@ export type Candidate = {
   owner: number
 }
 
-export type Job = {
+export type Vacancy = {
   id: number
   type: string
   position: string
@@ -33,7 +33,7 @@ export type Job = {
   department: string
   description: string
   candidatesCount: number
-  status: JobStatus
+  status: VacancyStatus
   createdBy: {
     id: string
     name: string
@@ -48,13 +48,13 @@ export type Job = {
   updatedAt: Date
 }
 
-export enum JobStatus {
+export enum VacancyStatus {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
 }
 
-
 export type UserInfo = {
+  id: string
   email: string,
   phone: string,
   name: string
@@ -64,6 +64,7 @@ export type UserInfo = {
   address: string 
   department: string 
   position: string 
+  mobileNumber: string
   role: string 
   startDate: Date 
 }

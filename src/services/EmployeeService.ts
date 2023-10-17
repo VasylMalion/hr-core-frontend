@@ -1,48 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+
 import { BASE_URL } from 'common/constants';
-import { RootState } from 'store/store';
-
-export type AddEmployeeParams = {
-  gender: string
-  name: string
-  surname: string
-  birthDate: Date
-  email: string
-  mobile: string
-  address: string
-  department: string
-  position: string
-  role: string
-  startDate: Date
-}
-
-export type FindEmployeeParams = {
-  username: string
-}
-
-export type FindEmployeeResponse = {
-  id: string
-  name: string
-  surname: string
-}
-
-type User = {
-  _id: string
-  name: string
-  surname: string
-  birthDate: Date
-  mobileNumber: string
-  position: string
-  address: string
-  email: string
-  gender: string
-  startDate: Date
-  department: string
-  role: string
-}
+import { UserInfo } from 'common/types/common';
+import { getToken } from 'common/utils/common';
 
 export type GetAllResponse = {
-  users: Array<Partial<User>>
+  users: Array<Partial<UserInfo>>
   count: number
 }
 
@@ -55,25 +18,24 @@ export type GetOneParams = {
   id: string
 }
 
-export type GetOneResponse = User
+export type GetOneResponse = UserInfo
 
-type AddEmployeeResponse = {}
+export type AddEmployeeParams = Partial<UserInfo>
+
+export type AddEmployeeResponse = {}
+
+export type FindEmployeeParams = {
+  username: string
+}
+
+export type FindEmployeeResponse = Pick<UserInfo, 'id' | 'name' | 'surname'>
 
 export const EmployeeApi = createApi({
   reducerPath: 'employeeApi',
   tagTypes: ['Employee'],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/employees`,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.userToken
-
-      // If we have a token set in state, let's assume that we should be passing it.
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`)
-      }
-
-      return headers
-    }
+    prepareHeaders: (headers, { getState }) => getToken(headers, getState)
   }),
   endpoints: (build) => ({
     addEmployee: build.mutation<AddEmployeeResponse, AddEmployeeParams>({
@@ -112,4 +74,10 @@ export const EmployeeApi = createApi({
   })
 })
 
-export const { useAddEmployeeMutation, util, useFindEmployeeQuery, useGetAllQuery, useGetOneQuery } = EmployeeApi
+export const {
+  useAddEmployeeMutation,
+  useFindEmployeeQuery,
+  useGetAllQuery,
+  useGetOneQuery,
+  util
+} = EmployeeApi

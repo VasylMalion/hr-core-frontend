@@ -1,5 +1,6 @@
 import { SerializedError } from "@reduxjs/toolkit"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
+import { RootState } from "store/store"
 
 export const formatDate = (date: Date): string => {
 
@@ -17,4 +18,12 @@ export const formatDate = (date: Date): string => {
 
 export const errorHandler = (error: any) => {
   if ('data' in error) return error.data
+}
+
+export const getToken = (headers: Headers, getState: () => unknown) => {
+  const token = (getState() as RootState).auth.userToken
+
+  if (token) headers.set('authorization', `Bearer ${token}`)
+
+  return headers
 }
