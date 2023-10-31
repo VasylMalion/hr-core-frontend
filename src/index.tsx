@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 const store = setupStore()
 
 render(
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<div className="h-full w-full bg-red">Loading...</div>}>
     <Provider store={store}>
       <BrowserRouter>
         <App />

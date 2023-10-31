@@ -1,40 +1,26 @@
-import { FunctionComponent } from "react"
-import { useNavigate } from "react-router-dom"
-import { useTranslation } from "react-i18next"
+import { FunctionComponent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
-import { TranslationNamespace } from "common/translations"
-import Avatarcon from "assets/images/avatar.png"
-import { VacancyStatus, Vacancy } from "common/types/common"
-import { RoutePaths } from "containers/AppRouter"
-import { formatDate } from "common/utils/common"
+import { TranslationNamespace } from 'common/translations'
+import { VacancyStatus, Vacancy } from 'common/types/common'
+import { RoutePaths } from 'containers/AppRouter'
+import { formatDate, routeWithParams } from 'common/utils/common'
+import Avatarcon from 'assets/images/avatar.png'
 
 type VacancyItemProps = Vacancy
 
 const VacancyItem: FunctionComponent<VacancyItemProps> =
-  ({ position, location, description, createdAt, status, assignedTo }) => {
+  ({ id, position, location, description, createdAt, status, assignedTo }) => {
 
     const { t } = useTranslation(TranslationNamespace.vacancies)
     const navigate = useNavigate()
 
-    const handleCreationJob = () => navigate(RoutePaths.VACANCY_ADDING)
-    const handleNavigation = () => navigate(RoutePaths.VACANCY_DETAILS)
-
-    // if (isNew) {
-    //   return (
-    //     <div
-    //       onClick={handleCreationJob}
-    //       className='cursor-pointer min-h-[16rem] w-[16rem] p-[1.5rem] rounded-[5px] flex 
-    //     flex-col border border-dashed	border-border justify-center items-center text-green'
-    //     >
-    //       <PlusIcon />
-    //       <div>Create new job</div>
-    //     </div>
-    //   )
-    // }
+    const handleClick = () => navigate(routeWithParams(RoutePaths.VACANCY_DETAILS, { id }))
 
     return (
       <div
-        onClick={handleNavigation}
+        onClick={handleClick}
         className='min-h-[16rem] w-[16rem] bg-white p-[1.5rem] rounded-[5px] 
       flex flex-col justify-between cursor-pointer'>
         <div>

@@ -1,0 +1,29 @@
+{
+  "title": "Кандидат #{{num}}",
+  "deleteCandidate": "Видалити кандидата",
+  "personalInfo": "Персональна інформація",
+  "contactInfo": "Контактна інформація",
+  "workInfo": "Робоча інформація",
+  "name": "Ім'я:",
+  "surname": "Прізвище:",
+  "birthDate": "Дата народження:",
+  "genderTitle": "Стать:",
+  "email": "Електронна пошта:",
+  "mobile": "Номер телефону:",
+  "location": "Адреса:",
+  "position": "Посада:",
+  "salary": "Зарплата:",
+  "salaryValue": "{{value}}₴",
+  "gender": {
+    "male": "Чоловіча",
+    "female": "Жіноча"
+  },
+  "deletingTitle": "Увага!",
+  "deletingDescription": "Ви дійсно хочете видалити кандидата?",
+  "yes": "Так",
+  "no": "Ні",
+  "successTitle": "Успіх!",
+  "successDescription": "Кандидата успішно видалено",
+  "failTitle": "Помилка!",
+  "failDescription": "Упс. Щось пішло не так"
+}

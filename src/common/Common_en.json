@@ -6,5 +6,9 @@
   "errors": {
     "GENERAL_ERROR": "Sorry, something went wrong",
     "INVALID_BODY": "Неправильні дані"
+  },
+  "vacancyStatus": {
+    "ACTIVE": "Відкриті",
+    "INACTIVE": "Неправильні дані"
   }
 }

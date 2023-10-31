@@ -2,8 +2,9 @@
   "title": "Employees",
   "addEmployee": "Add Employee",
   "employee": "Employee",
-  "location": "Location",
+  "location": "Address",
   "position": "Position",
   "birthdate": "Birth Date",
-  "mobileNumber": "Mobile Number"
+  "mobileNumber": "Mobile Number",
+  "search": "Search"
 }

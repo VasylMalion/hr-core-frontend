@@ -27,3 +27,19 @@ export const getToken = (headers: Headers, getState: () => unknown) => {
 
   return headers
 }
+
+// type RouteWithParamsType = {
+//   route: string
+//   params: Record<string, number | string>
+// } 
+
+type RouteWithParamsType = (route: string, params: { [key: string]: number | string }) => string
+
+export const routeWithParams:RouteWithParamsType = (route, params) => {
+
+  for (let k in params) {
+    route = route.replace(`:${k}`, params[k] as string)
+  }
+
+  return route
+}

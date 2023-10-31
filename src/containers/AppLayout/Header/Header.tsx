@@ -46,8 +46,11 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
   const dispatch = useAppDispatch()
 
   const getContent = () => {
+        
+    const getCase = (path: string) => location.pathname.startsWith(path) ? path : ''
+    
     switch (location.pathname) {
-      case RoutePaths.DASHBOARD: {
+      case getCase(RoutePaths.DASHBOARD): {
         return {
           title: t('dashboard'),
           icon: <DashboardIcon className='fill-current' />
@@ -59,7 +62,7 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
           icon: <UserIcon className='fill-current w-[20px] h-[20px]' />
         }
       }
-      case RoutePaths.VACANCIES: {
+      case getCase(RoutePaths.VACANCIES): {
         return {
           title: t('jobs'),
           icon: <JobIcon className='fill-current' />
@@ -95,7 +98,7 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
   const canBeCollapsed = isCollapsed && !isPhoneLarge
 
   return (
-    <div className={`fixed h-[5rem] top-0 bg-white flex items-center ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-[calc(100vw_-_4rem)]' : 'w-[calc(100vw_-_16rem)]'} border-b border-b-[#091e4214] px-[2rem] py-[1rem] z-50`}>
+    <div className={`fixed h-[5rem] top-0 bg-white flex items-center ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-[calc(100vw_-_4rem)]' : 'w-[calc(100vw_-_16rem)]'} border-b border-b-[#091e4214] px-[2rem] py-[1rem] z-10`}>
       {isPhoneLarge && <HamburgerIcon className='w-[2rem] h-[2rem]' onClick={() => setIsSidebarOpen((prev: boolean) => !prev)}/>}
       <div className='flex gap-2 items-center mx-auto'>
         <span>{icon}</span>

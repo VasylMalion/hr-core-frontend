@@ -1,99 +1,123 @@
-import { TranslationNamespace, addTranslationNamespace } from "common/translations";
-import { FunctionComponent } from "react";
-import Typography from "ui-components/Typography/Typography";
+import { FunctionComponent, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { generatePath, useNavigate } from 'react-router-dom'
+
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import EmptyList from 'components/EmptyList/EmptyList'
+import { RoutePaths } from 'containers/AppRouter'
+import { formatDate } from 'common/utils/common'
+import { useLazyGetAllQuery } from 'services/CandidateService'
+import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
+import { useDebounce } from 'hooks/useDebounce'
+import { PER_PAGE } from 'common/constants'
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+  Typography,
+  Pagination,
+  WithPreload,
+  Input,
+  Checkbox,
+} from 'ui-components'
 
 import candidatesEn from './Candidates_en.json'
 import candidatesUa from './Candidates_ua.json'
-import List from "./ListSection";
-import { Candidate, Stage } from "common/types/common";
-
-const candidates: Array<Candidate> = [
-  {
-    id: 2,
-    avatar: '123',
-    name: 'Vasyl',
-    surname: '',
-    birthDate: '01-01-2000',
-    rating: 0.0,
-    stages: Stage.SHORTLIST,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-  {
-    id: 2,
-    avatar: '123',
-    name: 'Vasyl',
-    surname: '',
-    birthDate: '01-01-2000',
-    rating: 4.5,
-    stages: Stage.PREINTERVIEW,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-  {
-    id: 2,
-    avatar: '123',
-    name: 'Vasylw',
-    surname: 'Malionw asdasd',
-    birthDate: '01-01-2000',
-    rating: 4.5,
-    stages: Stage.INTERVIEW,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-  {
-    id: 3,
-    avatar: '123',
-    name: 'Vasylw',
-    surname: 'sdfsdfs',
-    birthDate: '01-01-2000',
-    rating: 4.5,
-    stages: Stage.TEST,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-  {
-    id: 4,
-    avatar: '123',
-    name: 'Vasylw',
-    surname: 'Malionw dsfsdfsd',
-    birthDate: '01-01-2000',
-    rating: 4.5,
-    stages: Stage.APPLIED,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-  {
-    id: 4,
-    avatar: '123',
-    name: 'Vasylw',
-    surname: 'Malionw dsfsdfsd',
-    birthDate: '01-01-2000',
-    rating: 4.5,
-    stages: Stage.NOT_APPLIED,
-    createdAt: '',
-    appliedAt: '',
-    owner: 0
-  },
-]
 
 const Candidates: FunctionComponent = () => {
-    
-    return <div>
-      <Typography appearance='title'>
-        Candidates
-      </Typography>
-      <Typography appearance='subtitle'>
-        Candidates
-      </Typography>
-      <List candidates={candidates}/>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </div>
+  const { t } = useTranslation(TranslationNamespace.candidates)
+  const navigate = useNavigate()
+
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [onlyMine, setOnlyMine] = useState<boolean>(false)
+
+  const [filter, setFilter] = useState('')
+  const debouncedInputValue = useDebounce({ value: filter })
+
+  const [getAll, { isFetching, isSuccess, isError, data }] = useLazyGetAllQuery()
+
+  useEffect(() => {
+    getAll({ limit: PER_PAGE, page: currentPage, onlyMine, filter: debouncedInputValue })
+  }, [currentPage, onlyMine, debouncedInputValue])
+
+  const routeChange = (id: string) => {
+    const path = generatePath(RoutePaths.CANDIDATE_DETAILS, { id })
+    navigate(path)
+  }
+
+  const handleAdding = () => navigate(RoutePaths.CANDIDATE_ADDING)
+
+  const rows = data && data.candidates.map(item => (
+    <TableRow key={item.id} onClick={() => routeChange(item.id)}>
+      <TableCell>{item.name}</TableCell>
+      <TableCell>{item.location}</TableCell>
+      <TableCell>{item.position}</TableCell>
+      <TableCell>{formatDate(item.birthDate)}</TableCell>
+      <TableCell>{item.mobileNumber}</TableCell>
+    </TableRow>
+  ))
+
+  return (
+    <>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4 gap:4'>
+        <Typography appearance='title'>
+          {t('title')}
+        </Typography>
+        <div>
+          <Button icon={<PlusIcon />} onClick={handleAdding}>
+            {t('addCandidate')}
+          </Button>
+        </div>
+      </div>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-8 md:mb-6 gap:4'>
+        <Input
+          label={t('search')}
+          placeholder={t('search')}
+          value={filter}
+          onChange={setFilter}
+          className='mb-4 md:mb-0'
+        />
+        <Checkbox checked={onlyMine} onChange={setOnlyMine} caption={t('onlyMine')} />
+      </div>
+      <WithPreload
+        isLoading={isFetching}
+        isSuccess={isSuccess}
+        isError={isError}
+      >
+        {data?.candidates.length ? (
+          <>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableHeadCell>{t('candidate')}</TableHeadCell>
+                  <TableHeadCell>{t('location')}</TableHeadCell>
+                  <TableHeadCell>{t('position')}</TableHeadCell>
+                  <TableHeadCell>{t('birthdate')}</TableHeadCell>
+                  <TableHeadCell>{t('mobileNumber')}</TableHeadCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows}
+              </TableBody>
+            </Table>
+            <div className='m-8'>
+              <Pagination
+                pagesCount={data?.count}
+                currentPage={currentPage}
+                onChange={setCurrentPage}
+              />
+            </div>
+          </>
+        ) : (
+          <EmptyList />
+        )}
+      </WithPreload>
+    </>
+  )
 }
 
 export default Candidates

@@ -13,7 +13,7 @@ type InputProps = {
 const DatePicker: FunctionComponent<InputProps> = ({ label, placeholder, value, onChange, className }) => {
 
   return (
-    <div>
+    <div className='font-[ceraProLight]'>
       <label>{label}</label>
       <DatePickerCom
         placeholderText={placeholder}
@@ -24,7 +24,7 @@ const DatePicker: FunctionComponent<InputProps> = ({ label, placeholder, value, 
         dateFormat="dd/MM/yyyy"
         dropdownMode="select"
         className={
-          `min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 font-[ceraProLight] text-xl rounded-md border border-strock mt-2 ${className}`
+          `min-w-[10rem] bg-white flex align-center gap-3 py-3 font-[ceraProLight] px-4 text-xl rounded-md border border-strock mt-2 ${className}`
         }
       />
     </div>

@@ -12,17 +12,16 @@ export enum Stage {
   NOT_APPLIED = 'NOT_APPLIED',
 }
 
-export type Candidate = {
-  id: number
-  avatar: string
-  name: string
-  surname: string
-  birthDate: string
-  rating: number
-  stages: Stage,
-  createdAt: string,
-  appliedAt: string,
-  owner: number
+export type Task = {
+  id: string
+  candidate: Candidate
+  column: Stage
+  isOpen?: boolean
+}
+
+export type Desk = {
+  _id: string
+  tasks: Array<Task>
 }
 
 export type Vacancy = {
@@ -46,6 +45,16 @@ export type Vacancy = {
   }
   createdAt: Date
   updatedAt: Date
+  salaryMin: number
+  salaryMax: number
+  deadlineDate: Date
+  desk: Desk
+}
+
+export type Column = {
+  id: number
+  title: string
+  items: Array<Task>
 }
 
 export enum VacancyStatus {
@@ -67,6 +76,24 @@ export type UserInfo = {
   mobileNumber: string
   role: string 
   startDate: Date 
+}
+
+export type Candidate = {
+  id: string
+  name: string
+  birthDate: Date 
+  gender: string 
+  email: string,
+  mobileNumber: string
+  location: string 
+  position: string 
+  salary: number
+}
+
+export type Status = {
+  isSuccess: boolean
+  isLoading: boolean
+  isError: boolean
 }
 
 export enum GenderTypes {

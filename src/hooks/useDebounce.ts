@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-const DEBOUNCE_TIME = 500
+const DEBOUNCE_TIME = 300
 
 type useDebounceProps = {
   value: string

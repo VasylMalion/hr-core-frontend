@@ -14,7 +14,7 @@ import { RoutePaths } from "containers/AppRouter";
 import employeeAddingEn from './EmployeeAdding_en.json'
 import employeeAddingUa from './EmployeeAdding_ua.json'
 import { useNavigate } from "react-router-dom";
-import { useDebounce } from "hooks/debounce";
+import { useDebounce } from "hooks/useDebounce";
 
 const EmployeeAdding: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.employeeAdding)
@@ -67,16 +67,16 @@ const EmployeeAdding: FunctionComponent = () => {
 
   return (
     <>
+      <Typography appearance='title'>
+        {t('title')}
+      </Typography>
       <div className='grid gap-6 max-w-[50rem]'>
-        <Typography appearance='title'>
-          {t('title')}
-        </Typography>
         <div>
           <Typography appearance='subtitle'>
             {t('personalInfo')}
           </Typography>
-          <div className='grid gap-4 max-w-[50rem]'>
-            <div className='grid grid-cols-2 gap-8'>
+          <div className='grid gap-4'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Input
                 label={t('name')}
                 className='w-full'
@@ -90,7 +90,7 @@ const EmployeeAdding: FunctionComponent = () => {
                 validation={register("surname")}
               />
             </div>
-            <div className='grid grid-cols-2 gap-8'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Select
                 options={genderOptions}
                 placeholder={t('genderTitle')}
@@ -116,40 +116,44 @@ const EmployeeAdding: FunctionComponent = () => {
           </div>
         </div>
         <div>
-          <Typography appearance='subtitle'>
+          <Typography appearance='subtitle' className='mt-4'>
             {t('contactInfo')}
           </Typography>
-          <div className='grid gap-4 max-w-[50rem]'>
-            <div className='grid grid-cols-2 gap-8'>
+          <div className='grid gap-4'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Input
                 label={t('email')}
-                className='w-full'
+                placeholder={t('email')}
+                validation={register('email')}
                 error={errors.email}
-                validation={register("email")}
+                className='w-full'
               />
               <Input
+                type='number'
                 label={t('mobile')}
-                className='w-full'
+                placeholder={t('mobile')}
+                validation={register('mobile')}
                 error={errors.mobile}
-                validation={register("mobile")}
+                className='w-full'
               />
             </div>
-            <div className='grid grid-cols-2 gap-8'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Input
                 label={t('address')}
-                className='w-full'
+                placeholder={t('address')}
+                validation={register('address')}
                 error={errors.address}
-                validation={register("address")}
+                className='w-full'
               />
             </div>
           </div>
         </div>
         <div>
-          <Typography appearance='subtitle'>
+          <Typography appearance='subtitle' className='mt-4'>
             {t('workInfo')}
           </Typography>
-          <div className='grid gap-4 max-w-[50rem]'>
-            <div className='grid grid-cols-2 gap-8'>
+          <div className='grid gap-4'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Input
                 label={t('department')}
                 className='w-full'
@@ -163,7 +167,7 @@ const EmployeeAdding: FunctionComponent = () => {
                 validation={register("position")}
               />
             </div>
-            <div className='grid grid-cols-2 gap-8'>
+            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
               <Select
                 options={roleOptions}
                 placeholder={t('role')}
@@ -198,12 +202,12 @@ const EmployeeAdding: FunctionComponent = () => {
           {t('add')}
         </Button>
       </div>
-      {/* <Modal
+      <Modal
         isOpen={isSuccess}
         onClose={onSuccessClose}
         title={t('successTitle')}
         body={t('successDescription')}
-      /> */}
+      />
       <Modal
         isOpen={isError}
         onClose={onFailClose}

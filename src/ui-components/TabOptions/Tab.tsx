@@ -11,7 +11,7 @@ const Tab: FunctionComponent<TabProps> = ({ title, value, isActive, onChange }) 
   console.log(value)
 
   return (
-    <div onClick={() => onChange(value)} className={`${isActive ? 'text-[#333333] border-b-[3px] border-green' : 'text-greyDark'} p-1 cursor-pointer`}>
+    <div onClick={() => onChange(value)} className={`${isActive ? 'text-[#333333] border-b-[3px] border-green' : 'text-greyDark'} p-1 cursor-pointer whitespace-pre`}>
       {title}
     </div>
   )

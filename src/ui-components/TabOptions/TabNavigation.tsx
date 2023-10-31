@@ -12,7 +12,7 @@ type TabNavigationProps = {
 const TabNavigation: FunctionComponent<TabNavigationProps> = ({ options, value, onChange }) => {
 
   return (
-    <>
+    <div className='overflow-x-auto'>
       <div className='flex gap-8 border-b border-greyLight'>
         {
           options.map(item => (
@@ -25,10 +25,8 @@ const TabNavigation: FunctionComponent<TabNavigationProps> = ({ options, value, 
             />
           ))
         }
-
       </div>
-      <div className='p'></div>
-    </>
+    </div>
   )
 }
 

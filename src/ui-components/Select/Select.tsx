@@ -31,7 +31,7 @@ const Select: FunctionComponent<InputProps> = ({
   const values = options.map((option, index) => <option key={index} value={option.value}>{option.title}</option>)
 
   return (
-    <div>
+    <div className='font-[ceraProLight]'>
       <label htmlFor="select">{label}</label>
       <select
         value={value}
@@ -40,7 +40,7 @@ const Select: FunctionComponent<InputProps> = ({
         onChange={(e) => onChange(e.target.value)}
         className={
           `cursor-pointer min-w-[10rem] bg-white flex align-center
-          gap-3 py-3 px-4 font-[ceraProLight] text-xl rounded-md 
+          gap-3 py-3 px-4 text-xl rounded-md 
           border border-strock mt-2
           ${className} ${error?.type && 'border-red'}
           `}

@@ -1,1 +1,16 @@
-{}
+{
+  "title": "Adding a new vacancy",
+  "department": "Department",
+  "position": "Position",
+  "location": "Location",
+  "description": "Description",
+  "deadlineDate": "Deadline date",
+  "assignedTo": "Assigne to",
+  "salaryMin": "Salary (minimum)",
+  "salaryMax": "Salary (maximum)",
+  "create": "Create",
+  "successTitle": "Success!",
+  "successDescription": "The vacancy was added successfuly",
+  "failTitle": "Sorry!",
+  "failDescription": "Something went wrong. Try again later"
+}

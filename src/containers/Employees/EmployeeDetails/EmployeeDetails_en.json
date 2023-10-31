@@ -1,27 +1,29 @@
 {
-  "title": "Adding a new employee",
+  "title": "Employee #{{num}}",
+  "deleteEmployee": "Delete employee",
   "personalInfo": "Personal information",
   "contactInfo": "Contact information",
   "workInfo": "Work information",
-  "name": "Name",
-  "surname": "Surname",
-  "birthDate": "Birth date",
-  "genderTitle": "Gender",
-  "email": "Email",
-  "mobile": "Phone number",
-  "address": "Address",
-  "department": "Department",
-  "position": "Position",
-  "role": "Role",
-  "startDate": "Start date",
-  "add": "Add",
+  "name": "Name:",
+  "surname": "Surname:",
+  "birthDate": "Birth date:",
+  "genderTitle": "Gender:",
+  "email": "Email:",
+  "mobile": "Phone number:",
+  "address": "Address:",
+  "department": "Department:",
+  "position": "Position:",
+  "startDate": "Start date:",
   "gender": {
-    "male": "Male",
-    "female": "Female"
+    "MALE": "Male",
+    "FEMALE": "Female"
   },
-  "roles": {
-    "user": "User",
-    "admin": "Admin"
-  },
-  "successTitle": ""
+  "deletingTitle": "Attention!",
+  "deletingDescription": "Do you really want to delete the employee?",
+  "yes": "Yes",
+  "no": "No",
+  "successTitle": "Success!",
+  "successDescription": "The employee was removed successfuly",
+  "failTitle": "Sorry!",
+  "failDescription": "Something went wrong. Try again later"
 }

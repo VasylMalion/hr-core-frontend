@@ -1,31 +1,29 @@
 {
-  "title": "Додавання нового співробітника",
+  "title": "Кандидат #{{num}}",
+  "deleteEmployee": "Видалити співробітника",
   "personalInfo": "Персональна інформація",
   "contactInfo": "Контактна інформація",
   "workInfo": "Робоча інформація",
-  "name": "Ім'я",
-  "surname": "Прізвище",
-  "birthDate": "Дата народження",
-  "genderTitle": "Стать",
-  "email": "Електронна пошта",
-  "mobile": "Номер телефону",
-  "address": "Адреса",
-  "department": "Відділ",
-  "position": "Посада",
-  "role": "Тип",
-  "startDate": "Дата найму",
-  "add": "Додати",
+  "name": "Ім'я:",
+  "surname": "Прізвище:",
+  "birthDate": "Дата народження:",
+  "genderTitle": "Стать:",
+  "email": "Електронна пошта:",
+  "mobile": "Номер телефону:",
+  "address": "Адреса:",
+  "department": "Відділ:",
+  "position": "Посада:",
+  "startDate": "Дата початку:",
   "gender": {
-    "male": "Чоловіча",
-    "female": "Жіноча"
+    "MALE": "Чоловіча",
+    "FEMALE": "Жіноча"
   },
-  "roles": {
-    "user": "Користувач",
-    "admin": "Адмін"
-  },
+  "deletingTitle": "Увага!",
+  "deletingDescription": "Ви дійсно хочете видалити співробітника?",
+  "yes": "Так",
+  "no": "Ні",
   "successTitle": "Успіх!",
+  "successDescription": "Співробітника успішно видалено",
   "failTitle": "Помилка!",
-  "failDescription": "Упс. Щось пішло не так.",
-  "successDescription": "Співробітника успішно додано.",
-  "ok": "Ок"
+  "failDescription": "Упс. Щось пішло не так"
 }

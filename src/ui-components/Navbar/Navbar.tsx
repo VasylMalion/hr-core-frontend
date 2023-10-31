@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FunctionComponent, ReactNode, useState } from "react"
 import LogoLight from "assets/images/logo-light.png"
 import LogoLightMini from "assets/images/logo-light-mini.png"
@@ -61,11 +61,6 @@ const Navbar: FunctionComponent = () => {
       path: RoutePaths.DASHBOARD,
       icon: <DashboardIcon className='fill-current' />
     },
-    // {
-    //   title: 'Messages',
-    //   path: RoutePaths.MESSAGES,
-    //   icon: <MessageIcon />
-    // },
     {
       title: 'profile',
       path: RoutePaths.PROFILE,
@@ -84,16 +79,6 @@ const Navbar: FunctionComponent = () => {
       path: RoutePaths.CANDIDATES,
       icon: <CandidatesIcon className='fill-current' />
     },
-    // {
-    //   title: 'My referral',
-    //   path: RoutePaths.REFERRALS,
-    //   icon: <ReferralIcon />
-    // },
-    // {
-    //   title: 'Career Site',
-    //   path: RoutePaths.CAREER,
-    //   icon: <CareerIcon />
-    // }
   ]
 
   const organizationLinks = [
@@ -102,12 +87,14 @@ const Navbar: FunctionComponent = () => {
       path: RoutePaths.EMPLOYEES,
       icon: <CandidatesIcon className='fill-current' />
     },
-    {
-      title: 'structure',
-      path: RoutePaths.STRUCTURE,
-      icon: <CareerIcon className='fill-current' />
-    }
   ]
+
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    const currentPath = location.pathname
+    return currentPath.startsWith(path)
+  }
 
   const getSection = (title: string, links: Links) => (
     <div className='mt-4'>
@@ -124,11 +111,11 @@ const Navbar: FunctionComponent = () => {
             key={index}
             to={item.path}
           >
-            {({ isActive }) => (
+            {() => (
               <ToolTip text={canBeCollapsed ? t(item.title) : ''}>
                 <Button
                   icon={item.icon}
-                  type={isActive ? 'primary' : 'secondary'}
+                  type={isActive(item.path) ? 'primary' : 'secondary'}
                   className={
                     canBeCollapsed ? `${!isActive && 'hover:bg-[#091e4214]'} 
                     !min-w-[2rem] px-[1rem] flex justify-center` : 'w-full'

@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { BASE_URL } from 'common/constants';
-import { UserInfo } from 'common/types/common';
-import { getToken } from 'common/utils/common';
+import { BASE_URL } from 'common/constants'
+import { UserInfo } from 'common/types/common'
+import { getToken } from 'common/utils/common'
 
 export type GetAllResponse = {
   users: Array<Partial<UserInfo>>
@@ -12,6 +12,7 @@ export type GetAllResponse = {
 export type GetAllParams = {
   limit: number
   page: number
+  filter: string
 }
 
 export type GetOneParams = {
@@ -29,6 +30,12 @@ export type FindEmployeeParams = {
 }
 
 export type FindEmployeeResponse = Pick<UserInfo, 'id' | 'name' | 'surname'>
+
+type DeleteOneParams = {
+  id: string
+}
+
+type DeleteOneResponse = UserInfo
 
 export const EmployeeApi = createApi({
   reducerPath: 'employeeApi',
@@ -60,8 +67,9 @@ export const EmployeeApi = createApi({
         url: '/',
         method: 'GET',
         params: {
-          limit: 10,
+          limit: params.limit,
           page: params.page,
+          filter: params.filter,
         }
       }),
     }),
@@ -71,13 +79,20 @@ export const EmployeeApi = createApi({
         method: 'GET',
       }),
     }),
+    deleteOne: build.mutation<DeleteOneResponse, DeleteOneParams>({
+      query: (params) => ({
+        url: `/${params.id}`,
+        method: 'DELETE',
+      }),
+    }),
   })
 })
 
 export const {
   useAddEmployeeMutation,
   useFindEmployeeQuery,
-  useGetAllQuery,
+  useLazyGetAllQuery,
   useGetOneQuery,
+  useDeleteOneMutation,
   util
 } = EmployeeApi

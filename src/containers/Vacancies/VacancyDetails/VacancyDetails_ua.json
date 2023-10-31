@@ -1,12 +1,49 @@
 {
   "tabs": {
-    "candidates": "Candidates",
-    "jobDetails": "Job Details",
-    "timeline": "Timeline & Hiring Team"
+    "candidates": "Кандидати",
+    "vacancyDetails": "Деталі вакансії",
+    "timeline": "Часова шкала & Команда найму"
   },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  "title": "Вакансія #{{id}}",
+  "vacancyStatus": "Статус вакансії:",
+  "deactivate": "Деактивувати",
+  "vacancyStatusVal": {
+    "ACTIVE": "Відкрита",
+    "INACTIVE": "Закрита"
+  },
+  "generalInfo": "Загальна інформація",
+  "additionalInfo": "Додаткова інформація",
+  "position": "Позиція:",
+  "department": "Відділ:",
+  "description": "Опис:",
+  "salaryMin": "Мінімальна зарплата:",
+  "salaryMax": "Максимальна зарплата:",
+  "location": "Локація:",
+  "salary": "{{value}}₴",
+  "timeline": "Часова шкала",
+  "hiringTeam": "Команда найму",
+  "createdAt": "Створено в:",
+  "deadlineDate": "Дата крайнього терміну:",
+  "closedAt": "Закрито в:",
+  "createdBy": "Створено:",
+  "assignedTo": "Відповідальна особа:",
+  "addTask": "Додати завдання",
+  "deactivationTitle": "Увага!",
+  "deactivationDescription": "Ви дійсно хочете деактивувати вакансію?",
+  "yes": "Так",
+  "no": "Ні",
+  "deaSuccessTitle": "Успіх!",
+  "deaSuccessDescription": "Вакансія деактивована успішно",
+  "failTitle": "Пробачте!",
+  "failDescription": "Щось пішло не так. Спробуйте пізніше",
+  "showCandidate": "Переглянути кандидата",
+  "deleteItem": "Видалити завдання",
+  "stages": {
+    "SHORTLIST": "Шорт-лист",
+    "PREINTERVIEW": "Попереднє інтерв'ю",
+    "INTERVIEW": "Інтерв'ю",
+    "TEST": "Тест",
+    "APPLIED": "Найнято",
+    "NOT_APPLIED": "Не найнято"
+  }
 }

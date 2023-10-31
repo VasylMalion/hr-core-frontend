@@ -23,5 +23,9 @@
     "user": "User",
     "admin": "Admin"
   },
-  "successTitle": ""
+  "successTitle": "Success!",
+  "failTitle": "Error!",
+  "failDescription": "Sorry, something went wrong.",
+  "successDescription": "Employee was added successfully",
+  "ok": "Ok"
 }

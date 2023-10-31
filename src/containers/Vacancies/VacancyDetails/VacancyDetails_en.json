@@ -1,12 +1,51 @@
 {
   "tabs": {
     "candidates": "Candidates",
-    "jobDetails": "Job Details",
-    "timeline": "Timeline & Notes"
+    "vacancyDetails": "Vacancy Details",
+    "timeline": "Timeline & Hiring team"
   },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  "title": "Vacancy #{{id}}",
+  "vacancyStatus": "Vacancy status:",
+  "deactivate": "Deactivate",
+  "vacancyStatusVal": {
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive"
+  },
+  "generalInfo": "General information",
+  "additionalInfo": "Additional information",
+  "position": "Position:",
+  "department": "Department:",
+  "description": "Description:",
+  "salaryMin": "Minimum salary:",
+  "salaryMax": "Maximum salary:",
+  "location": "Locations:",
+  "salary": "{{value}}₴",
+  "timeline": "Timeline",
+  "hiringTeam": "Hiring Team",
+  "createdAt": "Created at:",
+  "deadlineDate": "Deadline date:",
+  "closedAt": "Closed at:",
+  "createdBy": "Created by:",
+  "assignedTo": "Responsible person:",
+  "addTask": "Add task",
+  "attention": "Attention!",
+  "deactivationDescription": "Do you really want to deactivate the vacancy?",
+  "yes": "Yes",
+  "no": "No",
+  "successTitle": "Success!",
+  "deaSuccessDescription": "The vacancy was deactivated successfuly",
+  "failTitle": "Sorry!",
+  "failDescription": "Something went wrong. Try again later",
+  "showCandidate": "Show candidate",
+  "deleteItem": "Delete task",
+  "deleteTaskDescription": "Do you really want to delete the task?",
+  "deleteTaskSucces": "The task was deleted successfuly",
+  "stages": {
+    "SHORTLIST": "Shortlist",
+    "PREINTERVIEW": "Pre-interview",
+    "INTERVIEW": "Interview",
+    "TEST": "Test",
+    "APPLIED": "Applied",
+    "NOT_APPLIED": "Not applied"
+  }
 }

@@ -1,4 +1,4 @@
-import { useDebounce } from "hooks/debounce"
+import { useDebounce } from "hooks/useDebounce"
 import { FunctionComponent, useState } from "react"
 import { FindEmployeeResponse, useFindEmployeeQuery } from "services/EmployeeService"
 import { Input } from "ui-components"
@@ -43,9 +43,6 @@ const FindInput: FunctionComponent<FindInputProps> = ({
       />
       {value && (
         <div className='absolute w-[15rem] bg-white max-h-[10rem] top-[5.75rem] rounded overflow-y-auto'>
-          {/* {users.data.length ? usersList : (
-            <div>No results</div>
-          )} */}
           {usersList}
         </div>
       )}

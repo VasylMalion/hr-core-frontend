@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react"
-import { FieldValues } from "react-hook-form"
+import { FunctionComponent } from 'react'
+import { FieldValues } from 'react-hook-form'
 
 export type InputProps = {
   label?: string
@@ -24,7 +24,7 @@ const Input: FunctionComponent<InputProps> = ({
 }) => {
 
   return (
-    <div>
+    <div className='font-[ceraProLight]'>
       <label>{label}</label>
       <input
         type={type}
@@ -33,7 +33,7 @@ const Input: FunctionComponent<InputProps> = ({
         placeholder={placeholder}
         className={`
           min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 
-          font-[ceraProLight] text-xl rounded-md border border-strock mt-2 
+          text-xl rounded-md border border-strock mt-2 
           ${className} ${error?.type && '!border-red'}
           `}
         {...validation}
