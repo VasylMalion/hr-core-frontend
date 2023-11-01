@@ -1,25 +1,23 @@
-import { FunctionComponent, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import * as yup from 'yup'
+import { FunctionComponent, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import yup from 'common/utils/validations'
-import { TranslationNamespace, addTranslationNamespace } from "common/translations";
-import Input from "ui-components/Input/Input";
-import Typography from "ui-components/Typography/Typography";
-import { Button } from "ui-components";
-import { LoginParams, useLoginMutation } from "services/AuthService";
-import { RoutePaths } from "containers/AppRouter";
-import { setCredentials } from "store/slices/authSlice";
-import { useAppDispatch } from "hooks/redux";
-import { errorHandler } from "common/utils/common";
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { Button, Typography, Input } from 'ui-components'
+import { LoginParams, useLoginMutation } from 'services/AuthService'
+import { RoutePaths } from 'containers/AppRouter'
+import { setCredentials } from 'store/slices/authSlice'
+import { useAppDispatch } from 'hooks/redux'
+import { errorHandler } from 'common/utils/common'
 
 import loginEn from './Login_en.json'
 import loginUa from './Login_ua.json'
+import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_KEY } from 'common/constants'
 
 const Login: FunctionComponent = () => {
-
   const { t } = useTranslation(TranslationNamespace.login)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -29,10 +27,11 @@ const Login: FunctionComponent = () => {
     { isLoading, isSuccess, isError, error, data },
   ] = useLoginMutation()
 
-  const schema = yup.object({
-    email: yup.string().email('validation.email').required().typeError("Invalid number"),
-    password: yup.string().min(8).required(),
+  const schema = yup.object().shape({
+    email: yup.string().email('validation.email').required('asdasda'),
+    password: yup.string().min(8).required('sdaasda'),
   });
+
 
   const { register, reset, handleSubmit, formState: { errors, isValid } } = useForm({
     mode: 'onChange',
@@ -43,8 +42,8 @@ const Login: FunctionComponent = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userInfo', JSON.stringify(data.userInfo))
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, data.token)
+      localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(data.userInfo))
 
       navigate(RoutePaths.DASHBOARD)
 
@@ -52,18 +51,17 @@ const Login: FunctionComponent = () => {
         token: data.token,
         user: data.userInfo,
       }))
-
-      reset({
-        email: '',
-        password: '',
-      })
+      reset({ email: '', password: '' })
     }
   }, [isSuccess])
 
   return (
-    <div className="bg-purpleLight h-screen w-screen flex items-center justify-center">
-      <div className='grid gap-8 justify-center bg-white py-[2rem] px-[2rem] rounded-lg 
-      md:px-[8rem] md:py-[3rem] m-8 max-w-[40rem]'
+    <div className='bg-purpleLight h-screen w-screen flex items-center justify-center'>
+      <div 
+        className='
+          grid gap-8 justify-center bg-white py-8 px-8 rounded-lg 
+          md:px-32 md:py-12 m-8 max-w-[40rem]
+        '
       >
         <Typography appearance='title'>
           {t('title')}
@@ -71,19 +69,21 @@ const Login: FunctionComponent = () => {
         <div className='grid gap-4'>
           <Input
             label={t('email')}
+            placeholder={t('email')}
             className='w-full'
             error={errors.email}
             validation={register('email')}
           />
           <Input
             type='password'
+            placeholder={t('password')}
             label={t('password')}
             className='w-full'
             error={errors.password}
             validation={register('password')}
           />
           {isError && !isLoading && (
-            <div className="text-red">
+            <div className='text-red'>
               {t(errorHandler(error))}
             </div>
           )}

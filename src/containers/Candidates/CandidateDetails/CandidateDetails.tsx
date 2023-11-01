@@ -5,9 +5,10 @@ import { useDispatch } from 'react-redux'
 
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Button, Modal, Typography, WithPreload } from 'ui-components'
-import { formatDate } from 'common/utils/common'
 import { useGetOneQuery, useLazyDeleteOneQuery, util } from 'services/CandidateService'
+import { formatDate } from 'common/utils/common'
 import { RoutePaths } from 'containers/AppRouter'
+import { ContentSection } from 'common/types/common'
 
 import candidateDetailsEn from './CandidateDetails_en.json'
 import candidateDetailsUa from './CandidateDetails_ua.json'
@@ -29,25 +30,73 @@ const EmployeeDetails: FunctionComponent = () => {
     }
   }, [isSuccess, data])
 
-  const onFailClose = () => {
+  const onClose = (isSuccess?: boolean) => {
     setIsOpenModal(false)
     dispatch(util.resetApiState())
+    if (isSuccess) navigate(RoutePaths.CANDIDATES)
   }
 
-  const onSuccessClose = () => {
-    setIsOpenModal(false)
-    dispatch(util.resetApiState())
-    navigate(RoutePaths.CANDIDATES)
-  }
+  const personalInfo = [
+    {
+      title: t('name'),
+      value: data?.name,
+    },
+    {
+      title: t('genderTitle'),
+      value: t(`gender.${data?.gender}`),
+    },
+    {
+      title: t('birthDate'),
+      value: formatDate(data?.birthDate),
+    },
+  ]
+
+  const contactInfo = [
+    {
+      title: t('email'),
+      value: data?.email,
+    },
+    {
+      title: t('mobile'),
+      value: data?.mobileNumber,
+    },
+    {
+      title: t('address'),
+      value: data?.location,
+    },
+  ]
+
+  const workInfo = [
+    {
+      title: t('position'),
+      value: data?.position,
+    },
+    {
+      title: t('salary'),
+      value: t('salaryValue', { value: data?.salary }),
+    },
+  ]
+
+  const getContent = (title: string, info: ContentSection) => (
+    <div>
+      <Typography appearance='subtitle'>
+        {t(title)}
+      </Typography>
+      <div className='grid gap-2 bg-white p-4 rounded'>
+        {info.map(item => (
+          <div className='flex gap-2'>
+            <span className='font-[ceraProLight]'>{item.title}</span>
+            <span>{item.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 
   return (
     <>
-      <WithPreload
-        isSuccess={isSuccess}
-        isLoading={isLoading}
-        isError={isError}
-      >
-        <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4 gap:4'>
+      <WithPreload isSuccess={isSuccess} isLoading={isLoading} isError={isError}>
+        <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
           <Typography appearance='title'>
             {t('title', { num: id })}
           </Typography>
@@ -56,68 +105,16 @@ const EmployeeDetails: FunctionComponent = () => {
               type='secondary'
               isLoading={false}
               onClick={() => setIsOpenModal(true)}
-              className='border-red border-[1px] text-red'
+              className='border-red border !text-red'
             >
               {t('deleteCandidate')}
             </Button>
           </div>
         </div>
-        <div className='grid gap-6 max-w-[50rem]'>
-          <div className='max-w-[30rem]'>
-            <div>
-              <Typography appearance='subtitle'>
-                {t('personalInfo')}
-              </Typography>
-              <div className='grid gap-2 bg-white p-[1rem] rounded'>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('name')}</span>
-                  <span>{data?.name}</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('genderTitle')}</span>
-                  <span>{t(`gender.${data?.gender}`)}</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('birthDate')}</span>
-                  <span>{formatDate(data?.birthDate)}</span>
-                </div>
-              </div>
-            </div>
-            <div className='mt-6'>
-              <Typography appearance='subtitle'>
-                {t('contactInfo')}
-              </Typography>
-              <div className='grid gap-2 bg-white p-[1rem] rounded'>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('email')}</span>
-                  <span>{data?.email}</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('mobile')}</span>
-                  <span>{data?.mobileNumber}</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('address')}</span>
-                  <span>{data?.location}</span>
-                </div>
-              </div>
-            </div>
-            <div className='mt-6'>
-              <Typography appearance='subtitle'>
-                {t('workInfo')}
-              </Typography>
-              <div className='grid gap-2 bg-white p-[1rem] rounded'>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('position')}</span>
-                  <span>{data?.position}</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-[ceraProLight]'>{t('salary')}</span>
-                  <span>{t('salaryValue', { value: data?.salary })}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className='max-w-medium flex flex-col gap-6'>
+          {getContent('personalInfo', personalInfo)}
+          {getContent('contactInfo', contactInfo)}
+          {getContent('workInfo', workInfo)}
         </div>
       </WithPreload>
       <Modal
@@ -146,13 +143,13 @@ const EmployeeDetails: FunctionComponent = () => {
       />
       <Modal
         isOpen={deletingData.isSuccess}
-        onClose={onSuccessClose}
+        onClose={() => onClose(true)}
         title={t('successTitle')}
         body={t('successDescription')}
       />
       <Modal
         isOpen={deletingData.isError}
-        onClose={onFailClose}
+        onClose={onClose}
         title={t('failTitle')}
         body={t('failDescription')}
       />

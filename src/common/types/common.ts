@@ -54,6 +54,7 @@ export type Vacancy = {
 export type Column = {
   id: number
   title: string
+  color: string
   items: Array<Task>
 }
 
@@ -105,3 +106,10 @@ export enum RoleTypes {
   ADMIN = 'ADMIN',
   USER = 'USER',
 }
+
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+export type ContentSection = Array<{ title: string, value: string }>

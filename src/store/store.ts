@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import { AuthApi } from "services/AuthService"
-import { VacancyApi } from "services/VacancyService"
-import { EmployeeApi } from "services/EmployeeService"
-import { CandidateApi } from "services/CandidateService"
+import { AuthApi } from 'services/AuthService'
+import { VacancyApi } from 'services/VacancyService'
+import { EmployeeApi } from 'services/EmployeeService'
+import { CandidateApi } from 'services/CandidateService'
 
-import authSlice from "./slices/authSlice"
+import authSlice from './slices/authSlice'
 
 const rootReducer = combineReducers({
   [AuthApi.reducerPath]: AuthApi.reducer,

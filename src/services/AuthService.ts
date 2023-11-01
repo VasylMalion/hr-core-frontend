@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { BASE_URL } from 'common/constants';
-import { UserInfo } from 'common/types/common';
+
+import { BASE_URL } from 'common/constants'
+import { UserInfo } from 'common/types/common'
 
 export type LoginParams = {
   email: string;

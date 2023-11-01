@@ -1,21 +1,19 @@
-import * as yup from "yup";
-import { FunctionComponent, useState } from "react"
-import { TranslationNamespace, addTranslationNamespace } from "common/translations"
-import { useTranslation } from "react-i18next"
-import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from 'yup'
+import { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import Input from "ui-components/Input/Input"
-import Typography from "ui-components/Typography/Typography"
-import { Button, DatePicker, Modal } from "ui-components"
-import { AddVacancyParams, useAddVacancyMutation, util } from "services/VacancyService"
-import FindInput from "ui-components/FindInput/FindInput"
+import { yupResolver } from '@hookform/resolvers/yup'
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { Button, DatePicker, Modal, Input, Typography } from 'ui-components'
+import { AddVacancyParams, useAddVacancyMutation, util } from 'services/VacancyService'
+import FindInput from 'ui-components/FindInput/FindInput'
+import { Controller, useForm } from 'react-hook-form'
+import { RoutePaths } from 'containers/AppRouter'
 
 import vacancyAddingEn from './VacancyAdding_en.json'
 import vacancyAddingUa from './VacancyAdding_ua.json'
-import { Controller, useForm } from "react-hook-form";
-import { RoutePaths } from "containers/AppRouter";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const VacancyAdding: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.vacancyAdding)
@@ -37,12 +35,12 @@ const VacancyAdding: FunctionComponent = () => {
     deadlineDate: yup.date(),
   });
 
-  const { 
-    register, 
-    reset, 
-    control, 
-    handleSubmit, 
-    formState: { errors, isValid } 
+  const {
+    register,
+    reset,
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -56,13 +54,15 @@ const VacancyAdding: FunctionComponent = () => {
 
   const onFailClose = () => dispatch(util.resetApiState())
 
+  const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
+
   return (
     <>
-      <Typography appearance='title' className=''>
+      <Typography appearance='title'>
         {t('title')}
       </Typography>
-      <div className='grid gap-6 max-w-[50rem]'>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8'>
+      <div className='grid gap-6 max-w-large'>
+        <div className={rowStyles}>
           <Input
             label={t('department')}
             placeholder={t('department')}
@@ -78,7 +78,7 @@ const VacancyAdding: FunctionComponent = () => {
             className='w-full'
           />
         </div>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8'>
+        <div className={rowStyles}>
           <Input
             label={t('location')}
             placeholder={t('location')}
@@ -94,7 +94,7 @@ const VacancyAdding: FunctionComponent = () => {
             className='w-full'
           />
         </div>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8'>
+        <div className={rowStyles}>
           <Controller
             control={control}
             name='deadlineDate'
@@ -121,7 +121,7 @@ const VacancyAdding: FunctionComponent = () => {
             )}
           />
         </div>
-        <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8'>
+        <div className={rowStyles}>
           <Input
             type='number'
             label={t('salaryMin')}
@@ -139,10 +139,10 @@ const VacancyAdding: FunctionComponent = () => {
             className='w-full'
           />
         </div>
-        <Button 
+        <Button
           textAlign='center'
           className='flex justify-self-start mt-4'
-          onClick={handleSubmit(createVacancy)} 
+          onClick={handleSubmit(createVacancy)}
           isLoading={isLoading}
           disabled={!isValid}
         >

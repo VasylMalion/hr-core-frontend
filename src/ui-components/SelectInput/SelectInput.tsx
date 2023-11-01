@@ -1,6 +1,5 @@
-import { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent, memo } from 'react'
 import AsyncSelect from 'react-select/async'
-import { Input } from 'ui-components'
 
 export type SelectInputProps = {
   onChange: (value: any) => void
@@ -16,8 +15,8 @@ const SelectInput: FunctionComponent<SelectInputProps> = ({ onChange, options, i
         classNames={{
           // container: () => 'rounded-md border border-strock',
           control: () => 'rounded-md border border-strock text-xl focus:border-red',
-          input: () => 'min-w-[15rem] bg-white flex align-center gap-3  font-[ceraProLight] py-3 text-xl mt-2 focus:border-red',
-          menuList: () => 'max-w-[15rem]',
+          input: () => 'min-w-[15rem] bg-white flex align-center gap-3 font-[ceraProLight] py-3 text-xl mt-2 focus:border-red',
+          menuList: () => 'max-w-60',
         }}
       />
   )

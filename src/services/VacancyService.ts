@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { UserInfo, Vacancy, VacancyStatus } from 'common/types/common';
-import { BASE_URL } from 'common/constants';
-import { getToken } from 'common/utils/common';
+import { UserInfo, Vacancy, VacancyStatus } from 'common/types/common'
+import { BASE_URL } from 'common/constants'
+import { getToken } from 'common/utils/common'
 
 type GetAllVacanciesParams = {
   status?: VacancyStatus
   limit?: number
   page?: number
+  filter?: string
+  onlyMine?: boolean
 }
 
 type GetAllVacanciesResponse = {
@@ -78,7 +80,10 @@ export const VacancyApi = createApi({
       query: (params) => ({
         url: '/jobs',
         method: 'GET',
-        params,
+        params: {
+          ...params,
+          onlyMine: params.onlyMine ? 1 : 0,
+        },
       })
     }),
     getOne: build.query<GetOneResponse, GetOneParams>({

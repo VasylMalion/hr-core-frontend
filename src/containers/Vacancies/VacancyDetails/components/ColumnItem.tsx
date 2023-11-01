@@ -24,8 +24,16 @@ type TaskProps = {
   item: Task
 } & Omit<ColumnItemProps, 'dropCardHandler'>
 
-const Task: FunctionComponent<TaskProps> = 
-  ({ item, desk, refetch, setDesk, column, dropHandler, dragStartHandler, dragOverHandler, }) => {
+const Task: FunctionComponent<TaskProps> = ({
+  item,
+  desk,
+  refetch,
+  setDesk,
+  column,
+  dropHandler,
+  dragStartHandler,
+  dragOverHandler,
+}) => {
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
   const { id: vacancyId } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -43,7 +51,6 @@ const Task: FunctionComponent<TaskProps> =
 
     const column = desk.find(column => column.title === it.column)
     const columnIndex = desk.findIndex(column => column.title === it.column)
-
     const task = column.items.find(task => task.id === item.id)
     const taskIndex = column.items.findIndex(task => task.id === item.id)
 
@@ -73,17 +80,17 @@ const Task: FunctionComponent<TaskProps> =
 
   return (
     <>
-      <div className='w-full p-2 bg-[#FAFBFC] rounded-[10px] cursor-pointer'
+      <div className='w-full p-2 bg-gray-100 rounded-lg cursor-pointer'
         onDrop={(e) => dropHandler(e, column, item)}
         onDragStart={(e) => dragStartHandler(e, column, item)}
         onDragOver={(e) => dragOverHandler(e)}
         draggable={true}
       >
         <div className='flex items-center gap-2' onClick={onClick}>
-          <img src={Avatarcon} className='w-[38px] h-[38px]' />
+          <img src={Avatarcon} className='w-9 h-9' />
           <div>
-            <div className='text-[1rem] text-[#333333]'>{item.candidate.name}</div>
-            <div className='text-[12px] text-[#6F767E]'>{item.candidate.position}</div>
+            <div className='text-base text-gray-600'>{item.candidate.name}</div>
+            <div className='text-xs text-gray-500'>{item.candidate.position}</div>
           </div>
         </div>
         {
@@ -95,7 +102,7 @@ const Task: FunctionComponent<TaskProps> =
               <Button
                 type='secondary'
                 onClick={() => setIsOpenModal(true)}
-                className='!py-2 !px-4 w-full border-red border-[1px] text-red'
+                className='!py-2 !px-4 w-full border-red border text-red'
               >
                 {t('deleteItem')}
               </Button>
@@ -153,19 +160,18 @@ const ColumnItem: FunctionComponent<ColumnItemProps> = ({
   column,
   desk,
 }) => {
-
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
 
   return (
-    <div className='min-h-[30rem] bg-red w-[200px] rounded-[10px] bg-white p-[10px]'
+    <div className='min-h-medium w-[12.5rem] rounded-lg bg-white p-3'
       onDrop={(e) => dropCardHandler(e, column)}
       onDragOver={(e) => dragOverHandler(e)}
     >
-      <div className="rounded-[10px] bg-[#FAFBFC] mb-6">
-        <div className='h-[6px] bg-red rounded-t-[10px]'></div>
-        <div className="py-[0.5rem] px-[1rem] flex items-center border-x border-b border-[#EFEFEF] justify-between rounded-b-[5px]">
+      <div className='rounded-lg bg-gray-100 mb-6'>
+        <div className={`h-1.5 ${column.color} rounded-t-lg`}></div>
+        <div className='py-2 px-4 flex items-center border-x border-b border-gray-200 justify-between rounded-b-md'>
           <div>{t(`stages.${column.title}`)}</div>
-          <div className='w-[25px] h-[28px] bg-[#EFEFEF] flex items-center justify-center rounded-[5px]'>
+          <div className='w-6 h-7 bg-gray-200 flex items-center justify-center rounded-md'>
             {column.items?.length}
           </div>
         </div>

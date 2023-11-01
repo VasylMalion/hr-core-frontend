@@ -31,9 +31,8 @@ const DebounceInput: FunctionComponent<DebounceInputProps> = ({
         className={`
           min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 
           font-[ceraProLight] text-xl rounded-md border border-strock mt-2
-          relative 
-          ${className} ${error?.type && '!border-red'}
-          `}
+          relative ${className} ${error?.type && '!border-red'}
+        `}
         {...validation}
       />
       <div className='absolute'>123</div>

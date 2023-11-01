@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Vacancy, VacancyStatus } from 'common/types/common'
 import { useLazyGetVacanciesQuery } from 'services/VacancyService'
-import { Button, Typography, WithPreload, Pagination, TabNavigation } from 'ui-components'
+import { Button, Typography, WithPreload, Pagination, TabNavigation, Input, Checkbox } from 'ui-components'
 import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
 import { RoutePaths } from 'containers/AppRouter'
 import EmptyList from 'components/EmptyList/EmptyList'
+import { useDebounce } from 'hooks/useDebounce'
 
 import VacancyItem from './VacancyItem'
 import vacanciesEn from './Vacancies_en.json'
@@ -28,6 +29,9 @@ const Vacancies: FunctionComponent = () => {
 
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.ALL)
+  const [onlyMine, setOnlyMine] = useState<boolean>(false)
+  const [filter, setFilter] = useState<string>('')
+  const debouncedInputValue = useDebounce({ value: filter })
 
   const [getVacancies, { data, isFetching, isSuccess, isError }] = useLazyGetVacanciesQuery()
 
@@ -42,8 +46,10 @@ const Vacancies: FunctionComponent = () => {
       status: tab !== TabNavigationTypes.ALL ? tab as unknown as VacancyStatus : undefined,
       limit: VACANCIES_PER_PAGE,
       page: currentPage,
+      onlyMine,
+      filter: debouncedInputValue
     })
-  }, [tab, currentPage])
+  }, [tab, currentPage, onlyMine, debouncedInputValue])
 
   const options = [
     {
@@ -62,7 +68,7 @@ const Vacancies: FunctionComponent = () => {
 
   return (
     <div>
-      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4 gap:4'>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
         <Typography appearance='title'>
           {t('title')}
         </Typography>
@@ -72,19 +78,21 @@ const Vacancies: FunctionComponent = () => {
           </Button>
         </div>
       </div>
-      <TabNavigation
-        options={options}
-        value={tab}
-        onChange={setTab}
-      />
-      <WithPreload
-        isLoading={isFetching}
-        isSuccess={isSuccess}
-        isError={isError}
-      >
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-8 md:mb-6'>
+        <Input
+          label={t('search')}
+          placeholder={t('search')}
+          value={filter}
+          onChange={setFilter}
+          className='mb-4 md:mb-0'
+        />
+        <Checkbox checked={onlyMine} onChange={setOnlyMine} caption={t('onlyMine')} />
+      </div>
+      <TabNavigation options={options} value={tab} onChange={setTab} />
+      <WithPreload isLoading={isFetching} isSuccess={isSuccess} isError={isError}>
         {data?.vacancies.length ? (
           <>
-            <div className='flex flex-wrap gap-[2rem] mt-8'>
+            <div className='flex flex-wrap gap-8 mt-8'>
               {list}
             </div>
             <div className='m-8'>

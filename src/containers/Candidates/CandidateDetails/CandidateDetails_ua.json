@@ -15,8 +15,8 @@
   "salary": "Зарплата:",
   "salaryValue": "{{value}}₴",
   "gender": {
-    "male": "Чоловіча",
-    "female": "Жіноча"
+    "MALE": "Чоловіча",
+    "FEMALE": "Жіноча"
   },
   "deletingTitle": "Увага!",
   "deletingDescription": "Ви дійсно хочете видалити кандидата?",

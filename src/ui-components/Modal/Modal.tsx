@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useEffect, useRef } from 'react'
+import { FunctionComponent, ReactNode, useEffect, useRef, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ReactComponent as CloseIcon } from 'assets/svgs/close.svg'
@@ -28,21 +28,27 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, [ onClose ]);
+  }, [onClose]);
 
   if (!isOpen) {
     return null
   }
 
   return (
-    <div className='fixed w-full h-full top-0 right-0 z-20 flex justify-center items-center bg-[#00000033]'>
-      <div ref={modalRef} className='max-h-[80vh] max-w-[40rem] min-w-[20rem] min-h-[16rem] flex flex-col rounded-lg	border border-[#091e4214] bg-white'>
-        <div className='p-[1.25rem] border-b border-b-[#091e4214] text-[20px] flex justify-between items-center'>
+    <div className='fixed w-full h-full top-0 right-0 z-20 flex justify-center items-center bg-gray-300'>
+      <div
+        ref={modalRef}
+        className='
+          max-h-[80vh] max-w-[40rem] min-w-[20rem] min-h-[15rem]
+          flex flex-col rounded-lg border border-gray-300 bg-white
+        '
+      >
+        <div className='p-5 border-b border-b-gray-300 text-xl flex justify-between items-center'>
           {title}
-          <CloseIcon className='w-[1rem] h-[1rem] cursor-pointer' onClick={onClose} />
+          <CloseIcon className='w-4 h-4 cursor-pointer' onClick={onClose} />
         </div>
-        <div className='p-[1.25rem] border-b border-b-[#091e4214] font-[ceraProLight] flex grow'>{body}</div>
-        <div className='p-[1.25rem]'>
+        <div className='p-5 border-b border-b-gray-300 font-[ceraProLight] flex grow'>{body}</div>
+        <div className='p-5'>
           {buttons ? (
             <div className='flex justify-center'>
               {buttons}
@@ -58,4 +64,4 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
   )
 }
 
-export default Modal
+export default memo(Modal)

@@ -1,11 +1,12 @@
-import i18n from "../i18n";
-import { Lang } from "./types/common";
+import i18n from '../i18n'
+import { Lang } from './types/common'
 
 export enum TranslationNamespace {
   common = 'common',
   uiComponents = 'uiComponents',
   navbar = 'navbar',
   header = 'header',
+  dashboard = 'dashboard',
   candidates = 'candidates',
   candidateAdding = 'candidateAdding',
   candidateDetails = 'candidateDetails',
@@ -17,7 +18,7 @@ export enum TranslationNamespace {
   employees = 'employees',
   employeeAdding = 'employeeAdding',
   employeeDetails = 'employeeDetails',
-  emptyList = 'emptyList' 
+  emptyList = 'emptyList',
 }
 
 export const addTranslationNamespace = (namespace: TranslationNamespace, langEn: {}, langUa: {}) => {

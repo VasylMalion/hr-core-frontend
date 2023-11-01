@@ -1,9 +1,6 @@
-import { SerializedError } from "@reduxjs/toolkit"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
-import { RootState } from "store/store"
+import { RootState } from 'store/store'
 
 export const formatDate = (date: Date): string => {
-
   const local = new Date(date)
   const day = local.getDate()
   const month = local.getMonth() + 1
@@ -26,20 +23,4 @@ export const getToken = (headers: Headers, getState: () => unknown) => {
   if (token) headers.set('authorization', `Bearer ${token}`)
 
   return headers
-}
-
-// type RouteWithParamsType = {
-//   route: string
-//   params: Record<string, number | string>
-// } 
-
-type RouteWithParamsType = (route: string, params: { [key: string]: number | string }) => string
-
-export const routeWithParams:RouteWithParamsType = (route, params) => {
-
-  for (let k in params) {
-    route = route.replace(`:${k}`, params[k] as string)
-  }
-
-  return route
 }

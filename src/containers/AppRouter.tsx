@@ -1,22 +1,24 @@
-import { Routes, Route, RouteProps, Navigate } from "react-router-dom"
+import { Routes, Route, RouteProps, Navigate } from 'react-router-dom'
 
-import Dashboard from "./Dashboard/Dashboard"
-import Candidates from "./Candidates/Candidates"
-import CandidateDetails from "./Candidates/CandidateDetails/CandidateDetails"
-import CandidateAdding from "./Candidates/CandidateAdding/CandidateAdding"
-import Vacancies from "./Vacancies/Vacancies"
-import VacancyDetails from "./Vacancies/VacancyDetails/VacancyDetails"
-import PrivateRoute from "./PrivateRouter"
-import VacancyAdding from "./Vacancies/VacancyAdding/VacancyAdding"
-import Profile from "./Profile/Profile"
-import Employees from "./Employees/Employees"
-import EmployeeAdding from "./Employees/EmployeeAdding/EmployeeAdding"
-import EmployeeDetails from "./Employees/EmployeeDetails/EmployeeDetails"
+import {
+  Dashboard,
+  Profile,
+  Candidates,
+  CandidateDetails,
+  CandidateAdding,
+  Vacancies,
+  VacancyDetails,
+  VacancyAdding,
+  Employees,
+  EmployeeAdding,
+  EmployeeDetails,
+} from 'containers'
+
+import PrivateRoute from './PrivateRouter'
 
 export enum  AppRoutes {
   LOGIN = 'LOGIN',
   DASHBOARD = 'DASHBOARD',
-  MESSAGES = 'MESSAGES',
   PROFILE = 'PROFILE',
   VACANCIES = 'VACANCIES',
   VACANCY_ADDING = 'VACANCY_ADDING',
@@ -24,11 +26,7 @@ export enum  AppRoutes {
   CANDIDATES = 'CANDIDATES',
   CANDIDATE_ADDING = 'CANDIDATE_ADDING',
   CANDIDATE_DETAILS = 'CANDIDATE_DETAILS',
-  REFERRALS = 'REFERRALS',
-  CAREER = 'CAREER',
   EMPLOYEES = 'EMPLOYEES',
-  REPORT = 'REPORT',
-  SETTINGS = 'SETTINGS',
   EMPLOYEE_ADDING = 'EMPLOYEE_ADDING',
   EMPLOYEE_DETAILS = 'EMPLOYEE_DETAILS',
 }
@@ -36,7 +34,6 @@ export enum  AppRoutes {
 export const RoutePaths: Record<AppRoutes, string> = {
   [AppRoutes.LOGIN]: '/login',
   [AppRoutes.DASHBOARD]: '/dashboard',
-  [AppRoutes.MESSAGES]: '/messages',
   [AppRoutes.PROFILE]: '/profile',
   [AppRoutes.VACANCIES]: '/vacancies',
   [AppRoutes.VACANCY_DETAILS]: '/vacancies/:id',
@@ -44,11 +41,7 @@ export const RoutePaths: Record<AppRoutes, string> = {
   [AppRoutes.CANDIDATES]: '/candidates',
   [AppRoutes.CANDIDATE_ADDING]: '/candidates/adding',
   [AppRoutes.CANDIDATE_DETAILS]: '/candidates/:id',
-  [AppRoutes.REFERRALS]: '/referrals',
-  [AppRoutes.CAREER]: '/career',
   [AppRoutes.EMPLOYEES]: '/employees',
-  [AppRoutes.REPORT]: '/report',
-  [AppRoutes.SETTINGS]: '/settings',
   [AppRoutes.EMPLOYEE_ADDING]: '/employees/adding',
   [AppRoutes.EMPLOYEE_DETAILS]: '/employees/:id',
 }
@@ -111,10 +104,8 @@ const AppRouter = () => {
   ))
 
   return (
-    <Routes>
-      {routes}
-    </Routes>
-  );
-};
+    <Routes>{routes}</Routes>
+  )
+}
 
-export default AppRouter;
+export default AppRouter

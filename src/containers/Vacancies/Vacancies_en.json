@@ -1,6 +1,8 @@
 {  
   "title": "Vacancies",
   "addNewVacancy": "Add New Vacancy",
+  "search": "Search",
+  "onlyMine": "Show only my vacancies",
   "tabs": {
     "ALL": "All",
     "ACTIVE": "Active",

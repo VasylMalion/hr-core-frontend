@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-import { BASE_URL } from 'common/constants';
-import { Candidate, UserInfo } from 'common/types/common';
-import { getToken } from 'common/utils/common';
+import { BASE_URL } from 'common/constants'
+import { Candidate, UserInfo } from 'common/types/common'
+import { getToken } from 'common/utils/common'
 
 export type AddCandidateParams = Omit<Candidate, 'id'>
 
@@ -13,7 +13,6 @@ export type FindCandidateParams = {
 }
 
 export type FindCandidateResponse = Pick<Candidate, 'id' | 'name'>
-
 
 type GetAllResponse = {
   candidates: Array<Candidate>

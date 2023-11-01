@@ -1,16 +1,16 @@
-import * as yup from "yup"
-import { FunctionComponent } from "react"
-import { useTranslation } from "react-i18next"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { Controller, useForm } from "react-hook-form"
+import * as yup from 'yup'
+import { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Controller, useForm } from 'react-hook-form'
 
-import { TranslationNamespace, addTranslationNamespace } from "common/translations"
-import { Button, DatePicker, Modal, Select, Input, Typography } from "ui-components"
-import { AddCandidateParams, useAddCandidateMutation, util } from "services/CandidateService"
-import { RoutePaths } from "containers/AppRouter"
-import { GenderTypes } from "common/types/common"
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { Button, DatePicker, Modal, Select, Input, Typography } from 'ui-components'
+import { AddCandidateParams, useAddCandidateMutation, util } from 'services/CandidateService'
+import { RoutePaths } from 'containers/AppRouter'
+import { GenderTypes } from 'common/types/common'
 
 import candidateAddingEn from './CandidateAdding_en.json'
 import candidateAddingUa from './CandidateAdding_ua.json'
@@ -60,18 +60,20 @@ const CandidateAdding: FunctionComponent = () => {
     { title: t('gender.female'), value: GenderTypes.FEMALE },
   ]
 
+  const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
+
   return (
     <>
-      <Typography appearance='title' className=''>
+      <Typography appearance='title'>
         {t('title')}
       </Typography>
-      <div className='grid gap-6 max-w-[50rem]'>
+      <div className='grid gap-6 max-w-large'>
         <div>
-          <Typography appearance='subtitle' className=''>
+          <Typography appearance='subtitle'>
             {t('personalInfo')}
           </Typography>
           <div className='grid gap-4'>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('name')}
                 placeholder={t('name')}
@@ -87,14 +89,14 @@ const CandidateAdding: FunctionComponent = () => {
                 className='w-full'
               />
             </div>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Select
                 options={genderOptions}
                 placeholder={t('genderTitle')}
                 label={t('genderTitle')}
                 className='w-full'
                 error={errors.gender}
-                validation={register("gender")}
+                validation={register('gender')}
               />
               <Controller
                 control={control}
@@ -117,7 +119,7 @@ const CandidateAdding: FunctionComponent = () => {
             {t('contactInfo')}
           </Typography>
           <div className='grid gap-4'>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('email')}
                 placeholder={t('email')}
@@ -134,7 +136,7 @@ const CandidateAdding: FunctionComponent = () => {
                 className='w-full'
               />
             </div>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('location')}
                 placeholder={t('location')}
@@ -149,7 +151,7 @@ const CandidateAdding: FunctionComponent = () => {
           <Typography appearance='subtitle' className='mt-4'>
             {t('workInfo')}
           </Typography>
-          <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+          <div className={rowStyles}>
             <Input
               label={t('position')}
               placeholder={t('position')}

@@ -11,6 +11,7 @@ import Pagination from './Pagination/Pagination'
 import WithPreload from './WithPreload/WithPreload'
 import TabNavigation from './TabOptions/TabNavigation'
 import Checkbox from './Checkbox/Checkbox'
+import SelectInput from './SelectInput/SelectInput'
 import {
   Table,
   TableRow,
@@ -40,4 +41,5 @@ export {
   WithPreload,
   TabNavigation,
   Checkbox,
+  SelectInput,
 }

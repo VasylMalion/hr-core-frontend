@@ -1,8 +1,9 @@
-import { TranslationNamespace } from "common/translations";
-import { Status, VacancyStatus } from "common/types/common";
-import { FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
-import { Typography, WithPreload } from "ui-components";
+import { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { TranslationNamespace } from 'common/translations'
+import { ContentSection, Status, VacancyStatus } from 'common/types/common'
+import { Typography, WithPreload } from 'ui-components'
 
 type DetailsProps = {
   department: string
@@ -25,8 +26,53 @@ const Details: FunctionComponent<DetailsProps> = ({
   salaryMax,
   vacancyStatus,
 }) => {
-
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
+
+  const generalInfo = [
+    {
+      title: t('position'),
+      value: position,
+    },
+    {
+      title: t('department'),
+      value: department,
+    },
+    {
+      title: t('description'),
+      value: description,
+    },
+  ]
+
+  const additionalInfo = [
+    {
+      title: t('salaryMin'),
+      value: salaryMin ? t('salary', { value: salaryMin }) : '-',
+    },
+    {
+      title: t('salaryMax'),
+      value: salaryMax ? t('salary', { value: salaryMax }) : '-',
+    },
+    {
+      title: t('location'),
+      value: location,
+    },
+  ]
+
+  const getContent = (title: string, info: ContentSection) => (
+    <div>
+      <Typography appearance='subtitle'>
+        {t(title)}
+      </Typography>
+      <div className='grid gap-2 bg-white p-4 rounded'>
+        {info.map(item => (
+          <div className='flex gap-2'>
+            <span className='font-[ceraProLight]'>{item.title}</span>
+            <span>{item.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 
   return (
     <WithPreload
@@ -34,56 +80,25 @@ const Details: FunctionComponent<DetailsProps> = ({
       isSuccess={vacancyStatus.isSuccess}
       isError={vacancyStatus.isError}
     >
-      <div className='grid gap-2 max-w-[30rem] my-8'>
+      <div className='grid gap-2 mt-8 mb-2'>
         <Typography appearance='subtitle' className='font-[ceraProLight]'>
           <div className='flex gap-2 items-center'>
             <span>{t('vacancyStatus')}</span>
             <div className='flex gap-1 items-center'>
-              <div className={
-                `w-[1rem] h-[1rem] rounded-full ${status === VacancyStatus.ACTIVE ? 'bg-green' : 'bg-red'}`
-              } />
+              <div 
+                className={`
+                  w-4 h-4 rounded-full 
+                  ${status === VacancyStatus.ACTIVE ? 'bg-green' : 'bg-red'}
+                `}
+              />
               {t(`vacancyStatusVal.${status}`)}
             </div>
           </div>
         </Typography>
-        <div>
-          <Typography appearance='subtitle'>
-            {t('generalInfo')}
-          </Typography>
-          <div className='grid gap-2 bg-white p-[1rem] rounded font-[ceraProLight]'>
-            <div className='flex gap-2'>
-              <span>{t('position')}</span>
-              <span>{position}</span>
-            </div>
-            <div className='flex gap-2'>
-              <span>{t('department')}</span>
-              <span>{department}</span>
-            </div>
-            <div className='flex gap-2'>
-              <span>{t('description')}</span>
-              <span>{description}</span>
-            </div>
-          </div>
-        </div>
-        <div className='mt-2'>
-          <Typography appearance='subtitle'>
-            {t('additionalInfo')}
-          </Typography>
-          <div className='grid gap-2 bg-white p-[1rem] rounded font-[ceraProLight]'>
-            <div className='flex gap-2'>
-              <span>{t('salaryMin')}</span>
-              <span>{salaryMin ? t('salary', { value: salaryMin }) : '-'}</span>
-            </div>
-            <div className='flex gap-2'>
-              <span>{t('salaryMax')}</span>
-              <span>{salaryMax ? t('salary', { value: salaryMax }) : '-'}</span>
-            </div>
-            <div className='flex gap-2'>
-              <span>{t('location')}</span>
-              <span>{location}</span>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div className='max-w-medium flex flex-col gap-6'>
+        {getContent('generalInfo', generalInfo)}
+        {getContent('additionalInfo', additionalInfo)}
       </div>
     </WithPreload>
   )

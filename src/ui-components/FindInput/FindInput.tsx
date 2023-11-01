@@ -27,7 +27,7 @@ const FindInput: FunctionComponent<FindInputProps> = ({
         onSuccessFind(item)
         setValue(`${item.name} ${item.surname}`)
       }}
-      className='cursor-pointer px-[0.5rem] py-[0.25rem] hover:bg-greyLight'>{`${item.name} ${item.surname}`}</div>
+      className='cursor-pointer px-2 py-1 hover:bg-gray-300'>{`${item.name} ${item.surname}`}</div>
   ))
 
   return (
@@ -42,7 +42,7 @@ const FindInput: FunctionComponent<FindInputProps> = ({
         }
       />
       {value && (
-        <div className='absolute w-[15rem] bg-white max-h-[10rem] top-[5.75rem] rounded overflow-y-auto'>
+        <div className='absolute w-60 bg-white max-h-10 top-[5.75rem] rounded overflow-y-auto'>
           {usersList}
         </div>
       )}

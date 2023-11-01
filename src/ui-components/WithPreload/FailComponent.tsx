@@ -10,9 +10,9 @@ const FailComponent: FunctionComponent = () => {
 
   return (
     <div className='flex flex-col justify-center items-center my-10 mx-4'>
-      <AttentionIcon className='w-[10rem] h-[10rem] md:w-[13rem] md:h-[15rem]' />
+      <AttentionIcon className='w-40 h-40 md:w-52 md:h-60' />
       <div className='text-center mb-8'>
-        <div className='text-[2rem] mb-2'>{t('failTitle')}</div>
+        <div className='text-3xl mb-2'>{t('failTitle')}</div>
         <div>{t('failDescription')}</div>
       </div>
       <div>

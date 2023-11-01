@@ -1,11 +1,11 @@
-import { FunctionComponent } from "react"
-import { useTranslation } from "react-i18next"
+import { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { TranslationNamespace } from "common/translations"
-import { Status, VacancyStatus } from "common/types/common"
-import { formatDate } from "common/utils/common"
-import { Typography, WithPreload } from "ui-components"
-import Avatarcon from "assets/images/avatar.png"
+import { TranslationNamespace } from 'common/translations'
+import { ContentSection, Status, VacancyStatus } from 'common/types/common'
+import { formatDate } from 'common/utils/common'
+import { Typography, WithPreload } from 'ui-components'
+import Avatarcon from 'assets/images/avatar.png'
 
 type TimelineProps = {
   createdAt: Date
@@ -34,57 +34,67 @@ const Timeline: FunctionComponent<TimelineProps> = ({
   assignedTo,
   vacancyStatus,
 }) => {
-
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
+
+  const timeline = [
+    {
+      title: t('createdAt'),
+      value: formatDate(createdAt),
+    },
+    {
+      title: t('deadlineDate'),
+      value: deadlineDate ? formatDate(deadlineDate) : '-',
+    },
+    {
+      title: t('closedAt'),
+      value: status === VacancyStatus.INACTIVE ? formatDate(updatedAt) : '-',
+    },
+  ]
+
+  const hiringTeam = [
+    {
+      title: t('createdBy'),
+      value: `${createdBy?.name} ${createdBy?.surname}`,
+    },
+    {
+      title: t('assignedTo'),
+      value: `${assignedTo?.name} ${assignedTo?.surname}`,
+    },
+  ]
+
+  const getContent = (title: string, info: ContentSection, withIcon?: boolean) => (
+    <div>
+      <Typography appearance='subtitle'>
+        {t(title)}
+      </Typography>
+      <div className='grid gap-2 bg-white p-4 rounded'>
+        {info.map(item => (
+          <div className='flex gap-2 items-center'>
+            <span className='font-[ceraProLight]'>{item.title}</span>
+            {withIcon ? (
+              <div className='flex items-center gap-1'>
+                <img src={Avatarcon} className='w-8 h-8' />
+                <span>{`${assignedTo?.name} ${assignedTo?.surname}`}</span>
+              </div>
+            ) : (
+              <span>{item.value}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 
   return (
     <WithPreload
-    isLoading={vacancyStatus.isLoading}
-    isSuccess={vacancyStatus.isSuccess}
-    isError={vacancyStatus.isError}
-  >
-    <div className='grid gap-2 max-w-[30rem] my-8'>
-      <div>
-        <Typography appearance='subtitle'>
-          {t('timeline')}
-        </Typography>
-        <div className='grid gap-2 bg-white p-[1rem] rounded font-[ceraProLight]'>
-          <div className='flex gap-2'>
-            <span>{t('createdAt')}</span>
-            <span>{formatDate(createdAt)}</span>
-          </div>
-          <div className='flex gap-2'>
-            <span>{t('deadlineDate')}</span>
-            <span>{deadlineDate ? formatDate(deadlineDate) : '-'}</span>
-          </div>
-          <div className='flex gap-2'>
-            <span>{t('closedAt')}</span>
-            <span>{status === VacancyStatus.INACTIVE ? formatDate(updatedAt) : '-'}</span>
-          </div>
-        </div>
+      isLoading={vacancyStatus.isLoading}
+      isSuccess={vacancyStatus.isSuccess}
+      isError={vacancyStatus.isError}
+    >
+      <div className='max-w-medium flex flex-col gap-6 my-8'>
+        {getContent('timeline', timeline)}
+        {getContent('hiringTeam', hiringTeam, true)}
       </div>
-      <div className='mt-2'>
-        <Typography appearance='subtitle'>
-          {t('hiringTeam')}
-        </Typography>
-        <div className='grid gap-2 bg-white p-[1rem] rounded font-[ceraProLight]'>
-          <div className='flex gap-2 items-center'>
-            <span>{t('createdBy')}</span>
-            <div className='flex items-center gap-1'>
-              <img src={Avatarcon} className='w-[32px] h-[32px]' />
-              <span>{`${createdBy?.name} ${createdBy?.surname}`}</span>
-            </div>
-          </div>
-          <div className='flex gap-2 items-center'>
-            <span>{t('assignedTo')}</span>
-            <div className='flex items-center gap-1'>
-              <img src={Avatarcon} className='w-[32px] h-[32px]' />
-              <span>{`${assignedTo?.name} ${assignedTo?.surname}`}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     </WithPreload>
   )
 }

@@ -1,5 +1,5 @@
-import { FunctionComponent, ReactNode } from "react"
-import { FieldValues } from "react-hook-form"
+import { FunctionComponent, memo } from 'react'
+import { FieldValues } from 'react-hook-form'
 
 type InputProps = {
   label?: string
@@ -32,18 +32,17 @@ const Select: FunctionComponent<InputProps> = ({
 
   return (
     <div className='font-[ceraProLight]'>
-      <label htmlFor="select">{label}</label>
+      <label htmlFor='select'>{label}</label>
       <select
         value={value}
-        name="select"
+        name='select'
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className={
-          `cursor-pointer min-w-[10rem] bg-white flex align-center
-          gap-3 py-3 px-4 text-xl rounded-md 
-          border border-strock mt-2
+        className={`
+          cursor-pointer min-w-[10rem] bg-white flex align-center gap-3 
+          py-3 px-4 text-xl rounded-md border border-strock mt-2
           ${className} ${error?.type && 'border-red'}
-          `}
+        `}
         {...validation}
       >
         {values}
@@ -53,4 +52,4 @@ const Select: FunctionComponent<InputProps> = ({
   )
 }
 
-export default Select
+export default memo(Select)

@@ -7,8 +7,8 @@ type TableProps = {
 }
 
 const Table: FunctionComponent<TableProps> = ({ children }) => (
-  <div className='overflow-x-auto rounded-lg border border-[#091e4214]'>
-    <table className='text-natural w-full items-center py-[1rem] bg-white'>
+  <div className='overflow-x-auto rounded-lg border border-gray-300'>
+    <table className='text-gray-600 w-full items-center py-4 bg-white'>
       {children}
     </table>
   </div>
@@ -24,12 +24,12 @@ const TableRow: FunctionComponent<TableProps> = ({ children, className, onClick 
 )
 
 const TableHeadCell: FunctionComponent<TableProps> = ({ children }) =>
-  <th className='table-cell min-w-[10rem] max-w-[14rem] text-start px-[1.5rem] py-[0.75rem]'>
+  <th className='table-cell min-w-[10rem] max-w-56 text-start px-6 py-3'>
     {children}
   </th>
 
 const TableCell: FunctionComponent<TableProps> = ({ children }) =>
-  <td className='table-cell min-w-[10rem] max-w-[14rem] font-[ceraProLight] px-[1.5rem] py-[0.75rem]'>
+  <td className='table-cell min-w-[10rem] max-w-56 font-[ceraProLight] px-6 py-3'>
     {children}
   </td>
 

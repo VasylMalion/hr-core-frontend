@@ -12,14 +12,13 @@ type EmptyListProps = {
 }
 
 const EmptyList: FunctionComponent<EmptyListProps> = ({ className }) => {
-
   const { t } = useTranslation(TranslationNamespace.emptyList)
 
   return (
     <div className={`${className} flex flex-col justify-center items-center my-10 mx-4`}>
-      <NoResultIcon className='w-[10rem] h-[10rem] md:w-[13rem] md:h-[13rem]' />
+      <NoResultIcon className='w-40 h-40 md:w-52 md:h-52' />
       <div className='text-center mb-8'>
-        <div className='text-[2rem] mb-2'>{t('sorry')}</div>
+        <div className='text-3xl mb-2'>{t('sorry')}</div>
         <div>{t('noResult')}</div>
       </div>
     </div>

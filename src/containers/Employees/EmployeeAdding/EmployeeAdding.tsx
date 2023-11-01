@@ -1,28 +1,28 @@
-import * as yup from "yup";
-import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import * as yup from 'yup'
+import { FunctionComponent } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { AddEmployeeParams, FindEmployeeResponse, useAddEmployeeMutation, useFindEmployeeQuery, util } from "services/EmployeeService";
-import { TranslationNamespace, addTranslationNamespace } from "common/translations";
-import { Button, DatePicker, Typography, Select, Input, Modal } from "ui-components";
-import { GenderTypes, RoleTypes } from "common/types/common";
-import { RoutePaths } from "containers/AppRouter";
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { Button, DatePicker, Typography, Select, Input, Modal } from 'ui-components'
+import { GenderTypes, RoleTypes } from 'common/types/common'
+import { RoutePaths } from 'containers/AppRouter'
+import {
+  AddEmployeeParams,
+  useAddEmployeeMutation,
+  util
+} from 'services/EmployeeService'
 
 import employeeAddingEn from './EmployeeAdding_en.json'
 import employeeAddingUa from './EmployeeAdding_ua.json'
-import { useNavigate } from "react-router-dom";
-import { useDebounce } from "hooks/useDebounce";
 
 const EmployeeAdding: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.employeeAdding)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const currentRef = useRef(null)
-
-  const [hrPartner, setHrPartner] = useState<FindEmployeeResponse>()
 
   const [addEmployee, { isLoading, isSuccess, isError }] = useAddEmployeeMutation({})
 
@@ -65,39 +65,43 @@ const EmployeeAdding: FunctionComponent = () => {
 
   const onFailClose = () => dispatch(util.resetApiState())
 
+  const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
+
   return (
     <>
       <Typography appearance='title'>
         {t('title')}
       </Typography>
-      <div className='grid gap-6 max-w-[50rem]'>
+      <div className='grid gap-6 max-w-large'>
         <div>
           <Typography appearance='subtitle'>
             {t('personalInfo')}
           </Typography>
           <div className='grid gap-4'>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('name')}
+                placeholder={t('name')}
                 className='w-full'
                 error={errors.name}
-                validation={register("name")}
+                validation={register('name')}
               />
               <Input
                 label={t('surname')}
+                placeholder={t('surname')}
                 className='w-full'
                 error={errors.surname}
-                validation={register("surname")}
+                validation={register('surname')}
               />
             </div>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Select
                 options={genderOptions}
                 placeholder={t('genderTitle')}
                 label={t('genderTitle')}
                 className='w-full'
                 error={errors.gender}
-                validation={register("gender")}
+                validation={register('gender')}
               />
               <Controller
                 control={control}
@@ -120,7 +124,7 @@ const EmployeeAdding: FunctionComponent = () => {
             {t('contactInfo')}
           </Typography>
           <div className='grid gap-4'>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('email')}
                 placeholder={t('email')}
@@ -137,7 +141,7 @@ const EmployeeAdding: FunctionComponent = () => {
                 className='w-full'
               />
             </div>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('address')}
                 placeholder={t('address')}
@@ -153,32 +157,34 @@ const EmployeeAdding: FunctionComponent = () => {
             {t('workInfo')}
           </Typography>
           <div className='grid gap-4'>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Input
                 label={t('department')}
+                placeholder={t('department')}
                 className='w-full'
                 error={errors.department}
-                validation={register("department")}
+                validation={register('department')}
               />
               <Input
                 label={t('position')}
+                placeholder={t('position')}
                 className='w-full'
                 error={errors.position}
-                validation={register("position")}
+                validation={register('position')}
               />
             </div>
-            <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 md:gap-8'>
+            <div className={rowStyles}>
               <Select
                 options={roleOptions}
                 placeholder={t('role')}
                 label={t('role')}
                 className='w-full'
                 error={errors.role}
-                validation={register("role")}
+                validation={register('role')}
               />
               <Controller
                 control={control}
-                name="startDate"
+                name='startDate'
                 render={({ field: { onChange, value } }) => (
                   <DatePicker
                     placeholder={t('startDate')}

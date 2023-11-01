@@ -1,26 +1,26 @@
-import { FunctionComponent } from "react";
-import AsyncSelect from "react-select/async";
-import { useLazyFindCandidateQuery } from "services/CandidateService";
+import { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import ContentIcon from 'assets/images/dashboard-content.png'
+import { Typography } from 'ui-components'
+
+import dashboardEn from './Dashboard_en.json'
+import dashboardUa from './Dashboard_ua.json'
 
 const Dashboard: FunctionComponent = () => {
-    
-  const [getCandidates2, users] = useLazyFindCandidateQuery()
+  const { t } = useTranslation(TranslationNamespace.dashboard)
 
-
-  return <div>
-    It is the Dashboard page
-
-
-    <AsyncSelect
-            cacheOptions
-            placeholder="Search by name"
-            isClearable={true}
-            loadOptions={async (query: string) => {
-              await getCandidates2({username: query}).unwrap();
-                return users.data?.map((user) => ({ label: user.name, value: user.id }));
-            }}
-          />
-  </div>
+  return (
+    <div className='mt-8'>
+      <Typography appearance='title' className='text-center'>
+        {t('title')}
+      </Typography>
+      <img src={ContentIcon} className='mx-auto' />
+    </div>
+  )
 }
 
 export default Dashboard
+
+addTranslationNamespace(TranslationNamespace.dashboard, dashboardEn, dashboardUa)

@@ -20,13 +20,8 @@
     "male": "Male",
     "female": "Female"
   },
-  "roles": {
-    "user": "User",
-    "admin": "Admin"
-  },
   "successTitle": "Success!",
   "failTitle": "Error!",
   "failDescription": "Sorry, something went wrong.",
-  "successDescription": "Candidate was added successfully",
-  "ok": "Ok"
+  "successDescription": "Candidate was added successfully"
 }

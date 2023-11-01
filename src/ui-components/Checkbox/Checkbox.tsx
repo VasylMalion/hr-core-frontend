@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export type CheckboxProps = {
@@ -12,7 +12,6 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
   checked,
   onChange,
 }) => {
-
   const id = `input-${uuidv4}`
 
   return (
@@ -22,7 +21,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         type='checkbox'
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className='h-[1rem] w-[1rem] font-[ceraProLight] rounded-md border border-strock cursor-pointer'
+        className='h-4 w-4 font-[ceraProLight] rounded-md border border-strock cursor-pointer'
       />
       <label htmlFor={id} className='text-md font-[ceraProLight] cursor-pointer'>
         <div>{caption}</div>
@@ -31,4 +30,4 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
   )
 }
 
-export default Checkbox
+export default memo(Checkbox)

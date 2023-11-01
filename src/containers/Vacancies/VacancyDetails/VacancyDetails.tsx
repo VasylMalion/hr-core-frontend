@@ -1,24 +1,26 @@
-import { FunctionComponent, createRef, useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
-import { useNavigate, useParams } from "react-router-dom"
+import { FunctionComponent, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import { TranslationNamespace, addTranslationNamespace } from "common/translations"
-import Typography from "ui-components/Typography/Typography"
-import TabNavigation from "ui-components/TabOptions/TabNavigation"
-import { useAddTaskMutation, useGetOneQuery, useLazyDeactivateQuery, useLazyGetVacanciesQuery, useLazyGetOneQuery, util } from "services/VacancyService"
-import { Button, Input, Modal } from "ui-components"
-import { RoutePaths } from "containers/AppRouter"
+import { VacancyStatus } from 'common/types/common'
+import { useLazyFindCandidateQuery } from 'services/CandidateService'
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { 
+  useAddTaskMutation, 
+  useGetOneQuery, 
+  useLazyDeactivateQuery, 
+  util 
+} from 'services/VacancyService'
+import { Button, Modal, Typography, TabNavigation, SelectInput } from 'ui-components'
 import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
 
-import Candidates from "./components/Candidates"
-import Timeline from "./components/Timeline"
-import Details from "./components/Details"
+import Candidates from './components/Candidates'
+import Timeline from './components/Timeline'
+import Details from './components/Details'
+
 import vacancyDetailsEn from './VacancyDetails_en.json'
 import vacancyDetailsUa from './VacancyDetails_ua.json'
-import { VacancyStatus } from "common/types/common"
-import { useDispatch } from "react-redux"
-import SelectInput from "ui-components/SelectInput/SelectInput"
-import { useLazyFindCandidateQuery } from "services/CandidateService"
 
 enum TabNavigationTypes {
   CANDIDATES = 'CANDIDATES',
@@ -39,7 +41,6 @@ type SelectCandidate = {
 const VacancyDetails: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
   const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
@@ -112,7 +113,7 @@ const VacancyDetails: FunctionComponent = () => {
   }
 
   return <>
-    <div className='flex flex-col md:flex-row md:justify-between md:items-center gap:4'>
+    <div className='flex flex-col md:flex-row md:justify-between md:items-center'>
       <Typography appearance='title'>
         {t('title', { id })}
       </Typography>
@@ -121,7 +122,7 @@ const VacancyDetails: FunctionComponent = () => {
           <Button
             type='secondary'
             onClick={() => setIsOpenDeactivateModal(true)}
-            className='border-red border-[1px] text-red'
+            className='border-red border !text-red'
           >
             {t('deactivate')}
           </Button>
@@ -129,7 +130,7 @@ const VacancyDetails: FunctionComponent = () => {
       )}
     </div>
     {data?.position && (
-      <div className='flex flex-col my-6 md:mb-4 md:mt-0 gap:4'>
+      <div className='flex flex-col my-6 md:mb-4 md:mt-0'>
         <Typography appearance='subtitle'>
           {data?.position}
         </Typography>

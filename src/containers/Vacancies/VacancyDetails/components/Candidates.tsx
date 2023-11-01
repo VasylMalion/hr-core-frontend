@@ -25,10 +25,20 @@ const Candidates: FunctionComponent<CandidatesProps> = ({ desk, vacancyStatus, r
 
   const [updateTask, data] = useUpdateTaskMutation()
 
+  const columnColors = [
+    'bg-yellow',
+    'bg-blueLight',
+    'bg-red',
+    'bg-blue',
+    'bg-purple',
+    'bg-green'
+  ]
+
   const initialBoard: Array<Column> = (Object.keys(Stage) as Array<keyof typeof Stage>).map((key, index) => {
     return ({
       id: index,
       title: t(key),
+      color: columnColors[index],
       items: desk?.tasks?.filter(item => item.column === Stage[key]).map(item => ({
         ...item,
         isOpen: false
@@ -43,12 +53,10 @@ const Candidates: FunctionComponent<CandidatesProps> = ({ desk, vacancyStatus, r
   }, [data.isSuccess, data.isError])
 
   useEffect(() => {
-    console.log(vacancyStatus)
     if (vacancyStatus.isSuccess && !vacancyStatus.isLoading) setBoard(initialBoard)
   }, [vacancyStatus])
 
   const sortedItems = (column: Column) => board?.map(boardItem => {
-    console.log(1)
     if (boardItem?.id === column.id) {
       return column
     }
@@ -103,16 +111,16 @@ const Candidates: FunctionComponent<CandidatesProps> = ({ desk, vacancyStatus, r
     desk={board}
   />)
 
-  return <div className='my-6 '>
+  return <div className='my-6'>
     <WithPreload
       isLoading={vacancyStatus.isLoading && !data.isSuccess}
       isSuccess={vacancyStatus.isSuccess}
       isError={vacancyStatus.isError}
     >
       <div className={`
-    ${(data.isLoading || vacancyStatus.isLoading) && 'pointer-events-none	opacity-50'} 
-    grid overflow-x-auto grid-flow-col gap-6
-    `}
+        grid overflow-x-auto grid-flow-col gap-6
+        ${(data.isLoading || vacancyStatus.isLoading) && 'pointer-events-none	opacity-50'} 
+      `}
       >
         {columns}
       </div>

@@ -60,7 +60,7 @@ const Employees: FunctionComponent = () => {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4 gap:4'>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
         <Typography appearance='title'>{t('title')}</Typography>
         <div>
           <Button icon={<PlusIcon />} onClick={handleAdding}>{t('addEmployee')}</Button>

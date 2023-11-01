@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, memo } from 'react'
 import { FieldValues } from 'react-hook-form'
 
 export type InputProps = {
@@ -35,7 +35,7 @@ const Input: FunctionComponent<InputProps> = ({
           min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 
           text-xl rounded-md border border-strock mt-2 
           ${className} ${error?.type && '!border-red'}
-          `}
+        `}
         {...validation}
       />
       <span className='text-red text-sm'>{error?.type}</span>
@@ -43,4 +43,4 @@ const Input: FunctionComponent<InputProps> = ({
   )
 }
 
-export default Input
+export default memo(Input)
