@@ -42,6 +42,10 @@ const EmployeeDetails: FunctionComponent = () => {
       value: data?.name,
     },
     {
+      title: t('surname'),
+      value: data?.surname,
+    },
+    {
       title: t('genderTitle'),
       value: t(`gender.${data?.gender}`),
     },
@@ -73,7 +77,7 @@ const EmployeeDetails: FunctionComponent = () => {
     },
     {
       title: t('salary'),
-      value: t('salaryValue', { value: data?.salary }),
+      value: data?.salary ? t('salaryValue', { value: data?.salary }) : '-',
     },
   ]
 

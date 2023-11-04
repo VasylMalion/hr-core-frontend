@@ -6,6 +6,8 @@ import commonEn from 'common/Common_en.json'
 import commonUa from 'common/Common_ua.json'
 import uiComponentsEn from 'ui-components/UIComponents_en.json'
 import uiComponentsUa from 'ui-components/UIComponents_ua.json'
+import validationEn from 'common/validation/Validation_en.json'
+import validationUa from 'common/validation/Validation_ua.json'
 
 i18n
   .use(initReactI18next)
@@ -16,10 +18,12 @@ i18n
       en: {
         common: commonEn,
         uiComponents: uiComponentsEn,
+        validation: validationEn,
       },
       ua: {
         common: commonUa,
         uiComponents: uiComponentsUa,
+        validation: validationUa,
       }
     },
   })

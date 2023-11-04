@@ -35,7 +35,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({ setIsSidebarOpen }) => {
             <Header setIsSidebarOpen={setIsSidebarOpen} />
             <div
               className={`
-                p-8 md:p-12 bg-purpleLight mt-20 min-h-content
+                p-8 md:p-12 bg-purpleLight mt-20 min-h-content pb-16
                 ${isPhoneLarge ? 'w-screen' : canBeCollapsed ? 'w-contentMax' : 'w-content'}
               `}
             >

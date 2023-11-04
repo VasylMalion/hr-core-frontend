@@ -79,9 +79,9 @@ const Candidates: FunctionComponent = () => {
         <Input
           label={t('search')}
           placeholder={t('search')}
+          className='mb-4 md:mb-0'
           value={filter}
           onChange={setFilter}
-          className='mb-4 md:mb-0'
         />
         <Checkbox checked={onlyMine} onChange={setOnlyMine} caption={t('onlyMine')} />
       </div>

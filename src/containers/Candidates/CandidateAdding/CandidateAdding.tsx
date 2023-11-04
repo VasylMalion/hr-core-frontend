@@ -1,16 +1,14 @@
-import * as yup from 'yup'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Controller, useForm } from 'react-hook-form'
 
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Button, DatePicker, Modal, Select, Input, Typography } from 'ui-components'
-import { AddCandidateParams, useAddCandidateMutation, util } from 'services/CandidateService'
+import { useAddOneMutation, util } from 'services/CandidateService'
 import { RoutePaths } from 'containers/AppRouter'
-import { GenderTypes } from 'common/types/common'
+import { GenderTypes, InputState } from 'common/types/common'
+import { checkValidation } from 'common/validation/validation'
 
 import candidateAddingEn from './CandidateAdding_en.json'
 import candidateAddingUa from './CandidateAdding_ua.json'
@@ -20,36 +18,32 @@ const CandidateAdding: FunctionComponent = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [addCandidate, { isLoading, isSuccess, isError }] = useAddCandidateMutation()
+  const [name, setName] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [surname, setSurname] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [gender, setGender] = useState<InputState>({ value: GenderTypes.MALE, validation: { isValid: true } })
+  const [birthDate, setBirthDate] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [email, setEmail] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [mobileNumber, setMobileNumber] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [location, setLocation] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [position, setPosition] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [salary, setSalary] = useState<InputState>({ value: '', validation: { isValid: true } })
 
-  const createCandidate = (data: AddCandidateParams) => addCandidate(data)
+  const [addOne, { isLoading, isSuccess, isError }] = useAddOneMutation()
 
-  const schema = yup.object().shape({
-    name: yup.string().required(),
-    surname: yup.string().required(),
-    position: yup.string().required(),
-    salary: yup.string().required(),
-    gender: yup.string().required(),
-    birthDate: yup.date().required(),
-    email: yup.string().email().required(),
-    mobile: yup.string().required(),
-    location: yup.string().required(),
-  });
-
-  const {
-    register,
-    reset,
-    control,
-    handleSubmit,
-    formState: { errors, isValid }
-  } = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(schema),
+  const handleSubmit = () => addOne({
+    name: name.value,
+    surname: surname.value,
+    gender: gender.value,
+    birthDate: new Date(birthDate.value),
+    email: email.value,
+    mobileNumber: mobileNumber.value,
+    location: location.value,
+    position: position.value,
+    salary: +salary.value,
   })
 
   const onSuccessClose = () => {
     dispatch(util.resetApiState())
-    reset()
     navigate(RoutePaths.CANDIDATES)
   }
 
@@ -61,6 +55,101 @@ const CandidateAdding: FunctionComponent = () => {
   ]
 
   const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
+
+  const isValid =
+    (name.value && name.validation.isValid) &&
+    (surname.value && surname.validation.isValid) &&
+    (birthDate.value && birthDate.validation.isValid) &&
+    (gender.value && gender.validation.isValid) &&
+    (email.value && email.validation.isValid) &&
+    (mobileNumber.value && mobileNumber.validation.isValid) &&
+    (location.value && location.validation.isValid) &&
+    (position.value && position.validation.isValid) &&
+    salary.validation.isValid
+
+  const handleName = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      maxLength: 40,
+    })
+
+    setName({ value, validation })
+  }
+
+  const handleSurname = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      maxLength: 40,
+    })
+
+    setSurname({ value, validation })
+  }
+
+  const handleGender = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+    })
+
+    setGender({ value, validation })
+  }
+
+  const handleBirthDate = (value: string) => {
+    console.log(value)
+
+    const validation = checkValidation(value, {
+      required: true,
+      date: true,
+      birthDate: true,
+    })
+
+    setBirthDate({ value, validation })
+  }
+
+  const handleEmail = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      email: true,
+    })
+
+    setEmail({ value, validation })
+  }
+
+  const handleLocation = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      maxLength: 50,
+    })
+
+    setLocation({ value, validation })
+  }
+
+  const handleMobileNumber = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      mobileNumber: true,
+    })
+
+    setMobileNumber({ value, validation })
+  }
+
+  const handlePosition = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+      maxLength: 40,
+    })
+
+    setPosition({ value, validation })
+  }
+
+  const handleSalary = (value: string) => {
+    if (value.length === 7) return
+
+    const validation = checkValidation(value, {
+      salary: true,
+    })
+
+    setSalary({ value, validation })
+  }
 
   return (
     <>
@@ -77,39 +166,37 @@ const CandidateAdding: FunctionComponent = () => {
               <Input
                 label={t('name')}
                 placeholder={t('name')}
-                validation={register('name')}
-                error={errors.name}
                 className='w-full'
+                value={name.value}
+                onChange={handleName}
+                validation={name.validation}
               />
               <Input
                 label={t('surname')}
                 placeholder={t('surname')}
-                validation={register('surname')}
-                error={errors.surname}
                 className='w-full'
+                value={surname.value}
+                onChange={handleSurname}
+                validation={surname.validation}
               />
             </div>
             <div className={rowStyles}>
               <Select
                 options={genderOptions}
-                placeholder={t('genderTitle')}
                 label={t('genderTitle')}
+                placeholder={t('genderTitle')}
                 className='w-full'
-                error={errors.gender}
-                validation={register('gender')}
+                value={gender.value}
+                onChange={handleGender}
+                validation={gender.validation}
               />
-              <Controller
-                control={control}
-                name='birthDate'
-                render={({ field: { onChange, value } }) => (
-                  <DatePicker
-                    placeholder={t('birthDate')}
-                    onChange={onChange}
-                    value={value}
-                    label={t('birthDate')}
-                    className='w-full'
-                  />
-                )}
+              <DatePicker
+                label={t('birthDate')}
+                placeholder={t('birthDate')}
+                className='w-full'
+                value={birthDate.value}
+                validation={birthDate.validation}
+                setValue={handleBirthDate}
               />
             </div>
           </div>
@@ -123,26 +210,29 @@ const CandidateAdding: FunctionComponent = () => {
               <Input
                 label={t('email')}
                 placeholder={t('email')}
-                validation={register('email')}
-                error={errors.email}
                 className='w-full'
+                value={email.value}
+                onChange={handleEmail}
+                validation={email.validation}
               />
               <Input
                 type='number'
                 label={t('mobile')}
                 placeholder={t('mobile')}
-                validation={register('mobile')}
-                error={errors.mobile}
                 className='w-full'
+                value={mobileNumber.value}
+                onChange={handleMobileNumber}
+                validation={mobileNumber.validation}
               />
             </div>
             <div className={rowStyles}>
               <Input
                 label={t('location')}
                 placeholder={t('location')}
-                validation={register('location')}
-                error={errors.location}
                 className='w-full'
+                value={location.value}
+                onChange={handleLocation}
+                validation={location.validation}
               />
             </div>
           </div>
@@ -155,24 +245,26 @@ const CandidateAdding: FunctionComponent = () => {
             <Input
               label={t('position')}
               placeholder={t('position')}
-              validation={register('position')}
-              error={errors.position}
               className='w-full'
+              value={position.value}
+              onChange={handlePosition}
+              validation={position.validation}
             />
             <Input
               type='number'
               label={t('salary')}
               placeholder={t('salary')}
-              validation={register('salary')}
-              error={errors.salary}
               className='w-full'
+              value={salary.value}
+              onChange={handleSalary}
+              validation={salary.validation}
             />
           </div>
         </div>
         <Button
           textAlign='center'
           className='flex justify-self-start mt-4'
-          onClick={handleSubmit(createCandidate)}
+          onClick={handleSubmit}
           isLoading={isLoading}
           disabled={!isValid}
         >

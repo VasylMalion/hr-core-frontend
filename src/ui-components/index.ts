@@ -12,6 +12,8 @@ import WithPreload from './WithPreload/WithPreload'
 import TabNavigation from './TabOptions/TabNavigation'
 import Checkbox from './Checkbox/Checkbox'
 import SelectInput from './SelectInput/SelectInput'
+import FieldErrors from './FieldErrors/FieldErrors'
+import TextArea from './TextArea/TextArea'
 import {
   Table,
   TableRow,
@@ -42,4 +44,6 @@ export {
   TabNavigation,
   Checkbox,
   SelectInput,
+  FieldErrors,
+  TextArea,
 }

@@ -4,6 +4,7 @@ import { Lang } from './types/common'
 export enum TranslationNamespace {
   common = 'common',
   uiComponents = 'uiComponents',
+  validation = 'validation',
   navbar = 'navbar',
   header = 'header',
   dashboard = 'dashboard',

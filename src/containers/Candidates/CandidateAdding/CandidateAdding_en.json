@@ -10,10 +10,7 @@
   "email": "Email",
   "mobile": "Phone number",
   "location": "Location",
-  "department": "Department",
   "position": "Position",
-  "role": "Role",
-  "startDate": "Start date",
   "salary": "Salary",
   "create": "Create",
   "gender": {

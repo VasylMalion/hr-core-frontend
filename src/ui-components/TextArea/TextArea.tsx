@@ -4,39 +4,36 @@ import { Validation } from 'common/types/common'
 import { getUniqueId } from 'common/utils/common'
 import { FieldErrors } from 'ui-components'
 
-export type InputProps = {
+export type TextAreaProps = {
   label?: string
   placeholder?: string
   value?: string
-  onChange?: (value: string) => void
-  className?: string
   validation?: Validation
-  type?: string
+  className?: string
+  onChange?: (value: string) => void
 }
 
-const Input: FunctionComponent<InputProps> = ({
+const TextArea: FunctionComponent<TextAreaProps> = ({
   label,
   placeholder,
   value,
   onChange,
   className,
   validation,
-  type = 'text',
 }) => {
-  const id = getUniqueId('input')
+  const id = getUniqueId('textarea')
 
   return (
     <div className='font-[ceraProLight]'>
       <label htmlFor={id}>{label}</label>
-      <input
+      <textarea
         id={id}
-        type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={`
-          min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4
-          text-base rounded-md border border-strock mt-2 
+          w-full h-[12rem] bg-white flex align-center gap-3 py-3 px-4
+          text-base rounded-md border border-strock mt-2 resize-none
           ${className} ${(validation && !validation?.isValid) && '!border-red'}
         `}
       />
@@ -45,4 +42,4 @@ const Input: FunctionComponent<InputProps> = ({
   )
 }
 
-export default memo(Input)
+export default memo(TextArea)

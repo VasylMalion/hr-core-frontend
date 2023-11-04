@@ -1,0 +1,9 @@
+{
+  "required": "The field is required",
+  "minLength": "The minimum field length is {{value}}",
+  "maxLength": "The maximum field length is {{value}}",
+  "email": "Wrong email format",
+  "mobileNumber": "Wrong mobile number format",
+  "birthDate": "Incorrect date of birth (must be at least 18 years old)",
+  "date": "The date is incorrect"
+}

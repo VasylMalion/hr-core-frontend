@@ -27,11 +27,10 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
+      disabled={(disabled || isLoading)}
       className={`
         min-w-[8rem] flex align-center gap-3 py-3 px-6 font-[ceraProMedium] text-sm rounded-md items-center
         ${className} 
-        // ${disabled && '!text-gray-300 !bg-gray-200 cursor-not-allowed'}
         ${disabled && '!text-[#00000042] !bg-[#0000001f] cursor-not-allowed'}
         ${type === 'primary' && 'text-[white] bg-blue fill-white'}
         ${type === 'secondary' && 'fill-gray-400 text-gray-400'}

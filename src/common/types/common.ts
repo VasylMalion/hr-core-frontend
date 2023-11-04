@@ -82,6 +82,7 @@ export type UserInfo = {
 export type Candidate = {
   id: string
   name: string
+  surname: string
   birthDate: Date 
   gender: string 
   email: string,
@@ -113,3 +114,12 @@ export enum Theme {
 }
 
 export type ContentSection = Array<{ title: string, value: string }>
+
+export type FieldError = string | [string, number]
+
+export type Validation = {
+  isValid?: boolean
+  errors?: Array<FieldError>
+}
+
+export type InputState = { value: string, validation: Validation }

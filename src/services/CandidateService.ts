@@ -46,7 +46,7 @@ export const CandidateApi = createApi({
     prepareHeaders: (headers, { getState }) => getToken(headers, getState)
   }),
   endpoints: (build) => ({
-    addCandidate: build.mutation<AddCandidateResponse, AddCandidateParams>({
+    addOne: build.mutation<AddCandidateResponse, AddCandidateParams>({
       query: (params) => ({
         url: '/add',
         method: 'POST',
@@ -90,7 +90,7 @@ export const CandidateApi = createApi({
 })
 
 export const {
-  useAddCandidateMutation,
+  useAddOneMutation,
   useLazyFindCandidateQuery,
   useLazyGetAllQuery,
   useGetOneQuery,
