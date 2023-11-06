@@ -1,7 +1,8 @@
-import { useAppSelector } from "hooks/redux";
-import { FunctionComponent, ReactNode } from "react";
-import { Navigate, Route } from "react-router-dom";
-import { RoutePaths } from "./AppRouter";
+import { FunctionComponent, ReactNode } from 'react'
+import { Navigate, Route } from 'react-router-dom'
+
+import { useAppSelector } from 'hooks/redux'
+import { RoutePaths } from './AppRouter'
 
 type PrivateRouteProps = {
   children: ReactNode
@@ -14,4 +15,4 @@ const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ children }) => {
   return token ? children : <Navigate to={RoutePaths.LOGIN} />
 }
 
-export default PrivateRoute;
+export default PrivateRoute

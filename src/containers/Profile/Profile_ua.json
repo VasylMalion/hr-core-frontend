@@ -1,13 +1,36 @@
 {
+  "title": "Профіль",
   "tabs": {
-    "candidates": "Candidates",
-    "jobDetails": "Job Details",
-    "timeline": "Timeline & Notes",
-    "hiringTeam": "Hiring Team"
+    "details": "Подробиці",
+    "updatePassword": "Оновити пароль"
   },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  "personalInfo": "Персональна інформація",
+  "contactInfo": "Контактна інформація",
+  "workInfo": "Робоча інформація",
+  "name": "Ім'я:",
+  "surname": "Прізвище:",
+  "birthDate": "Дата народження:",
+  "genderTitle": "Стать:",
+  "email": "Електронна пошта:",
+  "mobile": "Номер телефону:",
+  "address": "Адреса:",
+  "department": "Відділ:",
+  "position": "Посада:",
+  "startDate": "Дата початку:",
+  "gender": {
+    "MALE": "Чоловіча",
+    "FEMALE": "Жіноча"
+  },
+  "passwordOld": "Поточний пароль",
+  "passwordNew": "Новий пароль",
+  "passwordNewAgain": "Повторіть новий пароль",
+  "update": "Оновити",
+  "differentPasswords": "Паролі не збігаються",
+  "successTitle": "Успіх",
+  "successDescription": "Пароль оновлено",
+  "failTitle": "Вибачте",
+  "errors": {
+    "INVALID_BODY": "Пароль є невірним",
+    "GENERAL_ERROR": "Щось пішло не так. Спробуйте знову пізніше"
+  }
 }

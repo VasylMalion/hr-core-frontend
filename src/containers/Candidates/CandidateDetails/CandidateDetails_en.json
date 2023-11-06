@@ -1,0 +1,29 @@
+{
+  "title": "Candidate #{{num}}",
+  "deleteCandidate": "Delete candidate",
+  "personalInfo": "Personal information",
+  "contactInfo": "Contact information",
+  "workInfo": "Work information",
+  "name": "Name:",
+  "surname": "Surname:",
+  "birthDate": "Birth date:",
+  "genderTitle": "Gender:",
+  "email": "Email:",
+  "mobile": "Phone number:",
+  "address": "Address:",
+  "position": "Position:",
+  "salary": "Salary:",
+  "salaryValue": "{{value}}₴",
+  "gender": {
+    "MALE": "Male",
+    "FEMALE": "Female"
+  },
+  "deletingTitle": "Attention!",
+  "deletingDescription": "Do you really want to delete the candidate?",
+  "yes": "Yes",
+  "no": "No",
+  "successTitle": "Success!",
+  "successDescription": "The candidate was removed successfuly",
+  "failTitle": "Sorry!",
+  "failDescription": "Something went wrong. Try again later"
+}

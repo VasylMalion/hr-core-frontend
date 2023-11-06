@@ -1,0 +1,24 @@
+{
+  "title": "Додавання нового співробітника",
+  "personalInfo": "Персональна інформація",
+  "contactInfo": "Контактна інформація",
+  "workInfo": "Робоча інформація",
+  "name": "Ім'я",
+  "surname": "Прізвище",
+  "birthDate": "Дата народження",
+  "genderTitle": "Стать",
+  "email": "Електронна пошта",
+  "mobile": "Номер телефону",
+  "location": "Локація",
+  "position": "Посада",
+  "salary": "Зарплата",
+  "create": "Додати",
+  "gender": {
+    "male": "Чоловіча",
+    "female": "Жіноча"
+  },
+  "successTitle": "Успіх!",
+  "failTitle": "Помилка!",
+  "failDescription": "Упс. Щось пішло не так.",
+  "successDescription": "Кандидата успішно додано."
+}

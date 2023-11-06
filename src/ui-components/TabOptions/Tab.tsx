@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from "react"
+import { FunctionComponent, memo } from 'react'
 
 type TabProps = {
   title: string
@@ -6,15 +6,18 @@ type TabProps = {
   isActive?: boolean
   onChange?: (value: any) => void
 }
-const Tab: FunctionComponent<TabProps> = ({ title, value, isActive, onChange }) => {
 
-  console.log(value)
+const Tab: FunctionComponent<TabProps> = ({ title, value, isActive, onChange }) => (
+  <div
+    onClick={() => onChange(value)}
+    className={`
+      p-1 cursor-pointer whitespace-pre
+      ${isActive ? 'dark:text-white text-gray-600 border-b-[0.1875rem] border-b-green' : 'text-gray-500'}
+    `}
+  >
+    {title}
+  </div>
+)
 
-  return (
-    <div onClick={() => onChange(value)} className={`${isActive ? 'text-[#333333] border-b-[3px] border-green' : 'text-greyDark'} p-1 cursor-pointer`}>
-      {title}
-    </div>
-  )
-}
 
-export default Tab
+export default memo(Tab)

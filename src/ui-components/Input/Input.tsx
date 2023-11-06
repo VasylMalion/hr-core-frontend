@@ -1,5 +1,8 @@
-import { FunctionComponent } from "react"
-import { FieldValues } from "react-hook-form"
+import { FunctionComponent, MutableRefObject, memo } from 'react'
+
+import { Validation } from 'common/types/common'
+import { getUniqueId } from 'common/utils/common'
+import { FieldErrors } from 'ui-components'
 
 export type InputProps = {
   label?: string
@@ -7,9 +10,9 @@ export type InputProps = {
   value?: string
   onChange?: (value: string) => void
   className?: string
-  validation?: any
-  error?: FieldValues
+  validation?: Validation
   type?: string
+  inputRef?: MutableRefObject<HTMLInputElement>
 }
 
 const Input: FunctionComponent<InputProps> = ({
@@ -19,28 +22,30 @@ const Input: FunctionComponent<InputProps> = ({
   onChange,
   className,
   validation,
-  error,
   type = 'text',
+  inputRef,
 }) => {
+  const id = getUniqueId('input')
 
   return (
-    <div>
-      <label>{label}</label>
+    <div className='font-[ceraProLight]'>
+      <label htmlFor={id}>{label}</label>
       <input
+        ref={inputRef}
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={`
-          min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 
-          font-[ceraProLight] text-xl rounded-md border border-strock mt-2 
-          ${className} ${error?.type && '!border-red'}
-          `}
-        {...validation}
+          min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4
+          text-base rounded-md border border-strock mt-2 dark:bg-dark-100
+          ${className} ${(validation && !validation?.isValid) && '!border-red'}
+        `}
       />
-      <span className='text-red text-sm'>{error?.type}</span>
+      <FieldErrors isValid={validation?.isValid} errors={validation?.errors} />
     </div>
   )
 }
 
-export default Input
+export default memo(Input)

@@ -1,80 +1,86 @@
-import { TranslationNamespace, addTranslationNamespace } from "common/translations"
+import { FunctionComponent, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import i18n from 'i18n'
+
+import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import { LOCAL_STORAGE_LANGUAGE_KEY } from 'common/constants'
+import { RoutePaths } from 'containers/AppRouter'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useScreenResolution } from 'hooks/useScreenResolution'
+import { logOut } from 'store/slices/authSlice'
+import { Lang } from 'common/types/common'
+import { Button } from 'ui-components'
+
+import { ReactComponent as DashboardIcon } from 'assets/svgs/dashboard.svg'
+import { ReactComponent as UserIcon } from 'assets/svgs/user.svg'
+import { ReactComponent as JobIcon } from 'assets/svgs/job.svg'
+import { ReactComponent as CandidatesIcon } from 'assets/svgs/candidates.svg'
+import { ReactComponent as StructureIcon } from 'assets/svgs/structure.svg'
+import { ReactComponent as LogOutIcon } from 'assets/svgs/exit.svg'
+import { ReactComponent as HamburgerIcon } from 'assets/svgs/hamburger.svg'
+import { ReactComponent as LanguageIcon } from 'assets/svgs/language.svg'
 
 import headerEn from './Header_en.json'
 import headerUa from './Header_ua.json'
-import { Button } from "ui-components"
-import { FunctionComponent, useEffect, useState } from "react"
-import i18n from "i18n"
-import { Lang } from "common/types/common"
-import Input from "ui-components/Input/Input"
-import { useTranslation } from "react-i18next"
-
-import { ReactComponent as MessageIcon } from "assets/svgs/message.svg"
-import { ReactComponent as DashboardIcon } from "assets/svgs/dashboard.svg"
-import { ReactComponent as CalendarIcon } from "assets/svgs/calendar.svg"
-import { ReactComponent as UserIcon } from "assets/svgs/user.svg"
-
-import { ReactComponent as JobIcon } from "assets/svgs/job.svg"
-import { ReactComponent as CandidatesIcon } from "assets/svgs/candidates.svg"
-import { ReactComponent as ReferralIcon } from "assets/svgs/referrals.svg"
-import { ReactComponent as CareerIcon } from "assets/svgs/career.svg"
-import { ReactComponent as DoubleArrowLeftIcon } from "assets/svgs/double-arrow-left.svg"
-import { ReactComponent as DoubleArrowRightIcon } from "assets/svgs/double-arrow-right.svg"
-import { ReactComponent as LogOutIcon } from "assets/svgs/exit.svg"
-import { ReactComponent as HamburgerIcon } from "assets/svgs/hamburger.svg"
-
-import { ReactComponent as LanguageIcon } from "assets/svgs/language.svg"
-import { useLocation } from "react-router-dom"
-import { RoutePaths } from "containers/AppRouter"
-import { logOut } from "store/slices/authSlice"
-import { useAppDispatch, useAppSelector } from "hooks/redux"
-import { useScreenResolution } from "hooks/useScreenResolution"
-import { IS_COLLAPSED_SIDEBAR } from "common/constants"
-
 
 type HeaderProps = {
-  isSidebarOpen: boolean
-  setIsSidebarOpen:  any
+  setIsSidebarOpen: (value: boolean | ((prev: boolean) => boolean)) => void
 }
 
-const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
-
+const Header: FunctionComponent<HeaderProps> = ({ setIsSidebarOpen }) => {
   const { t } = useTranslation(TranslationNamespace.header)
-
+  const { isPhoneLarge } = useScreenResolution()
   const location = useLocation()
-
   const dispatch = useAppDispatch()
 
+  const isCollapsed = useAppSelector(state => state.auth.isCollapsed)
+  const canBeCollapsed = isCollapsed && !isPhoneLarge
+
+  const handleLang = () => i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_LANGUAGE_KEY, i18n.language)
+    i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
+  }, [i18n])
+
+  const getCase = (path: string) => `/${path.split('/')[1]}`
   const getContent = () => {
-    switch (location.pathname) {
+    switch (getCase(location.pathname)) {
       case RoutePaths.DASHBOARD: {
         return {
           title: t('dashboard'),
-          icon: <DashboardIcon className='fill-current' />
+          icon: <DashboardIcon className='dark:fill-white' />
         }
       }
       case RoutePaths.PROFILE: {
         return {
           title: t('profile'),
-          icon: <UserIcon className='fill-current w-[20px] h-[20px]' />
+          icon: <UserIcon className='dark:fill-white' />
         }
       }
       case RoutePaths.VACANCIES: {
         return {
-          title: t('jobs'),
-          icon: <JobIcon className='fill-current' />
+          title: t('vacancies'),
+          icon: <JobIcon className='dark:fill-white' />
         }
       }
       case RoutePaths.CANDIDATES: {
         return {
           title: t('candidates'),
-          icon: <CandidatesIcon className='fill-current' />
+          icon: <CandidatesIcon className='dark:fill-white' />
+        }
+      }
+      case RoutePaths.EMPLOYEES: {
+        return {
+          title: t('employees'),
+          icon: <StructureIcon className='dark:fill-white' />
         }
       }
       default: {
         return {
           title: t('dashboard'),
-          icon: <DashboardIcon className='fill-current' />
+          icon: <DashboardIcon className='dark:fill-white' />
         }
       }
     }
@@ -82,40 +88,41 @@ const Header: FunctionComponent<HeaderProps> = ({ isSidebarOpen, setIsSidebarOpe
 
   const { title, icon } = getContent()
 
-  useEffect(() => {
-    localStorage.setItem('language', i18n.language)
-    i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
-  }, [i18n])
-
-  const handleLang = () => i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
-
-  const { isPhoneLarge } = useScreenResolution()
-
-  const isCollapsed = useAppSelector(state => state.auth.isCollapsed)
-  const canBeCollapsed = isCollapsed && !isPhoneLarge
-
   return (
-    <div className={`fixed h-[5rem] top-0 bg-white flex items-center ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-[calc(100vw_-_4rem)]' : 'w-[calc(100vw_-_16rem)]'} border-b border-b-[#091e4214] px-[2rem] py-[1rem] z-50`}>
-      {isPhoneLarge && <HamburgerIcon className='w-[2rem] h-[2rem]' onClick={() => setIsSidebarOpen((prev: boolean) => !prev)}/>}
-      <div className='flex gap-2 items-center mx-auto'>
+    <div
+      className={`
+        fixed h-20 top-0 bg-white flex items-center dark:bg-dark-200
+        border-b border-b-gray-300 px-8 py-4 z-10 overflow-y-auto
+        ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-contentMax' : 'w-content'}
+      `}
+    >
+      {isPhoneLarge && (
+        <HamburgerIcon
+          id='hamburger-icon'
+          className='w-8 h-8 stroke-black dark:stroke-white'
+          onClick={() => setIsSidebarOpen(prev => !prev)}
+        />
+      )}
+      <div className='flex gap-2 items-center mx-auto dark:text-white'>
         <span>{icon}</span>
         <span>{title}</span>
       </div>
-      { !isPhoneLarge && <div className='flex justify-end'>
-        <div className='border-r border-r-greyLight'>
+      {!isPhoneLarge && <div className='flex justify-end'>
+        <div className='border-r border-r-grayLight'>
           <Button
-            icon={<LanguageIcon className='w-[20px] h-[20px]' />}
+            icon={<LanguageIcon className='w-5 h-5 dark:stroke-grayLight' />}
             type='secondary'
             onClick={handleLang}
-            className='text-[#58abc8]'
+            className='dark:!text-grayLight'
           >
             {t('language')}
           </Button>
         </div>
         <Button
-          icon={<LogOutIcon className='w-[20px] h-[20px]' />}
+          icon={<LogOutIcon className='w-5 h-5 dark:stroke-grayLight' />}
           type='secondary'
           onClick={() => dispatch(logOut())}
+          className='dark:!text-grayLight'
         >
           {t('logout')}
         </Button>

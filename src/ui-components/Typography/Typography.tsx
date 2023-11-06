@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from "react"
+import { FunctionComponent, ReactNode, memo } from 'react'
 
 type TypographyProps = {
   tag?: 'p' | 'h1' | 'h2' | 'h3' | 'h4'
@@ -8,19 +8,21 @@ type TypographyProps = {
   children: ReactNode
 }
 
-const Typography: FunctionComponent<TypographyProps> = ({ tag = 'p', appearance, color = 'light', className, children }) => {
+const Typography: FunctionComponent<TypographyProps> =
+  ({ tag = 'p', appearance, color = 'light', className, children }) => {
 
-  const TypographyTag = tag
+    const TypographyTag = tag
 
-  return <TypographyTag className={
-    `font-[ceraProBold] mb-4
-    ${className}
-    ${appearance === 'title' ? 'text-2xl' : 'text-lg'}
-    ${color === 'light' ? '' : ''}
-    `
-  }>
-    {children}
-  </TypographyTag>
-}
+    return (
+      <TypographyTag 
+        className={`
+          font-[ceraProBold] mb-4 ${className}
+          ${appearance === 'title' ? 'text-2xl' : 'text-lg'}
+        `}
+      >
+        {children}
+      </TypographyTag>
+    )
+  }
 
-export default Typography
+export default memo(Typography)

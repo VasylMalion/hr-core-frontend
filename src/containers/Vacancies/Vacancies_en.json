@@ -1,22 +1,11 @@
 {  
   "title": "Vacancies",
   "addNewVacancy": "Add New Vacancy",
-  "stages": {
-    "SHORTLIST": "Shortlist",
-    "PREINTERVIEW": "Pre Interview",
-    "INTERVIEW": "Interview",
-    "TEST": "Test",
-    "APPLIED": "Applied",
-    "NOT_APPLIED": "Not Applied"
-  },
+  "search": "Search",
+  "onlyMine": "Show only my vacancies",
   "tabs": {
     "ALL": "All",
     "ACTIVE": "Active",
     "INACTIVE": "Inactive"
-  },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  }
 }

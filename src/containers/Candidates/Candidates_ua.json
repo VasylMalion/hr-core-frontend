@@ -1,15 +1,11 @@
 {
-  "stages": {
-    "SHORTLIST": "Shortlist",
-    "PREINTERVIEW": "Pre Interview",
-    "INTERVIEW": "Interview",
-    "TEST": "Test",
-    "APPLIED": "Applied",
-    "NOT_APPLIED": "Not Applied"
-  },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  "title": "Кандидати",
+  "addCandidate": "Додати кандидата",
+  "search": "Пошук",
+  "onlyMine": "Показати тільки власних кандидатів",
+  "candidate": "Кандидат",
+  "location": "Локація",
+  "position": "Позиція",
+  "birthdate": "Дата народження",
+  "mobileNumber": "Номер телефону"
 }

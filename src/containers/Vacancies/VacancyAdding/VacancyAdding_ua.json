@@ -1,1 +1,16 @@
-{}
+{
+  "title": "Додавання нової вакансії",
+  "department": "Відділ",
+  "position": "Позиція",
+  "location": "Локація",
+  "description": "Опис",
+  "deadlineDate": "Кінцевий термін",
+  "assignedTo": "Призначити для",
+  "salaryMin": "Зарплата (мінімальна)",
+  "salaryMax": "Зарплата (максимальна)",
+  "create": "Створити",
+  "successTitle": "Успіх!",
+  "successDescription": "Вакансію успішно додано",
+  "failTitle": "Вибачте!",
+  "failDescription": "Щось пішло не так. Спробуйте знову пізніше"
+}

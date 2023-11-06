@@ -1,22 +1,11 @@
 {
   "title": "Вакансії",
   "addNewVacancy": "Додати вакансію",
-  "stages": {
-    "SHORTLIST": "Shortlist",
-    "PREINTERVIEW": "Pre Interview",
-    "INTERVIEW": "Interview",
-    "TEST": "Test",
-    "APPLIED": "Applied",
-    "NOT_APPLIED": "Not Applied"
-  },
+  "search": "Пошук",
+  "onlyMine": "Показати тільки власні вакансії",
   "tabs": {
-    "ALL": "All",
-    "ACTIVE": "Active",
-    "INACTIVE": "Inactive"
-  },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+    "ALL": "Всі",
+    "ACTIVE": "Активні",
+    "INACTIVE": "Неактивні"
+  }
 }

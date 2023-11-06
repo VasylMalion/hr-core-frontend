@@ -25,7 +25,6 @@ export const useScreenResolution = (): Size => {
   useEffect(() => {
     window.addEventListener('resize', resize)
     return () => window.removeEventListener('resize', resize)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { ...size, isPhoneLarge: size.width <= PHONE_LARGE }

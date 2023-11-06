@@ -1,22 +1,22 @@
-import { SerializedError } from "@reduxjs/toolkit"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
-import { RootState } from "store/store"
+import { v4 as uniqueId } from 'uuid'
 
-export const formatDate = (date: Date): string => {
+import { RootState } from 'store/store'
 
+export const formatDate = (date: Date, separator: string = '-'): string => {
   const local = new Date(date)
   const day = local.getDate()
   const month = local.getMonth() + 1
   const year = local.getFullYear()
 
   return (
-    (day <= 9 ? '0' + day : day) + '-' +
-    (month <= 9 ? '0' + month : month) + '-' +
-    year
+    year + separator +
+    (month <= 9 ? '0' + month : month) + separator +
+    (day <= 9 ? '0' + day : day)
   )
 }
 
 export const errorHandler = (error: any) => {
+  if (!error) return ''
   if ('data' in error) return error.data
 }
 
@@ -27,3 +27,5 @@ export const getToken = (headers: Headers, getState: () => unknown) => {
 
   return headers
 }
+
+export const getUniqueId = (prefix = 'id') => `${prefix}-${uniqueId()}`

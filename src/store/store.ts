@@ -1,15 +1,19 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import { AuthApi } from "services/AuthService";
-import { VacancyApi } from "services/VacancyService";
-import { EmployeeApi } from "services/EmployeeService";
+import { AuthApi } from 'services/AuthService'
+import { VacancyApi } from 'services/VacancyService'
+import { EmployeeApi } from 'services/EmployeeService'
+import { CandidateApi } from 'services/CandidateService'
+import { PasswordApi } from 'services/PasswordService'
 
-import authSlice from "./slices/authSlice";
+import authSlice from './slices/authSlice'
 
 const rootReducer = combineReducers({
   [AuthApi.reducerPath]: AuthApi.reducer,
   [VacancyApi.reducerPath]: VacancyApi.reducer,
   [EmployeeApi.reducerPath]: EmployeeApi.reducer,
+  [CandidateApi.reducerPath]: CandidateApi.reducer,
+  [PasswordApi.reducerPath]: PasswordApi.reducer,
   [authSlice.name]: authSlice.reducer,
 })
 
@@ -19,7 +23,9 @@ export const setupStore = () => {
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
       AuthApi.middleware,
       VacancyApi.middleware,
-      EmployeeApi.middleware
+      EmployeeApi.middleware,
+      CandidateApi.middleware,
+      PasswordApi.middleware,
     ),
   })
 }

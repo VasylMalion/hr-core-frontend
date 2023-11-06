@@ -1,14 +1,14 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { Navbar } from "ui-components";
-import { useLocation } from "react-router-dom";
-import { useScreenResolution } from "hooks/useScreenResolution";
+import { Navbar } from 'ui-components'
+import { useScreenResolution } from 'hooks/useScreenResolution'
+import { useTheme } from 'common/theme/useTheme'
 
-import AppLayout from "./AppLayout/AppLayout";
-import { AppRoutes, RoutePaths } from "./AppRouter";
+import AppLayout from './AppLayout/AppLayout'
+import { AppRoutes, RoutePaths } from './AppRouter'
 
 const App: FunctionComponent = () => {
-
   const location = useLocation()
   const { isPhoneLarge } = useScreenResolution()
 
@@ -16,19 +16,23 @@ const App: FunctionComponent = () => {
 
   const isLoginPage = location.pathname === RoutePaths[AppRoutes.LOGIN]
 
+  const { theme , toggleTheme } = useTheme()
+
   return (
-    <div className={`grid bg-white ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[auto_1fr]'}`}>
-      {!isLoginPage && !isPhoneLarge && <Navbar />}
-      <div>
-        <AppLayout setIsSidebarOpen={setIsSidebarOpen} isSidebarOpen={isSidebarOpen} />
+    <div className={`grid bg-white ${theme} ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[auto_1fr]'}`}>
+      {!isLoginPage && !isPhoneLarge && <Navbar toggleTheme={toggleTheme} />}
+      <div className='dark:text-white'>
+        <AppLayout setIsSidebarOpen={setIsSidebarOpen} />
       </div>
       {
         !isLoginPage && isPhoneLarge && (
-          <div 
-            className={`${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
-          fixed bg-white top-[5rem] transition-all	duration-150 ease-in`}
+          <div
+            className={`
+              ${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
+              fixed top-20 transition-all	duration-150 ease-in
+            `}
           >
-            <Navbar />
+            <Navbar setIsSidebarOpen={setIsSidebarOpen} toggleTheme={toggleTheme} />
           </div>
         )
       }

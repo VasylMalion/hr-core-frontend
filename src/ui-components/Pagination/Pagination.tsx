@@ -1,5 +1,6 @@
-import { FunctionComponent, ReactNode } from "react"
-import { ReactComponent as ArrowIcon } from "assets/svgs/arrow.svg"
+import { FunctionComponent, ReactNode, memo } from 'react'
+
+import { ReactComponent as ArrowIcon } from 'assets/svgs/arrow.svg'
 
 type PaginationProps = {
   pagesCount: number
@@ -17,13 +18,11 @@ type PaginationItemProps = {
 const PaginationItem: FunctionComponent<PaginationItemProps> = ({ value = 1, isActive, disabled, onClick }) =>
   <div
     onClick={onClick}
-    className=
-    {
-      `flex justify-center items-center w-[2.5rem] h-[2.5rem] rounded bg-white cursor-pointer 
-    ${isActive && '!bg-[#091e4214]'}
-    ${disabled && '!bg-[#091e4214] opacity-40 !cursor-not-allowed'}
-    `
-    }
+    className={`
+      flex justify-center items-center w-10 h-10 rounded bg-white cursor-pointer dark:bg-dark-100 
+      ${isActive && '!bg-gray-300'}
+      ${disabled && '!bg-gray-300 opacity-40 !cursor-not-allowed'}
+    `}
   >
     {value}
   </div>
@@ -40,33 +39,37 @@ const Pagination: FunctionComponent<PaginationProps> = ({
   }
 
   const pageNumbers = pages.map(page =>
-    <PaginationItem key={page} onClick={() => handlePageClick(page)} isActive={page === currentPage} value={page} />
+    <PaginationItem
+      key={page}
+      value={page}
+      onClick={() => handlePageClick(page)}
+      isActive={page === currentPage}
+    />
   )
 
   const handlePrevClick = () => onChange(currentPage - 1)
   const handleNextClick = () => onChange(currentPage + 1)
   const handlePageClick = (page: number) => onChange(page)
 
-  let pageIncrementEllipses = null;
-  if (pages.length > 5) {
-    pageIncrementEllipses = <li onClick={handleNextClick}>&hellip;</li>
-  }
-  let pageDecremenEllipses = null;
-  if (1 >= 1) {
-    pageDecremenEllipses = <li onClick={handlePrevClick}>&hellip;</li>
-  }
-
   if (pagesCount <= 1) {
     return null
-  } 
+  }
 
   return (
     <div className='flex gap-2 justify-center'>
-      <PaginationItem onClick={handlePrevClick} disabled={currentPage === 1} value={<ArrowIcon className='w-[1.7rem] h-[1.7rem]' />} />
+      <PaginationItem
+        onClick={handlePrevClick}
+        disabled={currentPage === 1}
+        value={<ArrowIcon className='w-7 h-7 dark:stroke-white stroke-black' />}
+      />
       {pageNumbers}
-      <PaginationItem onClick={handleNextClick} disabled={currentPage === pagesCount} value={<ArrowIcon className='w-[1.7rem] h-[1.7rem] rotate-180	' />} />
+      <PaginationItem
+        onClick={handleNextClick}
+        disabled={currentPage === pagesCount}
+        value={<ArrowIcon className='w-7 h-7 rotate-180 dark:stroke-white stroke-black' />}
+      />
     </div>
   )
 }
 
-export default Pagination
+export default memo(Pagination)

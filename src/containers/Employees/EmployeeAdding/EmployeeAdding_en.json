@@ -6,7 +6,7 @@
   "name": "Name",
   "surname": "Surname",
   "birthDate": "Birth date",
-  "genderTitle": "Gnder",
+  "genderTitle": "Gender",
   "email": "Email",
   "mobile": "Phone number",
   "address": "Address",
@@ -23,5 +23,9 @@
     "user": "User",
     "admin": "Admin"
   },
-  "successTitle": ""
+  "successTitle": "Success!",
+  "failTitle": "Error!",
+  "failDescription": "Sorry, something went wrong.",
+  "successDescription": "Employee was added successfully",
+  "ok": "Ok"
 }

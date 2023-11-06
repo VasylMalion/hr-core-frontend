@@ -1,13 +1,13 @@
-import { FunctionComponent, ReactNode, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { FunctionComponent, ReactNode, useState, memo } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
 type ToolTipProps = {
-  children: ReactNode;
-  text: string;
-};
+  children: ReactNode
+  text: string
+}
 
 const ToolTip: FunctionComponent<ToolTipProps> = ({ children, text }) => {
-  const [showToolTip, setShowToolTip] = useState(false);
+  const [showToolTip, setShowToolTip] = useState(false)
 
   const classNames = {
     enter: 'opacity-0',
@@ -20,13 +20,17 @@ const ToolTip: FunctionComponent<ToolTipProps> = ({ children, text }) => {
 
   if (!text) return children
 
-  const toolTipStyles = `absolute w-max m-[3.25rem] flex justify-center items-center py-[0.25rem] px-[0.75rem] 
-    text-[#FFFFFF] bg-[#222338] rounded-[5px] h-[28px] text-[14px] before:absolute before:border-y-[5px] 
-    before:border-r-[5px] before:border-y-transparent before:border-r-[#222338] before:top-[calc(50%_-_5px)] 
-    before:ml-[-5px] before:w-0 before:h-0 before:left-0`
+  const toolTipStyles = `absolute w-max m-[3.25rem] flex justify-center items-center py-1 px-3 
+    text-white bg-gray-500 rounded-md h-7 text-sm before:absolute before:border-y-4
+    before:border-r-4 before:border-y-transparent before:border-r-gray-500 before:top-[calc(50%_-_0.3125rem)] 
+    before:ml-[-0.25rem] before:w-0 before:h-0 before:left-0`
 
   return (
-    <div className='relative flex items-center' onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
+    <div
+      className='relative flex items-center'
+      onMouseEnter={onMouseEnterHandler}
+      onMouseLeave={onMouseLeaveHandler}
+    >
       {children}
       <CSSTransition
         in={showToolTip}
@@ -39,7 +43,7 @@ const ToolTip: FunctionComponent<ToolTipProps> = ({ children, text }) => {
         </div>
       </CSSTransition>
     </div>
-  );
-};
+  )
+}
 
-export default ToolTip;
+export default memo(ToolTip)

@@ -4,12 +4,13 @@
   "vacancies": "Vacancies",
   "candidates": "Candidates",
   "employees": "Employees",
-  "structure": "Structure",
   "collapseSidebar": "Collapse Sidebar",
   "expandSidebar": "Expand Sidebar",
   "menu": "Menu",
   "recruitment": "Recruitment",
   "organization": "Organization",
   "language": "Українська",
-  "logout": "Log out"
+  "logout": "Log out",
+  "darkMode": "Dark mode",
+  "lightMode": "Light mode"
 }

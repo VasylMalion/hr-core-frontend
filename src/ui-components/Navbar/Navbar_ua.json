@@ -4,12 +4,13 @@
   "vacancies": "Вакансії",
   "candidates": "Кандидати",
   "employees": "Співробітники",
-  "structure": "Структура",
   "collapseSidebar": "Згорнути панель",
   "expandSidebar": "Розгорнути панель",
   "menu": "Меню",
   "recruitment": "Рекрутинг",
   "organization": "Організація",
   "language": "English",
-  "logout": "Вихід"
+  "logout": "Вихід",
+  "darkMode": "Світлий режим",
+  "lightMode": "Темний режим"
 }
