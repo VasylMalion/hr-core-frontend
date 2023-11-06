@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent, MutableRefObject, memo } from 'react'
 
 import { Validation } from 'common/types/common'
 import { getUniqueId } from 'common/utils/common'
@@ -12,6 +12,7 @@ export type InputProps = {
   className?: string
   validation?: Validation
   type?: string
+  inputRef?: MutableRefObject<HTMLInputElement>
 }
 
 const Input: FunctionComponent<InputProps> = ({
@@ -22,6 +23,7 @@ const Input: FunctionComponent<InputProps> = ({
   className,
   validation,
   type = 'text',
+  inputRef,
 }) => {
   const id = getUniqueId('input')
 
@@ -29,6 +31,7 @@ const Input: FunctionComponent<InputProps> = ({
     <div className='font-[ceraProLight]'>
       <label htmlFor={id}>{label}</label>
       <input
+        ref={inputRef}
         id={id}
         type={type}
         value={value}
@@ -36,7 +39,7 @@ const Input: FunctionComponent<InputProps> = ({
         placeholder={placeholder}
         className={`
           min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4
-          text-base rounded-md border border-strock mt-2 
+          text-base rounded-md border border-strock mt-2 dark:bg-dark-100
           ${className} ${(validation && !validation?.isValid) && '!border-red'}
         `}
       />

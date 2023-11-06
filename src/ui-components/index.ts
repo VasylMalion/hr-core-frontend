@@ -1,6 +1,6 @@
 import Button from './Button/Button'
 import DatePicker from './DatePicker/DatePicker'
-import Input from './Input/Input'
+import Input, { InputProps } from './Input/Input'
 import Modal from './Modal/Modal'
 import Navbar from './Navbar/Navbar'
 import Select from './Select/Select'
@@ -27,6 +27,7 @@ export {
   Button,
   DatePicker,
   Input,
+  InputProps,
   Modal,
   Navbar,
   Select,

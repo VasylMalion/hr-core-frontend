@@ -16,6 +16,7 @@ export const formatDate = (date: Date, separator: string = '-'): string => {
 }
 
 export const errorHandler = (error: any) => {
+  if (!error) return ''
   if ('data' in error) return error.data
 }
 

@@ -16,6 +16,7 @@ import { ReactComponent as DashboardIcon } from 'assets/svgs/dashboard.svg'
 import { ReactComponent as UserIcon } from 'assets/svgs/user.svg'
 import { ReactComponent as JobIcon } from 'assets/svgs/job.svg'
 import { ReactComponent as CandidatesIcon } from 'assets/svgs/candidates.svg'
+import { ReactComponent as StructureIcon } from 'assets/svgs/structure.svg'
 import { ReactComponent as LogOutIcon } from 'assets/svgs/exit.svg'
 import { ReactComponent as HamburgerIcon } from 'assets/svgs/hamburger.svg'
 import { ReactComponent as LanguageIcon } from 'assets/svgs/language.svg'
@@ -43,37 +44,43 @@ const Header: FunctionComponent<HeaderProps> = ({ setIsSidebarOpen }) => {
     i18n.changeLanguage(i18n.language === Lang.ua ? Lang.en : Lang.ua)
   }, [i18n])
 
-  const getCase = (path: string) => location.pathname.startsWith(path) ? path : ''
+  const getCase = (path: string) => `/${path.split('/')[1]}`
   const getContent = () => {
-    switch (location.pathname) {
-      case getCase(RoutePaths.DASHBOARD): {
+    switch (getCase(location.pathname)) {
+      case RoutePaths.DASHBOARD: {
         return {
           title: t('dashboard'),
-          icon: <DashboardIcon className='fill-current' />
+          icon: <DashboardIcon className='dark:fill-white' />
         }
       }
       case RoutePaths.PROFILE: {
         return {
           title: t('profile'),
-          icon: <UserIcon className='fill-current' />
+          icon: <UserIcon className='dark:fill-white' />
         }
       }
-      case getCase(RoutePaths.VACANCIES): {
+      case RoutePaths.VACANCIES: {
         return {
-          title: t('jobs'),
-          icon: <JobIcon className='fill-current' />
+          title: t('vacancies'),
+          icon: <JobIcon className='dark:fill-white' />
         }
       }
       case RoutePaths.CANDIDATES: {
         return {
           title: t('candidates'),
-          icon: <CandidatesIcon className='fill-current' />
+          icon: <CandidatesIcon className='dark:fill-white' />
+        }
+      }
+      case RoutePaths.EMPLOYEES: {
+        return {
+          title: t('employees'),
+          icon: <StructureIcon className='dark:fill-white' />
         }
       }
       default: {
         return {
           title: t('dashboard'),
-          icon: <DashboardIcon className='fill-current' />
+          icon: <DashboardIcon className='dark:fill-white' />
         }
       }
     }
@@ -82,36 +89,40 @@ const Header: FunctionComponent<HeaderProps> = ({ setIsSidebarOpen }) => {
   const { title, icon } = getContent()
 
   return (
-    <div className={`
-      fixed h-20 top-0 bg-white flex items-center 
-      border-b border-b-gray-300 px-8 py-4 z-10 overflow-y-auto
-      ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-contentMax' : 'w-content'}
+    <div
+      className={`
+        fixed h-20 top-0 bg-white flex items-center dark:bg-dark-200
+        border-b border-b-gray-300 px-8 py-4 z-10 overflow-y-auto
+        ${isPhoneLarge ? 'w-full' : canBeCollapsed ? 'w-contentMax' : 'w-content'}
       `}
     >
       {isPhoneLarge && (
         <HamburgerIcon
-          className='w-8 h-8'
+          id='hamburger-icon'
+          className='w-8 h-8 stroke-black dark:stroke-white'
           onClick={() => setIsSidebarOpen(prev => !prev)}
         />
       )}
-      <div className='flex gap-2 items-center mx-auto'>
+      <div className='flex gap-2 items-center mx-auto dark:text-white'>
         <span>{icon}</span>
         <span>{title}</span>
       </div>
       {!isPhoneLarge && <div className='flex justify-end'>
         <div className='border-r border-r-grayLight'>
           <Button
-            icon={<LanguageIcon className='w-5 h-5' />}
+            icon={<LanguageIcon className='w-5 h-5 dark:stroke-grayLight' />}
             type='secondary'
             onClick={handleLang}
+            className='dark:!text-grayLight'
           >
             {t('language')}
           </Button>
         </div>
         <Button
-          icon={<LogOutIcon className='w-5 h-5' />}
+          icon={<LogOutIcon className='w-5 h-5 dark:stroke-grayLight' />}
           type='secondary'
           onClick={() => dispatch(logOut())}
+          className='dark:!text-grayLight'
         >
           {t('logout')}
         </Button>

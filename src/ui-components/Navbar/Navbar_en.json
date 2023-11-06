@@ -10,5 +10,7 @@
   "recruitment": "Recruitment",
   "organization": "Organization",
   "language": "Українська",
-  "logout": "Log out"
+  "logout": "Log out",
+  "darkMode": "Dark mode",
+  "lightMode": "Light mode"
 }

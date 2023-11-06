@@ -38,6 +38,12 @@
   "failDescription": "Щось пішло не так. Спробуйте пізніше",
   "showCandidate": "Переглянути кандидата",
   "deleteItem": "Видалити завдання",
+  "addtaskTitle": "Додати нове завдання",
+  "addtaskDescription": "Будь ласка знайдіть кандидата, якого хочете вибрати.",
+  "findCandidate": "Пошук кандидата",
+  "cantFindCandidate": "Якщо ви не можете знайти кандидата, то можете створити його.",
+  "addCandidate": "Додати кандидата",
+  "taskSuccessDescription": "Завдання додано успішно",
   "stages": {
     "SHORTLIST": "Шорт-лист",
     "PREINTERVIEW": "Попереднє інтерв'ю",

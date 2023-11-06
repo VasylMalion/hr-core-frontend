@@ -49,7 +49,7 @@ const DatePicker: FunctionComponent<InputProps> =
           dropdownMode='select'
           className={`
             min-w-[10rem] bg-white flex align-center gap-3 py-3
-            px-4 text-base rounded-md border border-strock mt-2 
+            px-4 text-base rounded-md border border-strock mt-2 dark:bg-dark-100
             ${className} ${!validation?.isValid && '!border-red'}
           `}
         />

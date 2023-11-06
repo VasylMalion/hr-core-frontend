@@ -16,7 +16,7 @@ const Dashboard: FunctionComponent = () => {
       <Typography appearance='title' className='text-center'>
         {t('title')}
       </Typography>
-      <img src={ContentIcon} className='mx-auto' />
+      <img src={ContentIcon} className='mx-auto' draggable={false} />
     </div>
   )
 }

@@ -40,7 +40,7 @@ const Select: FunctionComponent<InputProps> = ({
         onChange={(e) => onChange(e.target.value)}
         className={`
           cursor-pointer min-w-[12rem] bg-white flex align-center gap-3
-          py-3 px-4 text-base rounded-md border border-strock mt-2
+          py-3 px-4 text-base rounded-md border border-strock mt-2 dark:bg-dark-100
           ${className} ${validation && !validation.isValid && 'border-red'}
         `}
       >

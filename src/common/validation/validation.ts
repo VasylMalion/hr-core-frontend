@@ -9,10 +9,16 @@ type Rules = {
   birthDate?: boolean
   date?: boolean
   salary?: true
+  password?: true
 }
 
 const emailValidation = (value: string) => {
   const re = /^[a-zA-Z0-9._-]+@([A-Za-z]+\.[A-Za-z]+|[A-Za-z]+\.[A-Za-z]+\.[A-Za-z]+)$/
+  return re.test(value.toLowerCase())
+}
+
+const passwordValidation = (value: string) => {
+  const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
   return re.test(value.toLowerCase())
 }
 
@@ -55,6 +61,10 @@ export const checkValidation = (value: string, rules: Rules): Validation => {
 
     if (rules.email && value && !emailValidation(value)) {
       errors.push('email')
+    }
+
+    if (rules.password && value && !passwordValidation(value)) {
+      errors.push('password')
     }
 
     if (rules.mobileNumber && value && (!value.startsWith('380') || value.length !== 12)) {

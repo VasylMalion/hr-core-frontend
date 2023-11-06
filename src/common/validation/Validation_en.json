@@ -5,5 +5,6 @@
   "email": "Wrong email format",
   "mobileNumber": "Wrong mobile number format",
   "birthDate": "Incorrect date of birth (must be at least 18 years old)",
-  "date": "The date is incorrect"
+  "date": "The date is incorrect",
+  "password": "Password must contains minimum eight characters, at least one letter and one number"
 }

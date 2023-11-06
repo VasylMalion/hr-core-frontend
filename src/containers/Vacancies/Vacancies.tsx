@@ -39,7 +39,7 @@ const Vacancies: FunctionComponent = () => {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [tab])
+  }, [tab, filter, onlyMine])
 
   useEffect(() => {
     getVacancies({
@@ -95,7 +95,7 @@ const Vacancies: FunctionComponent = () => {
             <div className='flex flex-wrap gap-8 mt-8'>
               {list}
             </div>
-            <div className='m-8'>
+            <div className='my-8'>
               <Pagination
                 pagesCount={data?.count}
                 currentPage={currentPage}

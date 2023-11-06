@@ -8,7 +8,7 @@ type TableProps = {
 
 const Table: FunctionComponent<TableProps> = ({ children }) => (
   <div className='overflow-x-auto rounded-lg border border-gray-300'>
-    <table className='text-gray-600 w-full items-center py-4 bg-white'>
+    <table className='dark:bg-dark-100 dark:text-white text-gray-600 w-full items-center py-4 bg-white'>
       {children}
     </table>
   </div>

@@ -12,7 +12,7 @@ const Tab: FunctionComponent<TabProps> = ({ title, value, isActive, onChange }) 
     onClick={() => onChange(value)}
     className={`
       p-1 cursor-pointer whitespace-pre
-      ${isActive ? 'text-gray-600 border-b-[0.1875rem] border-b-green' : 'text-gray-500'}
+      ${isActive ? 'dark:text-white text-gray-600 border-b-[0.1875rem] border-b-green' : 'text-gray-500'}
     `}
   >
     {title}

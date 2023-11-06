@@ -1,11 +1,11 @@
-import { FunctionComponent, ReactNode, memo } from 'react'
+import { FunctionComponent, ReactNode, MouseEvent, memo } from 'react'
 
 import Loading from 'assets/svgs/Loading/Loading'
 
 type ButtonProps = {
   icon?: ReactNode
   type?: 'primary' | 'secondary'
-  onClick?: () => void
+  onClick?: (event: MouseEvent<HTMLElement>) => void
   children?: ReactNode
   className?: string
   textAlign?: 'center' | 'start' | 'end'
@@ -31,7 +31,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       className={`
         min-w-[8rem] flex align-center gap-3 py-3 px-6 font-[ceraProMedium] text-sm rounded-md items-center
         ${className} 
-        ${disabled && '!text-[#00000042] !bg-[#0000001f] cursor-not-allowed'}
+        ${disabled && '!text-[#00000042] !bg-[#0000001f] dark:!text-white dark:!bg-dark-100 cursor-not-allowed'}
         ${type === 'primary' && 'text-[white] bg-blue fill-white'}
         ${type === 'secondary' && 'fill-gray-400 text-gray-400'}
         ${textAlign === 'start' && 'justify-start'}

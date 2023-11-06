@@ -15,8 +15,9 @@ import {
 } from 'containers'
 
 import PrivateRoute from './PrivateRouter'
+import ProtectedRoute from './ProtectedRouter'
 
-export enum  AppRoutes {
+export enum AppRoutes {
   LOGIN = 'LOGIN',
   DASHBOARD = 'DASHBOARD',
   PROFILE = 'PROFILE',
@@ -99,8 +100,14 @@ export const routeConfig: Array<RouteProps> = [
 
 const AppRouter = () => {
 
-  const routes = routeConfig.map(({path, element}) => (
-    <Route key={path} path={path} element={<PrivateRoute>{element}</PrivateRoute>}/>
+  const routes = routeConfig.map(({ path, element }) => (
+    <Route key={path} path={path} element={
+      <PrivateRoute>
+        <ProtectedRoute>
+          {element}
+        </ProtectedRoute>
+      </PrivateRoute>}
+    />
   ))
 
   return (

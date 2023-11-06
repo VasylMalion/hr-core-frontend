@@ -122,4 +122,12 @@ export type Validation = {
   errors?: Array<FieldError>
 }
 
+export type FindedUser = {
+  id: string
+  name: string
+  surname: string
+}
+
 export type InputState = { value: string, validation: Validation }
+
+export type SelectInputState = {value: FindedUser, validation: Validation}

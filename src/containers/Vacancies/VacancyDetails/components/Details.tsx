@@ -63,7 +63,7 @@ const Details: FunctionComponent<DetailsProps> = ({
       <Typography appearance='subtitle'>
         {t(title)}
       </Typography>
-      <div className='grid gap-2 bg-white p-4 rounded'>
+      <div className='grid gap-2 dark:bg-dark-100 bg-white p-4 rounded'>
         {info.map(item => (
           <div className='flex gap-2'>
             <span className='font-[ceraProLight]'>{item.title}</span>

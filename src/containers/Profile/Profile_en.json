@@ -1,13 +1,36 @@
 {
+  "title": "Profile",
   "tabs": {
-    "candidates": "Candidates",
-    "jobDetails": "Job Details",
-    "timeline": "Timeline & Notes",
-    "hiringTeam": "Hiring Team"
+    "details": "Details",
+    "updatePassword": "Update Password"
   },
-  "name": "Candidate Name",
-  "rating": "Rating",
-  "stagesTitle": "Stages",
-  "appliedDate": "Applied Date",
-  "owner": "Owner"
+  "personalInfo": "Personal information",
+  "contactInfo": "Contact information",
+  "workInfo": "Work information",
+  "name": "Name:",
+  "surname": "Surname:",
+  "birthDate": "Birth date:",
+  "genderTitle": "Gender:",
+  "email": "Email:",
+  "mobile": "Phone number:",
+  "address": "Address:",
+  "department": "Department:",
+  "position": "Position:",
+  "startDate": "Start date:",
+  "gender": {
+    "MALE": "Male",
+    "FEMALE": "Female"
+  },
+  "passwordOld": "Current password",
+  "passwordNew": "New password",
+  "passwordNewAgain": "Repeat New password",
+  "update": "Update",
+  "differentPasswords": "Passwords are different",
+  "successTitle": "Success",
+  "successDescription": "The password was updated",
+  "failTitle": "Sorry",
+  "errors": {
+    "INVALID_BODY": "The password is incorrect",
+    "GENERAL_ERROR": "Something went wrong. Please try again later"
+  }
 }

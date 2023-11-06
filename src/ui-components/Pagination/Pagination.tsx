@@ -19,7 +19,7 @@ const PaginationItem: FunctionComponent<PaginationItemProps> = ({ value = 1, isA
   <div
     onClick={onClick}
     className={`
-      flex justify-center items-center w-10 h-10 rounded bg-white cursor-pointer 
+      flex justify-center items-center w-10 h-10 rounded bg-white cursor-pointer dark:bg-dark-100 
       ${isActive && '!bg-gray-300'}
       ${disabled && '!bg-gray-300 opacity-40 !cursor-not-allowed'}
     `}
@@ -60,13 +60,13 @@ const Pagination: FunctionComponent<PaginationProps> = ({
       <PaginationItem
         onClick={handlePrevClick}
         disabled={currentPage === 1}
-        value={<ArrowIcon className='w-7 h-7' />}
+        value={<ArrowIcon className='w-7 h-7 dark:stroke-white stroke-black' />}
       />
       {pageNumbers}
       <PaginationItem
         onClick={handleNextClick}
         disabled={currentPage === pagesCount}
-        value={<ArrowIcon className='w-7 h-7 rotate-180' />}
+        value={<ArrowIcon className='w-7 h-7 rotate-180 dark:stroke-white stroke-black' />}
       />
     </div>
   )

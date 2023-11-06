@@ -16,7 +16,7 @@ const EmptyList: FunctionComponent<EmptyListProps> = ({ className }) => {
 
   return (
     <div className={`${className} flex flex-col justify-center items-center my-10 mx-4`}>
-      <NoResultIcon className='w-40 h-40 md:w-52 md:h-52' />
+      <NoResultIcon className='w-40 h-40 md:w-52 md:h-52 stroke-black dark:stroke-white' />
       <div className='text-center mb-8'>
         <div className='text-3xl mb-2'>{t('sorry')}</div>
         <div>{t('noResult')}</div>

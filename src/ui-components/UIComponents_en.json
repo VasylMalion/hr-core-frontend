@@ -2,5 +2,6 @@
   "failTitle": "Sorry!",
   "failDescription": "Something went wrong",
   "tryAgain": "Try again",
+  "loading": "Завантаження...",
   "ok": "Ok"
 }

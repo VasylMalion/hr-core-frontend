@@ -1,19 +1,22 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { VacancyStatus } from 'common/types/common'
-import { useLazyFindCandidateQuery } from 'services/CandidateService'
+import { SelectInputState, VacancyStatus } from 'common/types/common'
+import { useFindCandidateQuery } from 'services/CandidateService'
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
-import { 
-  useAddTaskMutation, 
-  useGetOneQuery, 
-  useLazyDeactivateQuery, 
-  util 
+import {
+  useAddTaskMutation,
+  useGetOneQuery,
+  useLazyDeactivateQuery,
+  util
 } from 'services/VacancyService'
 import { Button, Modal, Typography, TabNavigation, SelectInput } from 'ui-components'
 import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
+import { useDebounce } from 'hooks/useDebounce'
+import { checkValidation } from 'common/validation/validation'
+import { RoutePaths } from 'containers/AppRouter'
 
 import Candidates from './components/Candidates'
 import Timeline from './components/Timeline'
@@ -28,28 +31,21 @@ enum TabNavigationTypes {
   TIMELINE = 'TIMELINE',
 }
 
-type FindedCandidate = {
-  id: string
-  name: string
-}
-
-type SelectCandidate = {
-  label: string
-  value: FindedCandidate
-}
-
 const VacancyDetails: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
   const [inputValue, setInputValue] = useState<string>('')
-  const [candidate, setCandidate] = useState<FindedCandidate>(null)
+  const [tab, setTab] = useState<TabNavigationTypes>(TabNavigationTypes.CANDIDATES)
+  const [candidate, setCandidate] = useState<SelectInputState>({ value: null, validation: { isValid: true } })
   const [isOpenTaskModal, setIsOpenTaskModal] = useState<boolean>(false)
   const [isOpenDeactivateModal, setIsOpenDeactivateModal] = useState<boolean>(false)
 
-  const [getCandidates, candidates] = useLazyFindCandidateQuery()
+  const debouncedInputValue = useDebounce({ value: inputValue })
+
+  const candidates = useFindCandidateQuery({ username: debouncedInputValue })
   const { data, isFetching, isSuccess, isError, refetch } = useGetOneQuery({ id })
   const [deactivate, deactivationData] = useLazyDeactivateQuery()
   const [addTask, addTaskData] = useAddTaskMutation()
@@ -60,11 +56,11 @@ const VacancyDetails: FunctionComponent = () => {
     isError
   }
 
-  const onClose = () => dispatch(util.resetApiState())
-
-  useEffect(() => {
-    getCandidates({ username: inputValue })
-  }, [inputValue])
+  const onClose = () => {
+    setIsOpenDeactivateModal(false)
+    setIsOpenTaskModal(false)
+    dispatch(util.resetApiState())
+  }
 
   const options = [
     {
@@ -98,18 +94,12 @@ const VacancyDetails: FunctionComponent = () => {
     }
   }
 
-  const loadOptions = async (inputValue: string) => {
-    await getCandidates({ username: inputValue })
+  const handleCandidate = (value: string) => {
+    const validation = checkValidation(value, {
+      required: true,
+    })
 
-    return candidates.data.map(item => ({
-      value: item,
-      label: item.name,
-    }))
-  }
-
-  const onChange = (option: SelectCandidate) => {
-    setCandidate(option.value)
-    setInputValue(option ? option.label : '')
+    setCandidate(prev => ({ ...prev, validation }))
   }
 
   return <>
@@ -151,7 +141,7 @@ const VacancyDetails: FunctionComponent = () => {
     />
     {getContent()}
     <Modal
-      isOpen={isOpenDeactivateModal}
+      isOpen={isOpenDeactivateModal && (!deactivationData.isSuccess && !deactivationData.isError)}
       onClose={() => setIsOpenDeactivateModal(false)}
       title={t('attention')}
       body={t('deactivationDescription')}
@@ -187,15 +177,57 @@ const VacancyDetails: FunctionComponent = () => {
       body={t('failDescription')}
     />
     <Modal
-      isOpen={isOpenTaskModal}
-      onClose={() => setIsOpenTaskModal(false)}
+      isOpen={addTaskData.isSuccess}
+      onClose={onClose}
+      title={t('successTitle')}
+      body={t('taskSuccessDescription')}
+    />
+    <Modal
+      isOpen={addTaskData.isError}
+      onClose={onClose}
       title={t('failTitle')}
-      body={<div>
-        <SelectInput options={loadOptions} onChange={onChange} inputValue={inputValue} onInputChange={setInputValue} />
-        <Button isLoading={addTaskData.isLoading} onClick={() => addTask({ id, boardId: data?.desk?._id, candidate: candidate })}>
-          {t('deactivate')}
+      body={t('failDescription')}
+    />
+    <Modal
+      isOpen={isOpenTaskModal && (!addTaskData.isSuccess && !addTaskData.isError)}
+      onClose={() => setIsOpenTaskModal(false)}
+      title={t('addtaskTitle')}
+      body={
+        <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-3'>
+            <div>{t('addtaskDescription')}</div>
+            <SelectInput
+              label={t('findCandidate')}
+              placeholder={t('findCandidate')}
+              value={inputValue}
+              setValue={(value) => {
+                setInputValue(value)
+                handleCandidate(value)
+              }}
+              isLoading={candidates.isFetching}
+              data={candidates.data}
+              validation={candidate.validation}
+              onSuccessFind={(value) => setCandidate({ ...candidate, value })}
+            />
+          </div>
+          <div className='grid gap-3'>
+            <div>{t('cantFindCandidate')}</div>
+            <Button onClick={() => navigate(RoutePaths.CANDIDATE_ADDING)} textAlign='center'>
+              {t('addCandidate')}
+            </Button>
+          </div>
+        </div>
+      }
+      buttons={
+        <Button
+          textAlign='center'
+          disabled={!candidate.value}
+          isLoading={addTaskData.isLoading}
+          onClick={() => addTask({ id, boardId: data?.desk?._id, candidate: candidate.value })}
+        >
+          {t('addTask')}
         </Button>
-      </div>}
+      }
     />
   </>
 }

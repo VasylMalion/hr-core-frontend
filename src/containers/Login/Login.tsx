@@ -7,8 +7,7 @@ import { LOCAL_STORAGE_TOKEN_KEY, LOCAL_STORAGE_USER_KEY } from 'common/constant
 import { Button, Typography, Input } from 'ui-components'
 import { useLoginMutation, util } from 'services/AuthService'
 import { RoutePaths } from 'containers/AppRouter'
-import { setCredentials } from 'store/slices/authSlice'
-import { useAppDispatch } from 'hooks/redux'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 import { errorHandler } from 'common/utils/common'
 import { InputState } from 'common/types/common'
 import { checkValidation } from 'common/validation/validation'
@@ -36,6 +35,14 @@ const Login: FunctionComponent = () => {
     { isLoading, isSuccess, isError, error, data },
   ] = useLoginMutation()
 
+  const authInfo = useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    if (!isSuccess && authInfo.userToken && authInfo.userInfo) {
+      navigate(RoutePaths.DASHBOARD)
+    }
+  }, [])
+
   const handleSubmit = () => login({ email: email.value, password: password.value })
 
   useEffect(() => {
@@ -44,10 +51,6 @@ const Login: FunctionComponent = () => {
       localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(data.userInfo))
 
       navigate(RoutePaths.DASHBOARD)
-      dispatch(setCredentials({
-        token: data.token,
-        user: data.userInfo,
-      }))
     }
   }, [isSuccess])
   
@@ -86,11 +89,11 @@ const Login: FunctionComponent = () => {
   }
 
   return (
-    <div className='bg-purpleLight h-screen w-screen flex items-center justify-center'>
+    <div className='bg-purpleLight dark:bg-dark-300 h-screen w-screen flex items-center justify-center'>
       <div 
         className='
           flex flex-col gap-8 justify-center bg-white py-8 px-8
-          rounded-lg md:px-24 md:py-12 m-8 max-w-[40rem]
+          rounded-lg md:px-24 md:py-12 m-8 max-w-[40rem] dark:bg-dark-200
         '
       >
         <Typography appearance='title' className='mb-[-0.5rem]'>

@@ -2,10 +2,12 @@ import { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { TranslationNamespace } from 'common/translations'
-import { ContentSection, Status, VacancyStatus } from 'common/types/common'
+import { ContentSection, Status, Theme, VacancyStatus } from 'common/types/common'
 import { formatDate } from 'common/utils/common'
 import { Typography, WithPreload } from 'ui-components'
-import Avatarcon from 'assets/images/avatar.png'
+import AvatarIcon from 'assets/images/avatar.png'
+import AvatarWhiteIcon from 'assets/images/avatar-white.png'
+import { LOCAL_STORAGE_THEME_KEY } from 'common/constants'
 
 type TimelineProps = {
   createdAt: Date
@@ -35,6 +37,8 @@ const Timeline: FunctionComponent<TimelineProps> = ({
   vacancyStatus,
 }) => {
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
+
+  const isDarkTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === Theme.DARK
 
   const timeline = [
     {
@@ -67,13 +71,13 @@ const Timeline: FunctionComponent<TimelineProps> = ({
       <Typography appearance='subtitle'>
         {t(title)}
       </Typography>
-      <div className='grid gap-2 bg-white p-4 rounded'>
+      <div className='grid gap-2 dark:bg-dark-100 bg-white p-4 rounded'>
         {info.map(item => (
           <div className='flex gap-2 items-center'>
             <span className='font-[ceraProLight]'>{item.title}</span>
             {withIcon ? (
               <div className='flex items-center gap-1'>
-                <img src={Avatarcon} className='w-8 h-8' />
+                <img src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-8 h-8' />
                 <span>{`${assignedTo?.name} ${assignedTo?.surname}`}</span>
               </div>
             ) : (

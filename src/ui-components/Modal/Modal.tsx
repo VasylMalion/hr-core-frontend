@@ -19,15 +19,15 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
   const modalRef = useRef(null)
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: Event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
+        onClose()
       }
-    };
-    document.addEventListener('click', handleClickOutside, true);
+    }
+    document.addEventListener('click', handleClickOutside, true)
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
+      document.removeEventListener('click', handleClickOutside, true)
+    }
   }, [onClose]);
 
   if (!isOpen) {
@@ -39,15 +39,16 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
       <div
         ref={modalRef}
         className='
-          max-h-[80vh] max-w-[40rem] min-w-[20rem] min-h-[15rem]
+          max-h-[80vh] max-w-[40rem] min-w-[18rem] min-h-[15rem] m-8
           flex flex-col rounded-lg border border-gray-300 bg-white
+          dark:text-white dark:bg-dark-200 dark:border-gray-200
         '
       >
-        <div className='p-5 border-b border-b-gray-300 text-xl flex justify-between items-center'>
+        <div className='p-5 border-b border-b-gray-300 dark:border-b-white text-xl flex justify-between items-center'>
           {title}
-          <CloseIcon className='w-4 h-4 cursor-pointer' onClick={onClose} />
+          <CloseIcon className='w-4 h-4 cursor-pointer fill-current dark:fill-white' onClick={onClose} />
         </div>
-        <div className='p-5 border-b border-b-gray-300 font-[ceraProLight] flex grow'>{body}</div>
+        <div className='p-5 border-b border-b-gray-300 dark:border-b-white font-[ceraProLight] flex grow'>{body}</div>
         <div className='p-5'>
           {buttons ? (
             <div className='flex justify-center'>

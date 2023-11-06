@@ -4,8 +4,8 @@ import { BASE_URL } from 'common/constants'
 import { UserInfo } from 'common/types/common'
 
 export type LoginParams = {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 type LoginResponse = {
@@ -23,7 +23,7 @@ export const AuthApi = createApi({
         method: 'POST',
         body: params,
       })
-    })
+    }),
   })
 })
 

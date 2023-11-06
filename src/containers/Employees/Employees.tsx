@@ -38,6 +38,10 @@ const Employees: FunctionComponent = () => {
   const [getAll, { isFetching, isSuccess, isError, data }] = useLazyGetAllQuery()
 
   useEffect(() => {
+    setCurrentPage(1)
+  }, [filter])
+
+  useEffect(() => {
     getAll({ limit: PER_PAGE, page: currentPage, filter: debouncedInputValue })
   }, [currentPage, debouncedInputValue])
 
@@ -94,7 +98,7 @@ const Employees: FunctionComponent = () => {
                 {rows}
               </TableBody>
             </Table>
-            <div className='m-8'>
+            <div className='my-8'>
               <Pagination
                 pagesCount={data?.count}
                 currentPage={currentPage}

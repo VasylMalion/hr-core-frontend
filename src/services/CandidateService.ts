@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { BASE_URL } from 'common/constants'
-import { Candidate, UserInfo } from 'common/types/common'
+import { Candidate, FindedUser, UserInfo } from 'common/types/common'
 import { getToken } from 'common/utils/common'
 
 export type AddCandidateParams = Omit<Candidate, 'id'>
@@ -12,18 +12,16 @@ export type FindCandidateParams = {
   username: string
 }
 
-export type FindCandidateResponse = Pick<Candidate, 'id' | 'name'>
-
 type GetAllResponse = {
   candidates: Array<Candidate>
   count: number
 }
 
 type GetAllParams = {
-  limit: number
-  page: number
-  filter: string
-  onlyMine: boolean
+  limit?: number
+  page?: number
+  filter?: string
+  onlyMine?: boolean
 }
 
 type GetOneParams = {
@@ -53,7 +51,7 @@ export const CandidateApi = createApi({
         body: params,
       }),
     }),
-    findCandidate: build.query<Array<FindCandidateResponse>, FindCandidateParams>({
+    findCandidate: build.query<Array<FindedUser>, FindCandidateParams>({
       query: (params) => ({
         url: '/search',
         method: 'GET',
@@ -91,7 +89,7 @@ export const CandidateApi = createApi({
 
 export const {
   useAddOneMutation,
-  useLazyFindCandidateQuery,
+  useFindCandidateQuery,
   useLazyGetAllQuery,
   useGetOneQuery,
   useLazyDeleteOneQuery,

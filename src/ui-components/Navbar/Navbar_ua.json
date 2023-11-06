@@ -10,5 +10,7 @@
   "recruitment": "Рекрутинг",
   "organization": "Організація",
   "language": "English",
-  "logout": "Вихід"
+  "logout": "Вихід",
+  "darkMode": "Світлий режим",
+  "lightMode": "Темний режим"
 }

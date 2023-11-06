@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
-import { Button, DatePicker, Modal, Input, Typography, TextArea } from 'ui-components'
+import { Button, DatePicker, Modal, Input, Typography, TextArea, SelectInput } from 'ui-components'
 import { useAddVacancyMutation, util } from 'services/VacancyService'
-import FindInput from 'ui-components/FindInput/FindInput'
 import { RoutePaths } from 'containers/AppRouter'
-import { InputState } from 'common/types/common'
+import { FindedUser, InputState, SelectInputState, Validation } from 'common/types/common'
 import { checkValidation } from 'common/validation/validation'
+import { useFindEmployeeQuery } from 'services/EmployeeService'
+import { useDebounce } from 'hooks/useDebounce'
 
 import vacancyAddingEn from './VacancyAdding_en.json'
 import vacancyAddingUa from './VacancyAdding_ua.json'
@@ -23,12 +24,17 @@ const VacancyAdding: FunctionComponent = () => {
   const [position, setPosition] = useState<InputState>({ value: '', validation: { isValid: true } })
   const [location, setLocation] = useState<InputState>({ value: '', validation: { isValid: true } })
   const [description, setDescription] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [assignedTo, setAssignedTo] = useState<any>({ value: null, validation: { isValid: true } })
+  const [assignedTo, setAssignedTo] = useState<SelectInputState>({ value: null, validation: { isValid: true } })
   const [deadlineDate, setDeadlineDate] = useState<InputState>({ value: '', validation: { isValid: true } })
   const [salaryMin, setSalaryMin] = useState<InputState>({ value: '', validation: { isValid: true } })
   const [salaryMax, setSalaryMax] = useState<InputState>({ value: '', validation: { isValid: true } })
 
+  const [inputValue, setInputValue] = useState<string>('')
+  const debouncedInputValue = useDebounce({ value: inputValue })
+
   const [addVacancy, { isLoading, isSuccess, isError }] = useAddVacancyMutation()
+
+  const employees = useFindEmployeeQuery({ username: debouncedInputValue })
 
   const handleSubmit = () => addVacancy({
     department: department.value,
@@ -98,7 +104,7 @@ const VacancyAdding: FunctionComponent = () => {
       required: true,
     })
 
-    setAssignedTo({ value, validation })
+    setAssignedTo(prev => ({ ...prev, validation }))
   }
 
   const handleDeadlineDate = (value: string) => {
@@ -171,10 +177,18 @@ const VacancyAdding: FunctionComponent = () => {
             validation={deadlineDate.validation}
             setValue={handleDeadlineDate}
           />
-          <FindInput
+          <SelectInput
             label={t('assignedTo')}
             placeholder={t('assignedTo')}
-            onSuccessFind={(item) => handleAssignedTo({ ...assignedTo, value: item })}
+            value={inputValue}
+            setValue={(value) => {
+              setInputValue(value)
+              handleAssignedTo(value)
+            }}
+            isLoading={employees.isFetching}
+            data={employees.data}
+            validation={assignedTo.validation}
+            onSuccessFind={(value) => setAssignedTo({ ...assignedTo, value })}
           />
         </div>
         <div className={rowStyles}>

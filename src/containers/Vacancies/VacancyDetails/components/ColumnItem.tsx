@@ -3,11 +3,13 @@ import { generatePath, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { TranslationNamespace } from 'common/translations'
-import Avatarcon from 'assets/images/avatar.png'
-import { Task, Column } from 'common/types/common'
+import AvatarIcon from 'assets/images/avatar.png'
+import AvatarWhiteIcon from 'assets/images/avatar-white.png'
+import { Task, Column, Theme } from 'common/types/common'
 import { Button, Modal } from 'ui-components'
 import { RoutePaths } from 'containers/AppRouter'
 import { useDeleteTaskMutation } from 'services/VacancyService'
+import { LOCAL_STORAGE_THEME_KEY } from 'common/constants'
 
 type ColumnItemProps = {
   dragStartHandler: (e: DragEvent, column: Column, item: Task) => void
@@ -40,6 +42,8 @@ const Task: FunctionComponent<TaskProps> = ({
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
   const [deleteItem, data] = useDeleteTaskMutation()
+
+  const isDarkTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === Theme.DARK
 
   const onClick = () => {
     let it: Task = null
@@ -80,16 +84,16 @@ const Task: FunctionComponent<TaskProps> = ({
 
   return (
     <>
-      <div className='w-full p-2 bg-gray-100 rounded-lg cursor-pointer'
+      <div className='w-full p-2 bg-gray-100 dark:bg-dark-300 rounded-lg cursor-pointer'
         onDrop={(e) => dropHandler(e, column, item)}
         onDragStart={(e) => dragStartHandler(e, column, item)}
         onDragOver={(e) => dragOverHandler(e)}
         draggable={true}
       >
         <div className='flex items-center gap-2' onClick={onClick}>
-          <img src={Avatarcon} className='w-9 h-9' />
+          <img draggable={false} src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-9 h-9' />
           <div>
-            <div className='text-base text-gray-600'>{item.candidate.name}</div>
+            <div className='text-base text-gray-600 dark:text-white'>{item.candidate.name}</div>
             <div className='text-xs text-gray-500'>{item.candidate.position}</div>
           </div>
         </div>
@@ -163,16 +167,16 @@ const ColumnItem: FunctionComponent<ColumnItemProps> = ({
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
 
   return (
-    <div className='min-h-medium w-[12.5rem] rounded-lg bg-white p-3'
+    <div className='min-h-medium w-[12.5rem] rounded-lg bg-white p-3 dark:bg-dark-100'
       onDrop={(e) => dropCardHandler(e, column)}
       onDragOver={(e) => dragOverHandler(e)}
     >
-      <div className='rounded-lg bg-gray-100 mb-6'>
+      <div className='rounded-lg bg-gray-100 dark:bg-dark-300 mb-6'>
         <div className={`h-1.5 ${column.color} rounded-t-lg`}></div>
         <div className='py-2 px-4 flex items-center border-x border-b border-gray-200 justify-between rounded-b-md'>
           <div>{t(`stages.${column.title}`)}</div>
-          <div className='w-6 h-7 bg-gray-200 flex items-center justify-center rounded-md'>
-            {column.items?.length}
+          <div className='w-6 h-7 bg-gray-200 dark:text-dark-300 flex items-center justify-center rounded-md'>
+            {column.items?.length || '0'}
           </div>
         </div>
       </div>

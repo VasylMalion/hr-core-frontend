@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
+import ThemeProvider from 'common/theme/ThemeProvider'
+import SuspensePreloader from 'components/SuspensePreloader/SuspensePreloader'
 import { setupStore } from 'store/store'
 
 import App from './containers/App'
@@ -13,12 +15,14 @@ import './i18n'
 const store = setupStore()
 
 render(
-  <Suspense fallback={<div className='h-full w-full'>Loading...</div>}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+  <Suspense fallback={<SuspensePreloader fullView />}>
+    <ThemeProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ThemeProvider>
   </Suspense>,
   document.getElementById('root')
 )

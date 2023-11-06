@@ -32,7 +32,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={`
-          w-full h-[12rem] bg-white flex align-center gap-3 py-3 px-4
+          w-full h-[12rem] bg-white flex align-center gap-3 py-3 px-4 dark:bg-dark-100
           text-base rounded-md border border-strock mt-2 resize-none
           ${className} ${(validation && !validation?.isValid) && '!border-red'}
         `}

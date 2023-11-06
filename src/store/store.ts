@@ -4,6 +4,7 @@ import { AuthApi } from 'services/AuthService'
 import { VacancyApi } from 'services/VacancyService'
 import { EmployeeApi } from 'services/EmployeeService'
 import { CandidateApi } from 'services/CandidateService'
+import { PasswordApi } from 'services/PasswordService'
 
 import authSlice from './slices/authSlice'
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   [VacancyApi.reducerPath]: VacancyApi.reducer,
   [EmployeeApi.reducerPath]: EmployeeApi.reducer,
   [CandidateApi.reducerPath]: CandidateApi.reducer,
+  [PasswordApi.reducerPath]: PasswordApi.reducer,
   [authSlice.name]: authSlice.reducer,
 })
 
@@ -23,6 +25,7 @@ export const setupStore = () => {
       VacancyApi.middleware,
       EmployeeApi.middleware,
       CandidateApi.middleware,
+      PasswordApi.middleware,
     ),
   })
 }

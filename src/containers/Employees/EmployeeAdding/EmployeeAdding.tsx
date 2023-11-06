@@ -105,8 +105,6 @@ const EmployeeAdding: FunctionComponent = () => {
   }
 
   const handleBirthDate = (value: string) => {
-    console.log(value)
-
     const validation = checkValidation(value, {
       required: true,
       date: true,

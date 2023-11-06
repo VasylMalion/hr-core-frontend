@@ -30,8 +30,8 @@ const Candidates: FunctionComponent<CandidatesProps> = ({ desk, vacancyStatus, r
     'bg-blueLight',
     'bg-red',
     'bg-blue',
-    'bg-purple',
-    'bg-green'
+    'bg-green',
+    'bg-purple'
   ]
 
   const initialBoard: Array<Column> = (Object.keys(Stage) as Array<keyof typeof Stage>).map((key, index) => {

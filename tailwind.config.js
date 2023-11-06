@@ -12,6 +12,12 @@ const colors = {
   'strock': '#F0F0F0',
   'grayLight': '#C4C4C4',
   'transparent': 'transparent',
+  "black": "#000000",
+  "dark": {
+    "100": "#2E2F45",
+    "200": "#222338",
+    "300": "#201C34",
+  },
   'gray': {
     '100': '#FAFBFC',
     '200': '#EFEFEF',
@@ -19,14 +25,12 @@ const colors = {
     '400': '#787878',
     '500': '#6F767E',
     '600': '#333333',
-    '700': '',
-    '800': '',
-    '900': '',
   },
 }
 
 module.exports = {
   content: ["./src/**/*.{html,tsx}"],
+  darkMode: ['class'],
 
   theme: {
     colors: colors,

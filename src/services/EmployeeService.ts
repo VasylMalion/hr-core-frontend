@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { BASE_URL } from 'common/constants'
-import { UserInfo } from 'common/types/common'
+import { FindedUser, UserInfo } from 'common/types/common'
 import { getToken } from 'common/utils/common'
 
 export type GetAllResponse = {
@@ -10,9 +10,9 @@ export type GetAllResponse = {
 }
 
 export type GetAllParams = {
-  limit: number
-  page: number
-  filter: string
+  limit?: number
+  page?: number
+  filter?: string
 }
 
 export type GetOneParams = {
@@ -28,8 +28,6 @@ export type AddEmployeeResponse = {}
 export type FindEmployeeParams = {
   username: string
 }
-
-export type FindEmployeeResponse = Pick<UserInfo, 'id' | 'name' | 'surname'>
 
 type DeleteOneParams = {
   id: string
@@ -53,7 +51,7 @@ export const EmployeeApi = createApi({
       }),
       invalidatesTags: ['Employee']
     }),
-    findEmployee: build.query<Array<FindEmployeeResponse>, FindEmployeeParams>({
+    findEmployee: build.query<Array<FindedUser>, FindEmployeeParams>({
       query: (params) => ({
         url: '/search',
         method: 'GET',
@@ -91,6 +89,7 @@ export const EmployeeApi = createApi({
 export const {
   useAddEmployeeMutation,
   useFindEmployeeQuery,
+  useLazyFindEmployeeQuery,
   useLazyGetAllQuery,
   useGetOneQuery,
   useDeleteOneMutation,

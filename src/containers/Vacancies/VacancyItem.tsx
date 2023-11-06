@@ -3,10 +3,12 @@ import { generatePath, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { TranslationNamespace } from 'common/translations'
-import { VacancyStatus, Vacancy } from 'common/types/common'
+import { VacancyStatus, Vacancy, Theme } from 'common/types/common'
 import { RoutePaths } from 'containers/AppRouter'
 import { formatDate } from 'common/utils/common'
-import Avatarcon from 'assets/images/avatar.png'
+import AvatarIcon from 'assets/images/avatar.png'
+import AvatarWhiteIcon from 'assets/images/avatar-white.png'
+import { LOCAL_STORAGE_THEME_KEY } from 'common/constants'
 
 type VacancyItemProps = Vacancy
 
@@ -16,12 +18,18 @@ const VacancyItem: FunctionComponent<VacancyItemProps> =
     const { t } = useTranslation(TranslationNamespace.vacancies)
     const navigate = useNavigate()
 
+    const isDarkTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === Theme.DARK
+
     const handleClick = () => navigate(generatePath(RoutePaths.VACANCY_DETAILS, { id }))
 
     return (
       <div
         onClick={handleClick}
-        className='min-h-[16rem] w-64 bg-white p-6 rounded-md flex flex-col justify-between cursor-pointer'>
+        className='
+          dark:bg-dark-100 min-h-[16rem] w-64 bg-white p-6 rounded-md 
+          flex flex-col justify-between cursor-pointer
+        '
+      >
         <div>
           <div className='font-[ceraProBold]'>{position}</div>
           <div className='font-[ceraProLight] pt-1'>{location}</div>
@@ -43,7 +51,7 @@ const VacancyItem: FunctionComponent<VacancyItemProps> =
               </div>
             </div>
             <div className='flex items-center gap-1'>
-              <img src={Avatarcon} className='w-8 h-8' />
+              <img src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-8 h-8' />
               <span>{`${assignedTo.name} ${assignedTo.surname}`}</span>
             </div>
           </div>

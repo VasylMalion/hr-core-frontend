@@ -41,6 +41,10 @@ const Candidates: FunctionComponent = () => {
   const [getAll, { isFetching, isSuccess, isError, data }] = useLazyGetAllQuery()
 
   useEffect(() => {
+    setCurrentPage(1)
+  }, [filter, onlyMine])
+
+  useEffect(() => {
     getAll({ limit: PER_PAGE, page: currentPage, onlyMine, filter: debouncedInputValue })
   }, [currentPage, onlyMine, debouncedInputValue])
 
@@ -53,7 +57,7 @@ const Candidates: FunctionComponent = () => {
 
   const rows = data && data.candidates.map(item => (
     <TableRow key={item.id} onClick={() => routeChange(item.id)}>
-      <TableCell>{item.name}</TableCell>
+      <TableCell>{`${item.name} ${item.surname}`}</TableCell>
       <TableCell>{item.location}</TableCell>
       <TableCell>{item.position}</TableCell>
       <TableCell>{formatDate(item.birthDate)}</TableCell>

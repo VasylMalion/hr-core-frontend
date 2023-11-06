@@ -40,6 +40,12 @@
   "deleteItem": "Delete task",
   "deleteTaskDescription": "Do you really want to delete the task?",
   "deleteTaskSucces": "The task was deleted successfuly",
+  "addtaskTitle": "Adding a new task",
+  "addtaskDescription": "Please find candidate which you want to select.",
+  "findCandidate": "Find candidate",
+  "cantFindCandidate": "If you can't find a candidate, you can add them.",
+  "addCandidate": "Add candidate",
+  "taskSuccessDescription": "The task was added successfuly",
   "stages": {
     "SHORTLIST": "Shortlist",
     "PREINTERVIEW": "Pre-interview",
