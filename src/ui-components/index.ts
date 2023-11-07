@@ -9,6 +9,7 @@ import ToolTip from './ToolTip/ToolTip'
 import Typography from './Typography/Typography'
 import Pagination from './Pagination/Pagination'
 import WithPreload from './WithPreload/WithPreload'
+import LoadingComponent from './WithPreload/LoadingComponent'
 import TabNavigation from './TabOptions/TabNavigation'
 import Checkbox from './Checkbox/Checkbox'
 import SelectInput from './SelectInput/SelectInput'
@@ -47,4 +48,5 @@ export {
   SelectInput,
   FieldErrors,
   TextArea,
+  LoadingComponent,
 }

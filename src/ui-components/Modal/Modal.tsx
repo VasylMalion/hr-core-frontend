@@ -28,7 +28,7 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
     }
-  }, [onClose]);
+  }, [onClose])
 
   if (!isOpen) {
     return null
@@ -44,11 +44,15 @@ const Modal: FunctionComponent<ModalProps> = ({ isOpen, onClose, title, body, bu
           dark:text-white dark:bg-dark-200 dark:border-gray-200
         '
       >
-        <div className='p-5 border-b border-b-gray-300 dark:border-b-white text-xl flex justify-between items-center'>
+        <div
+          className='p-5 border-b border-b-gray-300 dark:border-b-white text-xl flex justify-between items-center'
+        >
           {title}
           <CloseIcon className='w-4 h-4 cursor-pointer fill-current dark:fill-white' onClick={onClose} />
         </div>
-        <div className='p-5 border-b border-b-gray-300 dark:border-b-white font-[ceraProLight] flex grow'>{body}</div>
+        <div className='p-5 border-b border-b-gray-300 dark:border-b-white font-[ceraProLight] flex grow'>
+          {body}
+        </div>
         <div className='p-5'>
           {buttons ? (
             <div className='flex justify-center'>

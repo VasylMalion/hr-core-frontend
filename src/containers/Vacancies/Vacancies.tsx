@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Vacancy, VacancyStatus } from 'common/types/common'
-import { useLazyGetVacanciesQuery } from 'services/VacancyService'
+import { useLazyGetAllQuery } from 'services/VacancyService'
 import { Button, Typography, WithPreload, Pagination, TabNavigation, Input, Checkbox } from 'ui-components'
 import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
 import { RoutePaths } from 'containers/AppRouter'
@@ -33,7 +33,7 @@ const Vacancies: FunctionComponent = () => {
   const [filter, setFilter] = useState<string>('')
   const debouncedInputValue = useDebounce({ value: filter })
 
-  const [getVacancies, { data, isFetching, isSuccess, isError }] = useLazyGetVacanciesQuery()
+  const [getVacancies, { data, isFetching, isSuccess, isError }] = useLazyGetAllQuery()
 
   const list = data?.vacancies.map((item: Vacancy) => <VacancyItem {...item} />)
 
@@ -54,15 +54,15 @@ const Vacancies: FunctionComponent = () => {
   const options = [
     {
       title: t('tabs.ALL'),
-      type: TabNavigationTypes.ALL
+      value: TabNavigationTypes.ALL
     },
     {
       title: t('tabs.ACTIVE'),
-      type: TabNavigationTypes.ACTIVE
+      value: TabNavigationTypes.ACTIVE
     },
     {
       title: t('tabs.INACTIVE'),
-      type: TabNavigationTypes.INACTIVE
+      value: TabNavigationTypes.INACTIVE
     },
   ]
 
@@ -88,7 +88,7 @@ const Vacancies: FunctionComponent = () => {
         />
         <Checkbox checked={onlyMine} onChange={setOnlyMine} caption={t('onlyMine')} />
       </div>
-      <TabNavigation options={options} value={tab} onChange={setTab} />
+      <TabNavigation<TabNavigationTypes> options={options} value={tab} onChange={setTab} />
       <WithPreload isLoading={isFetching} isSuccess={isSuccess} isError={isError}>
         {data?.vacancies.length ? (
           <>

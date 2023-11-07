@@ -2,6 +2,5 @@
   "title": "Log in to the system",
   "email": "Email",
   "password": "Password",
-  "login": "Log in",
-  "INVALID_BODY": "Invalid email or password"
+  "login": "Log in"
 }

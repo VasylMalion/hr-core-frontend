@@ -13,6 +13,7 @@ const inputState = { value: '', validation: { isValid: true } }
 
 const UpdatePassword: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.profile)
+  const { t:tCommon } = useTranslation(TranslationNamespace.profile)
   const dispatch = useDispatch()
 
   const [passwordOld, setPasswordOld] = useState<InputState>(inputState)
@@ -134,7 +135,7 @@ const UpdatePassword: FunctionComponent = () => {
         isOpen={isError}
         onClose={onClose}
         title={t('failTitle')}
-        body={t(`errors.${errorHandler(error)}`)}
+        body={tCommon(`errors.${errorHandler(error)}`)}
       />
     </>
   )

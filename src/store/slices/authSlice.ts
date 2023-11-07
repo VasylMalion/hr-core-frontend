@@ -18,11 +18,11 @@ type State = {
 
 const initialState: State = {
   loading: false,
+  success: false,
+  error: '',
   userInfo: JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY)),
   userToken: localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY),
   isCollapsed: JSON.parse(localStorage.getItem(IS_COLLAPSED_SIDEBAR)),
-  error: '',
-  success: false,
 }
 
 const authSlice = createSlice({

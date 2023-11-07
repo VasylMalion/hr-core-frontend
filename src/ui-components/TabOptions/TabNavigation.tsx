@@ -1,25 +1,21 @@
-import { FunctionComponent, memo } from 'react'
+import Tab, {TabOption} from './Tab'
 
-import Tab from './Tab'
-
-type TabNavigationProps = {
-  options: Array<{
-    title: string
-    type: string
-  }>
-  value: string
-  onChange?: (value: any) => void
+type TabNavigationProps<T> = {
+  options: Array<TabOption<T>>
+  value: T
+  onChange?: (value: T) => void
 }
-const TabNavigation: FunctionComponent<TabNavigationProps> = ({ options, value, onChange }) => (
+
+const TabNavigation = <T extends unknown>({ options, value, onChange }: TabNavigationProps<T>) => (
   <div className='overflow-x-auto'>
     <div className='flex gap-8 border-b border-grayLight'>
       {
-        options.map(item => (
+        options.map((item, index) => (
           <Tab
-            key={item.type}
+            key={index}
             title={item.title}
-            value={item.type}
-            isActive={item.type === value}
+            value={item.value}
+            isActive={item.value === value}
             onChange={onChange}
           />
         ))
@@ -28,4 +24,4 @@ const TabNavigation: FunctionComponent<TabNavigationProps> = ({ options, value, 
   </div>
 )
 
-export default memo(TabNavigation)
+export default TabNavigation

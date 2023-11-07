@@ -1,4 +1,6 @@
 import { v4 as uniqueId } from 'uuid'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/react'
+import { SerializedError } from '@reduxjs/toolkit'
 
 import { RootState } from 'store/store'
 
@@ -15,7 +17,7 @@ export const formatDate = (date: Date, separator: string = '-'): string => {
   )
 }
 
-export const errorHandler = (error: any) => {
+export const errorHandler = (error: FetchBaseQueryError | SerializedError) => {
   if (!error) return ''
   if ('data' in error) return error.data
 }

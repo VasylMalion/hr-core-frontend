@@ -1,13 +1,16 @@
-import { FunctionComponent, memo } from 'react'
+import { memo } from 'react'
 
-type TabProps = {
+export type TabOption<T = string> = {
   title: string
-  value: string
-  isActive?: boolean
-  onChange?: (value: any) => void
+  value: T
 }
 
-const Tab: FunctionComponent<TabProps> = ({ title, value, isActive, onChange }) => (
+type TabProps<T> = TabOption<T> & {
+  isActive?: boolean
+  onChange?: (value: T) => void
+}
+
+const Tab = <T extends unknown>({ title, value, isActive, onChange }: TabProps<T>) => (
   <div
     onClick={() => onChange(value)}
     className={`

@@ -7,7 +7,7 @@ import { TranslationNamespace, addTranslationNamespace } from 'common/translatio
 import { Button, DatePicker, Typography, Select, Input, Modal } from 'ui-components'
 import { GenderTypes, InputState, RoleTypes } from 'common/types/common'
 import { RoutePaths } from 'containers/AppRouter'
-import { useAddEmployeeMutation, util } from 'services/EmployeeService'
+import { useAddOneMutation, util } from 'services/EmployeeService'
 import { checkValidation } from 'common/validation/validation'
 
 import employeeAddingEn from './EmployeeAdding_en.json'
@@ -30,7 +30,7 @@ const EmployeeAdding: FunctionComponent = () => {
   const [role, setRole] = useState<InputState>({ value: RoleTypes.USER, validation: { isValid: true } })
   const [startDate, setStartDate] = useState<InputState>({ value: '', validation: { isValid: true } })
 
-  const [addEmployee, { isLoading, isSuccess, isError }] = useAddEmployeeMutation({})
+  const [addEmployee, { isLoading, isSuccess, isError }] = useAddOneMutation({})
 
   const handleSubmit = () => addEmployee({
     name: name.value,

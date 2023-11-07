@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react'
-import { Navigate, Route } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { useAppSelector } from 'hooks/redux'
 import { RoutePaths } from './AppRouter'

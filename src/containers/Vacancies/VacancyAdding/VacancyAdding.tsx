@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux'
 
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Button, DatePicker, Modal, Input, Typography, TextArea, SelectInput } from 'ui-components'
-import { useAddVacancyMutation, util } from 'services/VacancyService'
+import { useAddOneMutation, util } from 'services/VacancyService'
 import { RoutePaths } from 'containers/AppRouter'
-import { FindedUser, InputState, SelectInputState, Validation } from 'common/types/common'
+import { InputState, SelectInputState } from 'common/types/common'
 import { checkValidation } from 'common/validation/validation'
 import { useFindEmployeeQuery } from 'services/EmployeeService'
 import { useDebounce } from 'hooks/useDebounce'
@@ -32,7 +32,7 @@ const VacancyAdding: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState<string>('')
   const debouncedInputValue = useDebounce({ value: inputValue })
 
-  const [addVacancy, { isLoading, isSuccess, isError }] = useAddVacancyMutation()
+  const [addVacancy, { isLoading, isSuccess, isError }] = useAddOneMutation()
 
   const employees = useFindEmployeeQuery({ username: debouncedInputValue })
 
@@ -56,6 +56,11 @@ const VacancyAdding: FunctionComponent = () => {
 
   const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
 
+  const shoulShowError =
+    (salaryMin.value && salaryMin.validation.isValid) &&
+    (salaryMax.value && salaryMax.validation.isValid) &&
+    +salaryMin.value > +salaryMax.value
+
   const isValid =
     (department.value && department.validation.isValid) &&
     (position.value && position.validation.isValid) &&
@@ -64,7 +69,8 @@ const VacancyAdding: FunctionComponent = () => {
     (assignedTo.value && assignedTo.validation.isValid) &&
     (deadlineDate.value && deadlineDate.validation.isValid) &&
     (salaryMin.value && salaryMin.validation.isValid) &&
-    (salaryMax.value && salaryMax.validation.isValid)
+    (salaryMax.value && salaryMax.validation.isValid) &&
+    shoulShowError
 
   const handleDepartment = (value: string) => {
     const validation = checkValidation(value, {
@@ -117,6 +123,8 @@ const VacancyAdding: FunctionComponent = () => {
   }
 
   const handlesalaryMin = (value: string) => {
+    if (value.length > 7) return
+
     const validation = checkValidation(value, {
       required: true,
       salary: true,
@@ -126,6 +134,8 @@ const VacancyAdding: FunctionComponent = () => {
   }
 
   const handleSalaryMax = (value: string) => {
+    if (value.length > 7) return
+
     const validation = checkValidation(value, {
       required: true,
       salary: true,
@@ -211,6 +221,11 @@ const VacancyAdding: FunctionComponent = () => {
             validation={salaryMax.validation}
           />
         </div>
+        {shoulShowError && (
+          <div className='text-red'>
+            {t('salaryError')}
+          </div>
+        )}
         <div className={rowStyles}>
           <TextArea
             label={t('description')}

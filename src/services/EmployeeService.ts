@@ -4,28 +4,28 @@ import { BASE_URL } from 'common/constants'
 import { FindedUser, UserInfo } from 'common/types/common'
 import { getToken } from 'common/utils/common'
 
-export type GetAllResponse = {
+type GetAllResponse = {
   users: Array<Partial<UserInfo>>
   count: number
 }
 
-export type GetAllParams = {
+type GetAllParams = {
   limit?: number
   page?: number
   filter?: string
 }
 
-export type GetOneParams = {
+type GetOneParams = {
   id: string
 }
 
-export type GetOneResponse = UserInfo
+type GetOneResponse = UserInfo
 
-export type AddEmployeeParams = Partial<UserInfo>
+type AddEmployeeParams = Partial<UserInfo>
 
-export type AddEmployeeResponse = {}
+type AddEmployeeResponse = {}
 
-export type FindEmployeeParams = {
+type FindEmployeeParams = {
   username: string
 }
 
@@ -43,13 +43,12 @@ export const EmployeeApi = createApi({
     prepareHeaders: (headers, { getState }) => getToken(headers, getState)
   }),
   endpoints: (build) => ({
-    addEmployee: build.mutation<AddEmployeeResponse, AddEmployeeParams>({
+    addOne: build.mutation<AddEmployeeResponse, AddEmployeeParams>({
       query: (params) => ({
         url: '/add',
         method: 'POST',
         body: params,
       }),
-      invalidatesTags: ['Employee']
     }),
     findEmployee: build.query<Array<FindedUser>, FindEmployeeParams>({
       query: (params) => ({
@@ -87,7 +86,7 @@ export const EmployeeApi = createApi({
 })
 
 export const {
-  useAddEmployeeMutation,
+  useAddOneMutation,
   useFindEmployeeQuery,
   useLazyFindEmployeeQuery,
   useLazyGetAllQuery,

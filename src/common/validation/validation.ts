@@ -1,4 +1,4 @@
-import { Validation } from "common/types/common"
+import { Validation } from 'common/types/common'
 
 type Rules = {
   required?: boolean
