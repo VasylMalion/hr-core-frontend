@@ -28,9 +28,5 @@
   "differentPasswords": "Passwords are different",
   "successTitle": "Success",
   "successDescription": "The password was updated",
-  "failTitle": "Sorry",
-  "errors": {
-    "INVALID_BODY": "The password is incorrect",
-    "GENERAL_ERROR": "Something went wrong. Please try again later"
-  }
+  "failTitle": "Sorry"
 }

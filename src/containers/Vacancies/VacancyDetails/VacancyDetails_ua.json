@@ -38,6 +38,8 @@
   "failDescription": "Щось пішло не так. Спробуйте пізніше",
   "showCandidate": "Переглянути кандидата",
   "deleteItem": "Видалити завдання",
+  "deleteTaskDescription": "Ви дійсно хочете видалити це завдання?",
+  "deleteTaskSucces": "Завдання видалено успішно",
   "addtaskTitle": "Додати нове завдання",
   "addtaskDescription": "Будь ласка знайдіть кандидата, якого хочете вибрати.",
   "findCandidate": "Пошук кандидата",

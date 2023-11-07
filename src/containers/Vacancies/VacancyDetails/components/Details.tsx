@@ -40,6 +40,7 @@ const Details: FunctionComponent<DetailsProps> = ({
     {
       title: t('description'),
       value: description,
+      isLarge: true,
     },
   ]
 
@@ -65,8 +66,8 @@ const Details: FunctionComponent<DetailsProps> = ({
       </Typography>
       <div className='grid gap-2 dark:bg-dark-100 bg-white p-4 rounded'>
         {info.map(item => (
-          <div className='flex gap-2'>
-            <span className='font-[ceraProLight]'>{item.title}</span>
+          <div className={`${item.isLarge && 'flex-col'} flex gap-2`}>
+            <span className='[font-ceraProLight]'>{item.title}</span>
             <span>{item.value}</span>
           </div>
         ))}
@@ -85,7 +86,7 @@ const Details: FunctionComponent<DetailsProps> = ({
           <div className='flex gap-2 items-center'>
             <span>{t('vacancyStatus')}</span>
             <div className='flex gap-1 items-center'>
-              <div 
+              <div
                 className={`
                   w-4 h-4 rounded-full 
                   ${status === VacancyStatus.ACTIVE ? 'bg-green' : 'bg-red'}

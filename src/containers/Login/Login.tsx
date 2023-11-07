@@ -14,11 +14,13 @@ import { checkValidation } from 'common/validation/validation'
 
 import loginEn from './Login_en.json'
 import loginUa from './Login_ua.json'
+import { setCredentials } from 'store/slices/authSlice'
 
 const inputState = { value: '', validation: { isValid: true } }
 
 const Login: FunctionComponent = () => {
   const { t } = useTranslation(TranslationNamespace.login)
+  const { t: tCommon } = useTranslation(TranslationNamespace.common)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -36,7 +38,7 @@ const Login: FunctionComponent = () => {
   ] = useLoginMutation()
 
   const authInfo = useAppSelector(state => state.auth)
-
+  
   useEffect(() => {
     if (!isSuccess && authInfo.userToken && authInfo.userInfo) {
       navigate(RoutePaths.DASHBOARD)
@@ -49,6 +51,13 @@ const Login: FunctionComponent = () => {
     if (isSuccess) {
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, data.token)
       localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(data.userInfo))
+
+      dispatch(
+        setCredentials({
+          token: data.token, 
+          userInfo: data.userInfo
+        })
+      )
 
       navigate(RoutePaths.DASHBOARD)
     }
@@ -99,7 +108,7 @@ const Login: FunctionComponent = () => {
         <Typography appearance='title' className='mb-[-0.5rem]'>
           {t('title')}
         </Typography>
-        <div className='grid gap-4 min-w-[20rem]'>
+        <div className='grid gap-4 min-w-[16rem] md:min-w-[20rem]'>
           <Input
             label={t('email')}
             placeholder={t('email')}
@@ -119,7 +128,7 @@ const Login: FunctionComponent = () => {
           />
           {isError && !isLoading && (
             <div className='text-red'>
-              {t(errorHandler(error))}
+              {tCommon(`errors.${errorHandler(error)}`)}
             </div>
           )}
         </div>

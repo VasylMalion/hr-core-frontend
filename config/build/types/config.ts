@@ -1,7 +1,6 @@
-
 export enum BuildMode {
   PRODUCTION = 'production', 
-  DEVELOPMENT = 'development'
+  DEVELOPMENT = 'development',
 }
 
 export type BuildPaths = {

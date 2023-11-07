@@ -1,10 +1,10 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { SelectInputState, VacancyStatus } from 'common/types/common'
-import { useFindCandidateQuery } from 'services/CandidateService'
+import { useFindQuery } from 'services/CandidateService'
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import {
   useAddTaskMutation,
@@ -45,10 +45,16 @@ const VacancyDetails: FunctionComponent = () => {
 
   const debouncedInputValue = useDebounce({ value: inputValue })
 
-  const candidates = useFindCandidateQuery({ username: debouncedInputValue })
+  const candidates = useFindQuery({ username: debouncedInputValue })
   const { data, isFetching, isSuccess, isError, refetch } = useGetOneQuery({ id })
   const [deactivate, deactivationData] = useLazyDeactivateQuery()
   const [addTask, addTaskData] = useAddTaskMutation()
+
+  useEffect(() => {
+    if (isSuccess && !data) {
+      navigate(RoutePaths.VACANCIES)
+    }
+  }, [isSuccess, data])
 
   const vacancyStatus = {
     isLoading: isFetching,
@@ -59,21 +65,23 @@ const VacancyDetails: FunctionComponent = () => {
   const onClose = () => {
     setIsOpenDeactivateModal(false)
     setIsOpenTaskModal(false)
+    setCandidate({ value: null, validation: { isValid: true } })
+    setInputValue('')
     dispatch(util.resetApiState())
   }
 
   const options = [
     {
       title: t('tabs.candidates'),
-      type: TabNavigationTypes.CANDIDATES
+      value: TabNavigationTypes.CANDIDATES
     },
     {
       title: t('tabs.vacancyDetails'),
-      type: TabNavigationTypes.VACANCY_DETAILS
+      value: TabNavigationTypes.VACANCY_DETAILS
     },
     {
       title: t('tabs.timeline'),
-      type: TabNavigationTypes.TIMELINE
+      value: TabNavigationTypes.TIMELINE
     },
   ]
 
@@ -134,7 +142,7 @@ const VacancyDetails: FunctionComponent = () => {
         </div>
       </div>
     )}
-    <TabNavigation
+    <TabNavigation<TabNavigationTypes>
       options={options}
       value={tab}
       onChange={setTab}

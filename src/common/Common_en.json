@@ -1,14 +1,9 @@
 {
-  "validation": {
-    "min": "",
-    "email": "Email isn't valid"
-  },
   "errors": {
-    "GENERAL_ERROR": "Sorry, something went wrong",
-    "INVALID_BODY": "Неправильні дані"
-  },
-  "vacancyStatus": {
-    "ACTIVE": "Відкриті",
-    "INACTIVE": "Неправильні дані"
+    "EMAIL_ALREADY_EXISTS": "Such Email already used by another user",
+    "INVALID_PASSWORD": "Wrong password",
+    "INVALID_BODY": "Some data are wrong",
+    "NO_RESULT": "No result found",
+    "GENERAL_ERROR": "Something went wrong. Try again later"
   }
 }

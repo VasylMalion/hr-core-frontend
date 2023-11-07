@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
@@ -6,9 +6,10 @@ import { useDispatch } from 'react-redux'
 import { useDeleteOneMutation, useGetOneQuery, util } from 'services/EmployeeService'
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { Button, Modal, Typography, WithPreload } from 'ui-components'
-import { ContentSection } from 'common/types/common'
+import { ContentSection, RoleTypes } from 'common/types/common'
 import { formatDate } from 'common/utils/common'
 import { RoutePaths } from 'containers/AppRouter'
+import { useAppSelector } from 'hooks/redux'
 
 import employeeDetailsEn from './EmployeeDetails_en.json'
 import employeeDetailsUa from './EmployeeDetails_ua.json'
@@ -21,8 +22,15 @@ const EmployeeDetails: FunctionComponent = () => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
+  const userInfo = useAppSelector(state => state.auth.userInfo)
   const { data, isLoading, isSuccess, isError } = useGetOneQuery({ id })
   const [deleteEmployee, deletingData] = useDeleteOneMutation()
+
+  useEffect(() => {
+    if (isSuccess && !data) {
+      navigate(RoutePaths.EMPLOYEES)
+    }
+  }, [isSuccess, data])
 
   const onClose = (success?: boolean) => {
     setIsOpenModal(false)
@@ -102,16 +110,18 @@ const EmployeeDetails: FunctionComponent = () => {
           <Typography appearance='title'>
             {t('title', { num: id })}
           </Typography>
-          <div>
-            <Button
-              type='secondary'
-              isLoading={false}
-              onClick={() => setIsOpenModal(true)}
-              className='border-red border !text-red'
-            >
-              {t('deleteEmployee')}
-            </Button>
-          </div>
+          {userInfo?.role === RoleTypes.ADMIN && (
+            <div>
+              <Button
+                type='secondary'
+                isLoading={false}
+                onClick={() => setIsOpenModal(true)}
+                className='border-red border !text-red'
+              >
+                {t('deleteEmployee')}
+              </Button>
+            </div>
+          )}
         </div>
         <div className='max-w-medium flex flex-col gap-6'>
           {getContent('personalInfo', personalInfo)}

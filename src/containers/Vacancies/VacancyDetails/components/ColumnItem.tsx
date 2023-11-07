@@ -93,7 +93,9 @@ const Task: FunctionComponent<TaskProps> = ({
         <div className='flex items-center gap-2' onClick={onClick}>
           <img draggable={false} src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-9 h-9' />
           <div>
-            <div className='text-base text-gray-600 dark:text-white'>{item.candidate.name}</div>
+            <div className='text-base text-gray-600 dark:text-white'>
+              {item.candidate.name + ' ' + item.candidate.surname}
+            </div>
             <div className='text-xs text-gray-500'>{item.candidate.position}</div>
           </div>
         </div>

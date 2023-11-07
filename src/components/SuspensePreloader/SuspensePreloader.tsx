@@ -1,5 +1,6 @@
-import { FunctionComponent } from 'react'
-import LoadingComponent from 'ui-components/WithPreload/LoadingComponent'
+import { FunctionComponent, memo } from 'react'
+
+import { LoadingComponent } from 'ui-components'
 
 type SuspensePreloaderProps = {
   fullView?: boolean
@@ -19,4 +20,4 @@ const SuspensePreloader: FunctionComponent<SuspensePreloaderProps> = ({ fullView
   )
 }
 
-export default SuspensePreloader
+export default memo(SuspensePreloader)

@@ -1,10 +1,9 @@
 {
-  "validation": {
-    "min": "",
-    "email": "Email isn't valid"
-  },
   "errors": {
-    "GENERAL_ERROR": "Sorry, something went wrong",
-    "INVALID_BODY": "Неправильні дані"
+    "EMAIL_ALREADY_EXISTS": "Така пошта вже використовується іншим користувачем",
+    "INVALID_PASSWORD": "Невірний пароль",
+    "INVALID_BODY": "Якісь дані не правильні",
+    "NO_RESULT": "Результату не знайдено",
+    "GENERAL_ERROR": "Щось пішло не так. Спробуйте ще раз пізніше"
   }
 }

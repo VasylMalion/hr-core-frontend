@@ -27,9 +27,7 @@ type DeactivateParams = {
   id: string
 }
 
-type DeactivateResponse = {}
-
-export type AddVacancyParams = {
+type AddVacancyParams = {
   department: string
   position: string
   location: string
@@ -40,9 +38,7 @@ export type AddVacancyParams = {
   deadlineDate: Date
 }
 
-type AddVacancyResponse = {}
-
-export type AddTaskParams = {
+type AddTaskParams = {
   id: string
   boardId: string
   candidate: {
@@ -53,18 +49,13 @@ export type AddTaskParams = {
 
 type AddTaskResponse = Vacancy
 
-
-type UpdateTaskResponse = {}
-
-export type UpdateTaskParams = {
+type UpdateTaskParams = {
   vacancyId: string
   id: string
   column: string
 }
 
-type DeleteTaskResponse = {}
-
-export type DeleteTaskParams = {
+type DeleteTaskParams = {
   vacancyId: string
   id: string
 }
@@ -76,7 +67,7 @@ export const VacancyApi = createApi({
     prepareHeaders: (headers, { getState }) => getToken(headers, getState)
   }),
   endpoints: (build) => ({
-    getVacancies: build.query<GetAllVacanciesResponse, GetAllVacanciesParams>({
+    getAll: build.query<GetAllVacanciesResponse, GetAllVacanciesParams>({
       query: (params) => ({
         url: '/jobs',
         method: 'GET',
@@ -92,13 +83,13 @@ export const VacancyApi = createApi({
         method: 'GET'
       }),
     }),
-    deactivate: build.query<DeactivateResponse, DeactivateParams>({
+    deactivate: build.query<{}, DeactivateParams>({
       query: ({ id }) => ({
         url: `/jobs/${id}/deactivate`,
         method: 'GET'
       }),
     }),
-    addVacancy: build.mutation<AddVacancyResponse, AddVacancyParams>({
+    addOne: build.mutation<{}, AddVacancyParams>({
       query: (params) => ({
         url: '/jobs/add',
         method: 'POST',
@@ -124,7 +115,7 @@ export const VacancyApi = createApi({
         },
       })
     }),
-    deleteTask: build.mutation<DeleteTaskResponse, DeleteTaskParams>({
+    deleteTask: build.mutation<{}, DeleteTaskParams>({
       query: (params) => ({
         url: `/jobs/${params.vacancyId}/task`,
         method: 'DELETE',
@@ -133,7 +124,7 @@ export const VacancyApi = createApi({
         },
       })
     }),
-    updateTask: build.mutation<UpdateTaskResponse, UpdateTaskParams>({
+    updateTask: build.mutation<{}, UpdateTaskParams>({
       query: (params) => ({
         url: `/jobs/${params.vacancyId}/updateTask`,
         method: 'POST',
@@ -147,13 +138,12 @@ export const VacancyApi = createApi({
 })
 
 export const {
-  useGetVacanciesQuery,
   useGetOneQuery,
   useLazyGetOneQuery,
   useDeactivateQuery,
   useLazyDeactivateQuery,
-  useAddVacancyMutation,
-  useLazyGetVacanciesQuery,
+  useAddOneMutation,
+  useLazyGetAllQuery,
   useAddTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,

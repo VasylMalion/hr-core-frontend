@@ -28,9 +28,5 @@
   "differentPasswords": "Паролі не збігаються",
   "successTitle": "Успіх",
   "successDescription": "Пароль оновлено",
-  "failTitle": "Вибачте",
-  "errors": {
-    "INVALID_BODY": "Пароль є невірним",
-    "GENERAL_ERROR": "Щось пішло не так. Спробуйте знову пізніше"
-  }
+  "failTitle": "Вибачте"
 }

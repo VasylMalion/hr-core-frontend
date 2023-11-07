@@ -1,14 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 import { BASE_URL } from 'common/constants'
-import { Candidate, FindedUser, UserInfo } from 'common/types/common'
+import { Candidate, FindedUser } from 'common/types/common'
 import { getToken } from 'common/utils/common'
 
-export type AddCandidateParams = Omit<Candidate, 'id'>
+type AddCandidateParams = Omit<Candidate, 'id'>
 
-export type AddCandidateResponse = {}
-
-export type FindCandidateParams = {
+type FindedCandidateParams = {
   username: string
 }
 
@@ -44,14 +42,14 @@ export const CandidateApi = createApi({
     prepareHeaders: (headers, { getState }) => getToken(headers, getState)
   }),
   endpoints: (build) => ({
-    addOne: build.mutation<AddCandidateResponse, AddCandidateParams>({
+    addOne: build.mutation<{}, AddCandidateParams>({
       query: (params) => ({
         url: '/add',
         method: 'POST',
         body: params,
       }),
     }),
-    findCandidate: build.query<Array<FindedUser>, FindCandidateParams>({
+    find: build.query<Array<FindedUser>, FindedCandidateParams>({
       query: (params) => ({
         url: '/search',
         method: 'GET',
@@ -89,7 +87,7 @@ export const CandidateApi = createApi({
 
 export const {
   useAddOneMutation,
-  useFindCandidateQuery,
+  useFindQuery,
   useLazyGetAllQuery,
   useGetOneQuery,
   useLazyDeleteOneQuery,

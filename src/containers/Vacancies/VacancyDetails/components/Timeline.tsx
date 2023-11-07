@@ -78,7 +78,7 @@ const Timeline: FunctionComponent<TimelineProps> = ({
             {withIcon ? (
               <div className='flex items-center gap-1'>
                 <img src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-8 h-8' />
-                <span>{`${assignedTo?.name} ${assignedTo?.surname}`}</span>
+                <span>{item.value}</span>
               </div>
             ) : (
               <span>{item.value}</span>

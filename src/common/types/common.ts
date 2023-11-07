@@ -113,7 +113,11 @@ export enum Theme {
   DARK = 'dark',
 }
 
-export type ContentSection = Array<{ title: string, value: string }>
+export type ContentSection = Array<{ 
+  title: string 
+  value: string
+  isLarge?: boolean 
+}>
 
 export type FieldError = string | [string, number]
 

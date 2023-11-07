@@ -1,7 +1,7 @@
-import webpack from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { BuildOptions } from "./types/config";
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { BuildOptions } from './types/config'
 
 export const buildPlugins = ({
   paths,
@@ -16,5 +16,5 @@ export const buildPlugins = ({
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css'
     }),
-  ];
-};
+  ]
+}

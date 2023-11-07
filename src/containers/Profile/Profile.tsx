@@ -23,11 +23,11 @@ const Profile: FunctionComponent = () => {
   const options = [
     {
       title: t('tabs.details'),
-      type: TabNavigationTypes.DETAILS
+      value: TabNavigationTypes.DETAILS
     },
     {
       title: t('tabs.updatePassword'),
-      type: TabNavigationTypes.UPDATE_PASSWORD
+      value: TabNavigationTypes.UPDATE_PASSWORD
     }
   ]
 
@@ -50,7 +50,7 @@ const Profile: FunctionComponent = () => {
       <Typography appearance='title'>
         {t('title')}
       </Typography>
-      <TabNavigation
+      <TabNavigation<TabNavigationTypes>
         options={options}
         value={tab}
         onChange={setTab}

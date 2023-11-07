@@ -26,6 +26,5 @@
   "successTitle": "Success!",
   "failTitle": "Error!",
   "failDescription": "Sorry, something went wrong.",
-  "successDescription": "Employee was added successfully",
-  "ok": "Ok"
+  "successDescription": "Employee was added successfully"
 }

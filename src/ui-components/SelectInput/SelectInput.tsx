@@ -38,8 +38,8 @@ const SelectInput: FunctionComponent<SelectInputProps> = ({
   ))
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (listRef.current && !listRef.current.contains(event.target)) {
+    const handleClickOutside = (event: Event) => {
+      if (listRef.current && !listRef.current.contains(event.target as HTMLInputElement)) {
         if (edited) {
           setValue('')
           setEdited(false)

@@ -33,9 +33,9 @@ const Pagination: FunctionComponent<PaginationProps> = ({
   onChange,
 }) => {
 
-  const pages = [];
+  const pages = []
   for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
+    pages.push(i)
   }
 
   const pageNumbers = pages.map(page =>

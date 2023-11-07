@@ -9,6 +9,7 @@
   "salaryMin": "Salary (minimum)",
   "salaryMax": "Salary (maximum)",
   "create": "Create",
+  "salaryError": "Minimum salary bigger than maximum",
   "successTitle": "Success!",
   "successDescription": "The vacancy was added successfuly",
   "failTitle": "Sorry!",
