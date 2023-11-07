@@ -69,7 +69,7 @@ const Candidates: FunctionComponent = () => {
 
   return (
     <>
-      <div className={actionStyles}>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
         <Typography appearance='title'>
           {t('title')}
         </Typography>
@@ -79,7 +79,7 @@ const Candidates: FunctionComponent = () => {
           </Button>
         </div>
       </div>
-      <div className={actionStyles}>
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-8 md:mb-6'>
         <Input
           label={t('search')}
           placeholder={t('search')}

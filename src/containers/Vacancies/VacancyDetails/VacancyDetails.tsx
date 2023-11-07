@@ -65,6 +65,8 @@ const VacancyDetails: FunctionComponent = () => {
   const onClose = () => {
     setIsOpenDeactivateModal(false)
     setIsOpenTaskModal(false)
+    setCandidate({ value: null, validation: { isValid: true } })
+    setInputValue('')
     dispatch(util.resetApiState())
   }
 

@@ -70,7 +70,7 @@ const VacancyAdding: FunctionComponent = () => {
     (deadlineDate.value && deadlineDate.validation.isValid) &&
     (salaryMin.value && salaryMin.validation.isValid) &&
     (salaryMax.value && salaryMax.validation.isValid) &&
-    shoulShowError
+    !shoulShowError
 
   const handleDepartment = (value: string) => {
     const validation = checkValidation(value, {
