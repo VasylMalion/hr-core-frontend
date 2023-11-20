@@ -20,13 +20,14 @@ const ProtectedRoute: FunctionComponent<PrivateRouteProps> = ({ children }) => {
     RoutePaths.EMPLOYEE_DETAILS,
   ]
 
-  const data = useAppSelector(state => state.auth.userInfo)
+  const data = useAppSelector((state) => state.auth.userInfo)
 
   if (data?.role === RoleTypes.ADMIN) return children
 
   const isIncludedPath =
     routes.includes(pathname as AppRoutes) ||
-    (pathname.startsWith(RoutePaths.EMPLOYEES) && pathname !== RoutePaths.EMPLOYEE_ADDING)
+    (pathname.startsWith(RoutePaths.EMPLOYEES) &&
+      pathname !== RoutePaths.EMPLOYEE_ADDING)
 
   return isIncludedPath ? children : <Navigate to={RoutePaths.DASHBOARD} />
 }

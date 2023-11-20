@@ -39,7 +39,7 @@ export const CandidateApi = createApi({
   tagTypes: ['Candidate'],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/candidates`,
-    prepareHeaders: (headers, { getState }) => getToken(headers, getState)
+    prepareHeaders: (headers, { getState }) => getToken(headers, getState),
   }),
   endpoints: (build) => ({
     addOne: build.mutation<{}, AddCandidateParams>({
@@ -55,7 +55,7 @@ export const CandidateApi = createApi({
         method: 'GET',
         params: {
           username: params.username,
-        }
+        },
       }),
     }),
     getAll: build.query<GetAllResponse, GetAllParams>({
@@ -67,7 +67,7 @@ export const CandidateApi = createApi({
           page: params.page,
           filter: params.filter,
           onlyMine: params.onlyMine ? 1 : 0,
-        }
+        },
       }),
     }),
     getOne: build.query<GetOneResponse, GetOneParams>({
@@ -82,7 +82,7 @@ export const CandidateApi = createApi({
         method: 'DELETE',
       }),
     }),
-  })
+  }),
 })
 
 export const {
@@ -91,5 +91,5 @@ export const {
   useLazyGetAllQuery,
   useGetOneQuery,
   useLazyDeleteOneQuery,
-  util
+  util,
 } = CandidateApi

@@ -50,69 +50,68 @@ export const RoutePaths: Record<AppRoutes, string> = {
 export const routeConfig: Array<RouteProps> = [
   {
     path: RoutePaths.DASHBOARD,
-    element: <Dashboard />
+    element: <Dashboard />,
   },
   {
     path: RoutePaths.PROFILE,
-    element: <Profile />
+    element: <Profile />,
   },
   {
     path: RoutePaths.VACANCIES,
-    element: <Vacancies />
+    element: <Vacancies />,
   },
   {
     path: RoutePaths.CANDIDATES,
-    element: <Candidates />
+    element: <Candidates />,
   },
   {
     path: RoutePaths.CANDIDATE_DETAILS,
-    element: <CandidateDetails />
+    element: <CandidateDetails />,
   },
   {
     path: RoutePaths.CANDIDATE_ADDING,
-    element: <CandidateAdding />
+    element: <CandidateAdding />,
   },
   {
     path: RoutePaths.VACANCY_DETAILS,
-    element: <VacancyDetails />
+    element: <VacancyDetails />,
   },
   {
     path: RoutePaths.VACANCY_ADDING,
-    element: <VacancyAdding />
+    element: <VacancyAdding />,
   },
   {
     path: RoutePaths.EMPLOYEES,
-    element: <Employees />
+    element: <Employees />,
   },
   {
     path: RoutePaths.EMPLOYEE_ADDING,
-    element: <EmployeeAdding />
+    element: <EmployeeAdding />,
   },
   {
     path: RoutePaths.EMPLOYEE_DETAILS,
-    element: <EmployeeDetails />
+    element: <EmployeeDetails />,
   },
   {
     path: '*',
-    element: <Navigate to={RoutePaths.DASHBOARD} />
+    element: <Navigate to={RoutePaths.DASHBOARD} />,
   },
 ]
 
 const AppRouter = () => {
-
   const routes = routeConfig.map(({ path, element }) => (
-    <Route key={path} path={path} element={
-      <PrivateRoute>
-        <ProtectedRoute>
-          {element}
-        </ProtectedRoute>
-      </PrivateRoute>}
+    <Route
+      key={path}
+      path={path}
+      element={
+        <PrivateRoute>
+          <ProtectedRoute>{element}</ProtectedRoute>
+        </PrivateRoute>
+      }
     />
   ))
 
-  return (
-    <Routes>{routes}</Routes>
-  )
+  return <Routes>{routes}</Routes>
 }
 
 export default AppRouter

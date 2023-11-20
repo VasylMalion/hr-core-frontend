@@ -9,8 +9,7 @@ type PrivateRouteProps = {
 }
 
 const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ children }) => {
-
-  const token = useAppSelector(state => state.auth.userToken)
+  const token = useAppSelector((state) => state.auth.userToken)
 
   return token ? children : <Navigate to={RoutePaths.LOGIN} />
 }

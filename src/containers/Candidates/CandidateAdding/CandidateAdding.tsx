@@ -3,8 +3,18 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
-import { Button, DatePicker, Modal, Select, Input, Typography } from 'ui-components'
+import {
+  TranslationNamespace,
+  addTranslationNamespace,
+} from 'common/translations'
+import {
+  Button,
+  DatePicker,
+  Modal,
+  Select,
+  Input,
+  Typography,
+} from 'ui-components'
 import { useAddOneMutation, util } from 'services/CandidateService'
 import { RoutePaths } from 'containers/AppRouter'
 import { GenderTypes, InputState } from 'common/types/common'
@@ -18,29 +28,57 @@ const CandidateAdding: FunctionComponent = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [name, setName] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [surname, setSurname] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [gender, setGender] = useState<InputState>({ value: GenderTypes.MALE, validation: { isValid: true } })
-  const [birthDate, setBirthDate] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [email, setEmail] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [mobileNumber, setMobileNumber] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [location, setLocation] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [position, setPosition] = useState<InputState>({ value: '', validation: { isValid: true } })
-  const [salary, setSalary] = useState<InputState>({ value: '', validation: { isValid: true } })
+  const [name, setName] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [surname, setSurname] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [gender, setGender] = useState<InputState>({
+    value: GenderTypes.MALE,
+    validation: { isValid: true },
+  })
+  const [birthDate, setBirthDate] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [email, setEmail] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [mobileNumber, setMobileNumber] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [location, setLocation] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [position, setPosition] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
+  const [salary, setSalary] = useState<InputState>({
+    value: '',
+    validation: { isValid: true },
+  })
 
   const [addOne, { isLoading, isSuccess, isError }] = useAddOneMutation()
 
-  const handleSubmit = () => addOne({
-    name: name.value,
-    surname: surname.value,
-    gender: gender.value,
-    birthDate: new Date(birthDate.value),
-    email: email.value,
-    mobileNumber: mobileNumber.value,
-    location: location.value,
-    position: position.value,
-    salary: +salary.value,
-  })
+  const handleSubmit = () =>
+    addOne({
+      name: name.value,
+      surname: surname.value,
+      gender: gender.value,
+      birthDate: new Date(birthDate.value),
+      email: email.value,
+      mobileNumber: mobileNumber.value,
+      location: location.value,
+      position: position.value,
+      salary: +salary.value,
+    })
 
   const onSuccessClose = () => {
     dispatch(util.resetApiState())
@@ -57,14 +95,22 @@ const CandidateAdding: FunctionComponent = () => {
   const rowStyles = 'grid grid-cols-row gap-4 md:gap-8'
 
   const isValid =
-    (name.value && name.validation.isValid) &&
-    (surname.value && surname.validation.isValid) &&
-    (birthDate.value && birthDate.validation.isValid) &&
-    (gender.value && gender.validation.isValid) &&
-    (email.value && email.validation.isValid) &&
-    (mobileNumber.value && mobileNumber.validation.isValid) &&
-    (location.value && location.validation.isValid) &&
-    (position.value && position.validation.isValid) &&
+    name.value &&
+    name.validation.isValid &&
+    surname.value &&
+    surname.validation.isValid &&
+    birthDate.value &&
+    birthDate.validation.isValid &&
+    gender.value &&
+    gender.validation.isValid &&
+    email.value &&
+    email.validation.isValid &&
+    mobileNumber.value &&
+    mobileNumber.validation.isValid &&
+    location.value &&
+    location.validation.isValid &&
+    position.value &&
+    position.validation.isValid &&
     salary.validation.isValid
 
   const handleName = (value: string) => {
@@ -151,20 +197,16 @@ const CandidateAdding: FunctionComponent = () => {
 
   return (
     <>
-      <Typography appearance='title'>
-        {t('title')}
-      </Typography>
-      <div className='grid gap-6 max-w-large'>
+      <Typography appearance="title">{t('title')}</Typography>
+      <div className="grid gap-6 max-w-large">
         <div>
-          <Typography appearance='subtitle'>
-            {t('personalInfo')}
-          </Typography>
-          <div className='grid gap-4'>
+          <Typography appearance="subtitle">{t('personalInfo')}</Typography>
+          <div className="grid gap-4">
             <div className={rowStyles}>
               <Input
                 label={t('name')}
                 placeholder={t('name')}
-                className='w-full'
+                className="w-full"
                 value={name.value}
                 onChange={handleName}
                 validation={name.validation}
@@ -172,7 +214,7 @@ const CandidateAdding: FunctionComponent = () => {
               <Input
                 label={t('surname')}
                 placeholder={t('surname')}
-                className='w-full'
+                className="w-full"
                 value={surname.value}
                 onChange={handleSurname}
                 validation={surname.validation}
@@ -183,7 +225,7 @@ const CandidateAdding: FunctionComponent = () => {
                 options={genderOptions}
                 label={t('genderTitle')}
                 placeholder={t('genderTitle')}
-                className='w-full'
+                className="w-full"
                 value={gender.value}
                 onChange={handleGender}
                 validation={gender.validation}
@@ -191,7 +233,7 @@ const CandidateAdding: FunctionComponent = () => {
               <DatePicker
                 label={t('birthDate')}
                 placeholder={t('birthDate')}
-                className='w-full'
+                className="w-full"
                 value={birthDate.value}
                 validation={birthDate.validation}
                 setValue={handleBirthDate}
@@ -200,24 +242,24 @@ const CandidateAdding: FunctionComponent = () => {
           </div>
         </div>
         <div>
-          <Typography appearance='subtitle' className='mt-4'>
+          <Typography appearance="subtitle" className="mt-4">
             {t('contactInfo')}
           </Typography>
-          <div className='grid gap-4'>
+          <div className="grid gap-4">
             <div className={rowStyles}>
               <Input
                 label={t('email')}
                 placeholder={t('email')}
-                className='w-full'
+                className="w-full"
                 value={email.value}
                 onChange={handleEmail}
                 validation={email.validation}
               />
               <Input
-                type='number'
+                type="number"
                 label={t('mobile')}
                 placeholder={t('mobile')}
-                className='w-full'
+                className="w-full"
                 value={mobileNumber.value}
                 onChange={handleMobileNumber}
                 validation={mobileNumber.validation}
@@ -227,7 +269,7 @@ const CandidateAdding: FunctionComponent = () => {
               <Input
                 label={t('location')}
                 placeholder={t('location')}
-                className='w-full'
+                className="w-full"
                 value={location.value}
                 onChange={handleLocation}
                 validation={location.validation}
@@ -236,23 +278,23 @@ const CandidateAdding: FunctionComponent = () => {
           </div>
         </div>
         <div>
-          <Typography appearance='subtitle' className='mt-4'>
+          <Typography appearance="subtitle" className="mt-4">
             {t('workInfo')}
           </Typography>
           <div className={rowStyles}>
             <Input
               label={t('position')}
               placeholder={t('position')}
-              className='w-full'
+              className="w-full"
               value={position.value}
               onChange={handlePosition}
               validation={position.validation}
             />
             <Input
-              type='number'
+              type="number"
               label={t('salary')}
               placeholder={t('salary')}
-              className='w-full'
+              className="w-full"
               value={salary.value}
               onChange={handleSalary}
               validation={salary.validation}
@@ -260,8 +302,8 @@ const CandidateAdding: FunctionComponent = () => {
           </div>
         </div>
         <Button
-          textAlign='center'
-          className='flex justify-self-start mt-4'
+          textAlign="center"
+          className="flex justify-self-start mt-4"
           onClick={handleSubmit}
           isLoading={isLoading}
           disabled={!isValid}
@@ -287,4 +329,8 @@ const CandidateAdding: FunctionComponent = () => {
 
 export default CandidateAdding
 
-addTranslationNamespace(TranslationNamespace.candidateAdding, candidateAddingEn, candidateAddingUa)
+addTranslationNamespace(
+  TranslationNamespace.candidateAdding,
+  candidateAddingEn,
+  candidateAddingUa
+)

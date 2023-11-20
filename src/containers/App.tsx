@@ -16,26 +16,31 @@ const App: FunctionComponent = () => {
 
   const isLoginPage = location.pathname === RoutePaths[AppRoutes.LOGIN]
 
-  const { theme , toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme()
 
   return (
-    <div className={`grid bg-white ${theme} ${isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[auto_1fr]'}`}>
+    <div
+      className={`grid bg-white ${theme} ${
+        isPhoneLarge ? 'grid-cols-[1fr]' : 'grid-cols-[auto_1fr]'
+      }`}
+    >
       {!isLoginPage && !isPhoneLarge && <Navbar toggleTheme={toggleTheme} />}
-      <div className='dark:text-white'>
+      <div className="dark:text-white">
         <AppLayout setIsSidebarOpen={setIsSidebarOpen} />
       </div>
-      {
-        !isLoginPage && isPhoneLarge && (
-          <div
-            className={`
+      {!isLoginPage && isPhoneLarge && (
+        <div
+          className={`
               ${isSidebarOpen ? 'left-0' : 'left-[-20rem]'} 
               fixed top-20 transition-all	duration-150 ease-in
             `}
-          >
-            <Navbar setIsSidebarOpen={setIsSidebarOpen} toggleTheme={toggleTheme} />
-          </div>
-        )
-      }
+        >
+          <Navbar
+            setIsSidebarOpen={setIsSidebarOpen}
+            toggleTheme={toggleTheme}
+          />
+        </div>
+      )}
     </div>
   )
 }

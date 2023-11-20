@@ -22,9 +22,9 @@ export const AuthApi = createApi({
         url: '/login',
         method: 'POST',
         body: params,
-      })
+      }),
     }),
-  })
+  }),
 })
 
 export const { useLoginMutation, util } = AuthApi

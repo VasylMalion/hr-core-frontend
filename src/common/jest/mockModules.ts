@@ -18,3 +18,10 @@ export const mockNavigation = (fn: jest.Mock) =>
     ...(jest.requireActual('react-router-dom') as any),
     useNavigate: () => fn,
   }))
+
+export const mockRedux = jest.mock('react-redux', () => ({
+  ...(jest.requireActual('react-redux') as any),
+  useDispatch: () => jest.fn(),
+}))
+
+export const mockUuid = jest.mock('uuid', () => ({ v4: () => jest.fn() }))

@@ -64,7 +64,7 @@ export const VacancyApi = createApi({
   reducerPath: 'vacancyApi',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    prepareHeaders: (headers, { getState }) => getToken(headers, getState)
+    prepareHeaders: (headers, { getState }) => getToken(headers, getState),
   }),
   endpoints: (build) => ({
     getAll: build.query<GetAllVacanciesResponse, GetAllVacanciesParams>({
@@ -75,18 +75,18 @@ export const VacancyApi = createApi({
           ...params,
           onlyMine: params.onlyMine ? 1 : 0,
         },
-      })
+      }),
     }),
     getOne: build.query<GetOneResponse, GetOneParams>({
       query: ({ id }) => ({
         url: `/jobs/${id}`,
-        method: 'GET'
+        method: 'GET',
       }),
     }),
     deactivate: build.query<{}, DeactivateParams>({
       query: ({ id }) => ({
         url: `/jobs/${id}/deactivate`,
-        method: 'GET'
+        method: 'GET',
       }),
     }),
     addOne: build.mutation<{}, AddVacancyParams>({
@@ -103,7 +103,7 @@ export const VacancyApi = createApi({
           salaryMax: parseInt(params.salaryMax),
           deadlineDate: params.deadlineDate,
         },
-      })
+      }),
     }),
     addTask: build.mutation<AddTaskResponse, AddTaskParams>({
       query: (params) => ({
@@ -113,7 +113,7 @@ export const VacancyApi = createApi({
           boardId: params.boardId,
           candidate: params.candidate,
         },
-      })
+      }),
     }),
     deleteTask: build.mutation<{}, DeleteTaskParams>({
       query: (params) => ({
@@ -122,7 +122,7 @@ export const VacancyApi = createApi({
         body: {
           id: params.id,
         },
-      })
+      }),
     }),
     updateTask: build.mutation<{}, UpdateTaskParams>({
       query: (params) => ({
@@ -132,9 +132,9 @@ export const VacancyApi = createApi({
           id: params.id,
           column: params.column,
         },
-      })
+      }),
     }),
-  })
+  }),
 })
 
 export const {
@@ -147,5 +147,5 @@ export const {
   useAddTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
-  util
+  util,
 } = VacancyApi

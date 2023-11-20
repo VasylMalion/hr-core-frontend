@@ -40,7 +40,7 @@ export const EmployeeApi = createApi({
   tagTypes: ['Employee'],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/employees`,
-    prepareHeaders: (headers, { getState }) => getToken(headers, getState)
+    prepareHeaders: (headers, { getState }) => getToken(headers, getState),
   }),
   endpoints: (build) => ({
     addOne: build.mutation<AddEmployeeResponse, AddEmployeeParams>({
@@ -56,7 +56,7 @@ export const EmployeeApi = createApi({
         method: 'GET',
         params: {
           username: params.username,
-        }
+        },
       }),
     }),
     getAll: build.query<GetAllResponse, GetAllParams>({
@@ -67,7 +67,7 @@ export const EmployeeApi = createApi({
           limit: params.limit,
           page: params.page,
           filter: params.filter,
-        }
+        },
       }),
     }),
     getOne: build.query<GetOneResponse, GetOneParams>({
@@ -82,7 +82,7 @@ export const EmployeeApi = createApi({
         method: 'DELETE',
       }),
     }),
-  })
+  }),
 })
 
 export const {
@@ -92,5 +92,5 @@ export const {
   useLazyGetAllQuery,
   useGetOneQuery,
   useDeleteOneMutation,
-  util
+  util,
 } = EmployeeApi

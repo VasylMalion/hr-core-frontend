@@ -4,17 +4,11 @@ import { generatePath } from 'react-router-dom'
 
 import { renderWithProviders } from 'common/jest/renderWithProviders'
 import { RoutePaths } from 'containers/AppRouter'
+import { mockTranslations } from 'common/jest/mockModules'
+import { mockVacanciesLarge, mockVacanciesShort } from 'common/mockData'
 
 import { server } from '../../../config/jest/mockHttpServer'
 import Vacancies from './Vacancies'
-
-import {
-  mockCandidatesLarge,
-  mockCandidatesSmall,
-  mockVacanciesLarge,
-  mockVacanciesShort,
-} from 'common/mockData'
-import { mockTranslations } from 'common/jest/mockModules'
 
 const navigate = jest.fn()
 
@@ -23,20 +17,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => navigate,
 }))
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    }
-  },
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  },
-}))
+beforeAll(() => mockTranslations)
 
 describe('Vacancies component', () => {
   it('Test content of the heading', async () => {

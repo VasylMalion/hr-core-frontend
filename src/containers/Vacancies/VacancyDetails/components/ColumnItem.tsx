@@ -43,7 +43,8 @@ const TaskItem: FunctionComponent<TaskProps> = ({
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
   const [deleteItem, data] = useDeleteTaskMutation()
 
-  const isDarkTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === Theme.DARK
+  const isDarkTheme =
+    localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === Theme.DARK
 
   const onClick = () => {
     let it: Task = null
@@ -53,10 +54,10 @@ const TaskItem: FunctionComponent<TaskProps> = ({
       if (result) it = result
     }
 
-    const column = desk.find(column => column.title === it.column)
-    const columnIndex = desk.findIndex(column => column.title === it.column)
-    const task = column.items.find(task => task.id === item.id)
-    const taskIndex = column.items.findIndex(task => task.id === item.id)
+    const column = desk.find((column) => column.title === it.column)
+    const columnIndex = desk.findIndex((column) => column.title === it.column)
+    const task = column.items.find((task) => task.id === item.id)
+    const taskIndex = column.items.findIndex((task) => task.id === item.id)
 
     if (task) {
       setDesk([
@@ -70,7 +71,7 @@ const TaskItem: FunctionComponent<TaskProps> = ({
               isOpen: !task.isOpen,
             },
             ...column.items.slice(taskIndex + 1),
-          ]
+          ],
         },
         ...desk.slice(columnIndex + 1),
       ])
@@ -78,43 +79,50 @@ const TaskItem: FunctionComponent<TaskProps> = ({
   }
 
   const showCandidate = () => {
-    const path = generatePath(RoutePaths.CANDIDATE_DETAILS, { id: item.candidate.id })
+    const path = generatePath(RoutePaths.CANDIDATE_DETAILS, {
+      id: item.candidate.id,
+    })
     navigate(path)
   }
 
   return (
     <>
-      <div className='w-full p-2 bg-gray-100 dark:bg-dark-300 rounded-lg cursor-pointer'
+      <div
+        className="w-full p-2 bg-gray-100 dark:bg-dark-300 rounded-lg cursor-pointer"
         onDrop={(e) => dropHandler(e, column, item)}
         onDragStart={(e) => dragStartHandler(e, column, item)}
         onDragOver={(e) => dragOverHandler(e)}
         draggable={true}
       >
-        <div className='flex items-center gap-2' onClick={onClick}>
-          <img draggable={false} src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon} className='w-9 h-9' />
+        <div className="flex items-center gap-2" onClick={onClick}>
+          <img
+            draggable={false}
+            src={isDarkTheme ? AvatarWhiteIcon : AvatarIcon}
+            className="w-9 h-9"
+          />
           <div>
-            <div className='text-base text-gray-600 dark:text-white'>
+            <div className="text-base text-gray-600 dark:text-white">
               {item.candidate.name + ' ' + item.candidate.surname}
             </div>
-            <div className='text-xs text-gray-500'>{item.candidate.position}</div>
+            <div className="text-xs text-gray-500">
+              {item.candidate.position}
+            </div>
           </div>
         </div>
-        {
-          item.isOpen && (
-            <div className='flex flex-col gap-2 mt-2'>
-              <Button className='!py-2 !px-4 w-full' onClick={showCandidate}>
-                {t('showCandidate')}
-              </Button>
-              <Button
-                type='secondary'
-                onClick={() => setIsOpenModal(true)}
-                className='!py-2 !px-4 w-full border-red border text-red'
-              >
-                {t('deleteItem')}
-              </Button>
-            </div>
-          )
-        }
+        {item.isOpen && (
+          <div className="flex flex-col gap-2 mt-2">
+            <Button className="!py-2 !px-4 w-full" onClick={showCandidate}>
+              {t('showCandidate')}
+            </Button>
+            <Button
+              type="secondary"
+              onClick={() => setIsOpenModal(true)}
+              className="!py-2 !px-4 w-full border-red border text-red"
+            >
+              {t('deleteItem')}
+            </Button>
+          </div>
+        )}
       </div>
       <Modal
         isOpen={isOpenModal}
@@ -125,14 +133,14 @@ const TaskItem: FunctionComponent<TaskProps> = ({
           <>
             <Button
               isLoading={data.isLoading}
-              textAlign='center'
+              textAlign="center"
               onClick={() => deleteItem({ id: item.id, vacancyId })}
             >
               {t('yes')}
             </Button>
             <Button
-              textAlign='center'
-              type='secondary'
+              textAlign="center"
+              type="secondary"
               onClick={() => setIsOpenModal(false)}
             >
               {t('no')}
@@ -169,30 +177,33 @@ const ColumnItem: FunctionComponent<ColumnItemProps> = ({
   const { t } = useTranslation(TranslationNamespace.vacancyDetails)
 
   return (
-    <div className='min-h-medium w-[12.5rem] rounded-lg bg-white p-3 dark:bg-dark-100'
+    <div
+      className="min-h-medium w-[12.5rem] rounded-lg bg-white p-3 dark:bg-dark-100"
       onDrop={(e) => dropCardHandler(e, column)}
       onDragOver={(e) => dragOverHandler(e)}
     >
-      <div className='rounded-lg bg-gray-100 dark:bg-dark-300 mb-6'>
+      <div className="rounded-lg bg-gray-100 dark:bg-dark-300 mb-6">
         <div className={`h-1.5 ${column.color} rounded-t-lg`}></div>
-        <div className='py-2 px-4 flex items-center border-x border-b border-gray-200 justify-between rounded-b-md'>
+        <div className="py-2 px-4 flex items-center border-x border-b border-gray-200 justify-between rounded-b-md">
           <div>{t(`stages.${column.title}`)}</div>
-          <div className='w-6 h-7 bg-gray-200 dark:text-dark-300 flex items-center justify-center rounded-md'>
+          <div className="w-6 h-7 bg-gray-200 dark:text-dark-300 flex items-center justify-center rounded-md">
             {column.items?.length || '0'}
           </div>
         </div>
       </div>
-      <div className='grid gap-2'>
-        {column?.items?.map(item => <TaskItem
-          item={item}
-          refetch={refetch}
-          dropHandler={dropHandler}
-          dragStartHandler={dragStartHandler}
-          dragOverHandler={dragOverHandler}
-          setDesk={setDesk}
-          column={column}
-          desk={desk}
-        />)}
+      <div className="grid gap-2">
+        {column?.items?.map((item) => (
+          <TaskItem
+            item={item}
+            refetch={refetch}
+            dropHandler={dropHandler}
+            dragStartHandler={dragStartHandler}
+            dragOverHandler={dragOverHandler}
+            setDesk={setDesk}
+            column={column}
+            desk={desk}
+          />
+        ))}
       </div>
     </div>
   )

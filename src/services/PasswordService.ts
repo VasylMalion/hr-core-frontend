@@ -10,19 +10,19 @@ type ChangingPasswordParams = {
 
 export const PasswordApi = createApi({
   reducerPath: 'passwordApi',
-  baseQuery: fetchBaseQuery({ 
-    baseUrl: BASE_URL,    
-    prepareHeaders: (headers, { getState }) => getToken(headers, getState)
-}),
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+    prepareHeaders: (headers, { getState }) => getToken(headers, getState),
+  }),
   endpoints: (build) => ({
     updatePassword: build.mutation<{}, ChangingPasswordParams>({
       query: (params) => ({
         url: '/password',
         method: 'POST',
         body: params,
-      })
-    })
-  })
+      }),
+    }),
+  }),
 })
 
 export const { useUpdatePasswordMutation, util } = PasswordApi

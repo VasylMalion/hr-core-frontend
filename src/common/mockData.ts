@@ -161,3 +161,42 @@ export const mockVacanciesLarge = {
   ],
   count: 2,
 }
+
+export const mockEmployeesShort = {
+  users: [
+    userMock,
+    {
+      ...userMock,
+      id: 2,
+      surname: 'Doe 2'
+    },
+    {
+      ...userMock,
+      id: 3,
+      surname: 'Doe 3'
+    },
+  ],
+  count: 1,
+}
+
+export const mockEmployeesLarge = {
+  users: [
+    userMock,
+    {
+      ...userMock,
+      id: 2,
+      surname: 'Doe 2'
+    },
+    {
+      ...userMock,
+      id: 3,
+      surname: 'Doe 3'
+    },
+    {
+      ...userMock,
+      id: 4,
+      surname: 'Doe 3'
+    },
+  ],
+  count: 2,
+}

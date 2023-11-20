@@ -7,7 +7,6 @@ type useDebounceProps = {
 }
 
 export const useDebounce = ({ value }: useDebounceProps): string => {
-
   const [debouncedInputValue, setDebouncedInputValue] = useState('')
 
   useEffect(() => {
