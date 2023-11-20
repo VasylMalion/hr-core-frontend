@@ -25,7 +25,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
 
   return (
     <div className='font-[ceraProLight]'>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className='dark:text-white'>{label}</label>
       <textarea
         id={id}
         value={value}
@@ -33,7 +33,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
         placeholder={placeholder}
         className={`
           w-full h-[12rem] bg-white flex align-center gap-3 py-3 px-4 dark:bg-dark-100
-          text-base rounded-md border border-strock mt-2 resize-none
+          text-base rounded-md border border-strock mt-2 resize-none dark:text-white
           ${className} ${(validation && !validation?.isValid) && '!border-red'}
         `}
       />

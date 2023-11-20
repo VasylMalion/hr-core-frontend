@@ -9,23 +9,21 @@ import uiComponentsUa from 'ui-components/UIComponents_ua.json'
 import validationEn from 'common/validation/Validation_en.json'
 import validationUa from 'common/validation/Validation_ua.json'
 
-i18n
-  .use(initReactI18next)
-  .init({
-    lng: Lang.ua,
-    fallbackLng: Lang.en,
-    resources: {
-      en: {
-        common: commonEn,
-        uiComponents: uiComponentsEn,
-        validation: validationEn,
-      },
-      ua: {
-        common: commonUa,
-        uiComponents: uiComponentsUa,
-        validation: validationUa,
-      }
+i18n.use(initReactI18next).init({
+  lng: Lang.en,
+  fallbackLng: Lang.ua,
+  resources: {
+    en: {
+      common: commonEn,
+      uiComponents: uiComponentsEn,
+      validation: validationEn,
     },
-  })
+    ua: {
+      common: commonUa,
+      uiComponents: uiComponentsUa,
+      validation: validationUa,
+    },
+  },
+})
 
 export default i18n

@@ -7,8 +7,8 @@ import EmptyList from 'components/EmptyList/EmptyList'
 import { RoutePaths } from 'containers/AppRouter'
 import { formatDate } from 'common/utils/common'
 import { useLazyGetAllQuery } from 'services/CandidateService'
-import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
-import { useDebounce } from 'hooks/useDebounce'
+import PlusIcon from 'assets/svgs/PlusIcon'
+import { useDebounce } from 'hooks/useDebounce/useDebounce'
 import { PER_PAGE } from 'common/constants'
 import {
   Button,

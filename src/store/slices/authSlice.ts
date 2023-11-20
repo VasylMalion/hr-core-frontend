@@ -4,10 +4,10 @@ import { UserInfo } from 'common/types/common'
 import {
   IS_COLLAPSED_SIDEBAR,
   LOCAL_STORAGE_TOKEN_KEY,
-  LOCAL_STORAGE_USER_KEY
+  LOCAL_STORAGE_USER_KEY,
 } from 'common/constants'
 
-type State = {
+export type State = {
   userInfo: UserInfo
   userToken: string
   isCollapsed: boolean
@@ -38,7 +38,7 @@ const authSlice = createSlice({
       localStorage.setItem(IS_COLLAPSED_SIDEBAR, String(!state.isCollapsed))
       state.isCollapsed = !state.isCollapsed
     },
-    logOut: state => {
+    logOut: (state) => {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
       localStorage.removeItem(LOCAL_STORAGE_USER_KEY)
       state.userToken = null

@@ -7,12 +7,13 @@ type TabNavigationProps<T> = {
 }
 
 const TabNavigation = <T extends unknown>({ options, value, onChange }: TabNavigationProps<T>) => (
-  <div className='overflow-x-auto'>
+  <div className='overflow-x-auto' data-testid='tab-navigation'>
     <div className='flex gap-8 border-b border-grayLight'>
       {
         options.map((item, index) => (
           <Tab
             key={index}
+            testId={item.testId}
             title={item.title}
             value={item.value}
             isActive={item.value === value}

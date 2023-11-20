@@ -29,7 +29,7 @@ const Input: FunctionComponent<InputProps> = ({
 
   return (
     <div className='font-[ceraProLight]'>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className='dark:text-white'>{label}</label>
       <input
         ref={inputRef}
         id={id}
@@ -38,7 +38,7 @@ const Input: FunctionComponent<InputProps> = ({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={`
-          min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4
+          min-w-[10rem] bg-white flex align-center gap-3 py-3 px-4 dark:text-white
           text-base rounded-md border border-strock mt-2 dark:bg-dark-100
           ${className} ${(validation && !validation?.isValid) && '!border-red'}
         `}

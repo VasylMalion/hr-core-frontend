@@ -11,15 +11,17 @@ export const formatDate = (date: Date, separator: string = '-'): string => {
   const year = local.getFullYear()
 
   return (
-    year + separator +
-    (month <= 9 ? '0' + month : month) + separator +
+    year +
+    separator +
+    (month <= 9 ? '0' + month : month) +
+    separator +
     (day <= 9 ? '0' + day : day)
   )
 }
 
 export const errorHandler = (error: FetchBaseQueryError | SerializedError) => {
-  if (!error) return ''
-  if ('data' in error) return error.data
+  if (error && 'data' in error) return error.data
+  return ''
 }
 
 export const getToken = (headers: Headers, getState: () => unknown) => {

@@ -11,7 +11,7 @@ const AuthVerify = () => {
 
   useEffect(() => {
     const token = parseJwt(localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY))
-      if (!token || +token?.exp * 1000 < +Date.now()) dispatch(logOut())
+    if (!token || +token?.exp * 1000 < +Date.now()) dispatch(logOut())
   }, [location])
 
   const parseJwt = (token: string) => {
@@ -22,7 +22,7 @@ const AuthVerify = () => {
     }
   }
 
-  return <div/>
+  return <div />
 }
 
 export default AuthVerify

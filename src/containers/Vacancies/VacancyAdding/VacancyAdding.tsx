@@ -10,7 +10,7 @@ import { RoutePaths } from 'containers/AppRouter'
 import { InputState, SelectInputState } from 'common/types/common'
 import { checkValidation } from 'common/validation/validation'
 import { useFindEmployeeQuery } from 'services/EmployeeService'
-import { useDebounce } from 'hooks/useDebounce'
+import { useDebounce } from 'hooks/useDebounce/useDebounce'
 
 import vacancyAddingEn from './VacancyAdding_en.json'
 import vacancyAddingUa from './VacancyAdding_ua.json'
@@ -31,6 +31,8 @@ const VacancyAdding: FunctionComponent = () => {
 
   const [inputValue, setInputValue] = useState<string>('')
   const debouncedInputValue = useDebounce({ value: inputValue })
+
+  console.log(description)
 
   const [addVacancy, { isLoading, isSuccess, isError }] = useAddOneMutation()
 

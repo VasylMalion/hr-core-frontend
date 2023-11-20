@@ -23,7 +23,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         onChange={(e) => onChange(e.target.checked)}
         className='h-4 w-4 font-[ceraProLight] rounded-md border border-strock cursor-pointer'
       />
-      <label htmlFor={id} className='text-md font-[ceraProLight] cursor-pointer'>
+      <label htmlFor={id} className='text-md font-[ceraProLight] cursor-pointer dark:text-white'>
         <div>{caption}</div>
       </label>
     </div>

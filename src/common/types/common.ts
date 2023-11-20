@@ -65,30 +65,30 @@ export enum VacancyStatus {
 
 export type UserInfo = {
   id: string
-  email: string,
-  phone: string,
+  email: string
+  phone: string
   name: string
   surname: string
-  birthDate: Date 
-  gender: string 
-  address: string 
-  department: string 
-  position: string 
+  birthDate: Date
+  gender: string
+  address: string
+  department: string
+  position: string
   mobileNumber: string
-  role: string 
-  startDate: Date 
+  role: string
+  startDate: Date
 }
 
 export type Candidate = {
   id: string
   name: string
   surname: string
-  birthDate: Date 
-  gender: string 
-  email: string,
+  birthDate: Date
+  gender: string
+  email: string
   mobileNumber: string
-  location: string 
-  position: string 
+  location: string
+  position: string
   salary: number
 }
 
@@ -113,10 +113,10 @@ export enum Theme {
   DARK = 'dark',
 }
 
-export type ContentSection = Array<{ 
-  title: string 
+export type ContentSection = Array<{
+  title: string
   value: string
-  isLarge?: boolean 
+  isLarge?: boolean
 }>
 
 export type FieldError = string | [string, number]
@@ -132,6 +132,6 @@ export type FindedUser = {
   surname: string
 }
 
-export type InputState = { value: string, validation: Validation }
+export type InputState = { value: string; validation: Validation }
 
-export type SelectInputState = {value: FindedUser, validation: Validation}
+export type SelectInputState = { value: FindedUser; validation: Validation }

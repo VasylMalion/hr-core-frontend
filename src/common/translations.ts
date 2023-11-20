@@ -22,7 +22,11 @@ export enum TranslationNamespace {
   emptyList = 'emptyList',
 }
 
-export const addTranslationNamespace = (namespace: TranslationNamespace, langEn: {}, langUa: {}) => {
+export const addTranslationNamespace = (
+  namespace: TranslationNamespace,
+  langEn: {},
+  langUa: {}
+) => {
   i18n.addResourceBundle(Lang.en, namespace, langEn, true)
   i18n.addResourceBundle(Lang.ua, namespace, langUa, true)
 }

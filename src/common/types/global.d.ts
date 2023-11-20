@@ -1,4 +1,3 @@
-// declaration.d.ts
 declare module '*.scss' {
   interface IClassNames {
     [className: string]: string

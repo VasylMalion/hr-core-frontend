@@ -13,8 +13,8 @@ import {
   util
 } from 'services/VacancyService'
 import { Button, Modal, Typography, TabNavigation, SelectInput } from 'ui-components'
-import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
-import { useDebounce } from 'hooks/useDebounce'
+import PlusIcon from 'assets/svgs/PlusIcon'
+import { useDebounce } from 'hooks/useDebounce/useDebounce'
 import { checkValidation } from 'common/validation/validation'
 import { RoutePaths } from 'containers/AppRouter'
 

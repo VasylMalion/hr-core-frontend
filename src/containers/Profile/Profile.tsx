@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
 import { TabNavigation, Typography } from 'ui-components'
 
-import Details from './components/Details'
-import UpdatePassword from './components/UpdatePassword'
+import Details from './components/Details/Details'
+import UpdatePassword from './components/UpdatePassword/UpdatePassword'
 
 import profileEn from './Profile_en.json'
 import profileUa from './Profile_ua.json'
@@ -23,11 +23,13 @@ const Profile: FunctionComponent = () => {
   const options = [
     {
       title: t('tabs.details'),
-      value: TabNavigationTypes.DETAILS
+      value: TabNavigationTypes.DETAILS,
+      testId: 'tab-details'
     },
     {
       title: t('tabs.updatePassword'),
-      value: TabNavigationTypes.UPDATE_PASSWORD
+      value: TabNavigationTypes.UPDATE_PASSWORD,
+      testId: 'tab-upd-password'
     }
   ]
 
@@ -46,7 +48,7 @@ const Profile: FunctionComponent = () => {
   }
 
   return (
-    <>
+    <div data-testid='profile-page'>
       <Typography appearance='title'>
         {t('title')}
       </Typography>
@@ -56,7 +58,7 @@ const Profile: FunctionComponent = () => {
         onChange={setTab}
       />
       <div className='my-8'>{getContent()}</div>
-    </>
+    </div>
   )
 }
 

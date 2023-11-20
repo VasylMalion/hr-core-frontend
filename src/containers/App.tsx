@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { Navbar } from 'ui-components'
-import { useScreenResolution } from 'hooks/useScreenResolution'
+import { useScreenResolution } from 'hooks/useScreenResolution/useScreenResolution'
 import { useTheme } from 'common/theme/useTheme'
 
 import AppLayout from './AppLayout/AppLayout'

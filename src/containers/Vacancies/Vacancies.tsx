@@ -6,10 +6,10 @@ import { TranslationNamespace, addTranslationNamespace } from 'common/translatio
 import { Vacancy, VacancyStatus } from 'common/types/common'
 import { useLazyGetAllQuery } from 'services/VacancyService'
 import { Button, Typography, WithPreload, Pagination, TabNavigation, Input, Checkbox } from 'ui-components'
-import { ReactComponent as PlusIcon } from 'assets/svgs/plus.svg'
+import PlusIcon from 'assets/svgs/PlusIcon'
 import { RoutePaths } from 'containers/AppRouter'
 import EmptyList from 'components/EmptyList/EmptyList'
-import { useDebounce } from 'hooks/useDebounce'
+import { useDebounce } from 'hooks/useDebounce/useDebounce'
 
 import VacancyItem from './VacancyItem'
 import vacanciesEn from './Vacancies_en.json'
@@ -35,7 +35,7 @@ const Vacancies: FunctionComponent = () => {
 
   const [getVacancies, { data, isFetching, isSuccess, isError }] = useLazyGetAllQuery()
 
-  const list = data?.vacancies.map((item: Vacancy) => <VacancyItem {...item} />)
+  const list = data?.vacancies.map((item: Vacancy, index: number) => <VacancyItem key={index} {...item} />)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -67,7 +67,7 @@ const Vacancies: FunctionComponent = () => {
   ]
 
   return (
-    <div>
+    <div data-testid='vacancies-page'>
       <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
         <Typography appearance='title'>
           {t('title')}

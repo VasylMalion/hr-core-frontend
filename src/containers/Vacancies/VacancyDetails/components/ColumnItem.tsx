@@ -26,7 +26,7 @@ type TaskProps = {
   item: Task
 } & Omit<ColumnItemProps, 'dropCardHandler'>
 
-const Task: FunctionComponent<TaskProps> = ({
+const TaskItem: FunctionComponent<TaskProps> = ({
   item,
   desk,
   refetch,
@@ -183,7 +183,7 @@ const ColumnItem: FunctionComponent<ColumnItemProps> = ({
         </div>
       </div>
       <div className='grid gap-2'>
-        {column?.items?.map(item => <Task
+        {column?.items?.map(item => <TaskItem
           item={item}
           refetch={refetch}
           dropHandler={dropHandler}

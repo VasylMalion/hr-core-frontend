@@ -98,7 +98,9 @@ const Login: FunctionComponent = () => {
   }
 
   return (
-    <div className='bg-purpleLight dark:bg-dark-300 h-screen w-screen flex items-center justify-center'>
+    <div 
+    data-testid='login-page'
+    className='bg-purpleLight dark:bg-dark-300 h-screen w-screen flex items-center justify-center'>
       <div 
         className='
           flex flex-col gap-8 justify-center bg-white py-8 px-8
@@ -133,6 +135,7 @@ const Login: FunctionComponent = () => {
           )}
         </div>
         <Button
+          testId='login-btn'
           disabled={!isValid}
           isLoading={isLoading}
           textAlign='center'

@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, memo } from 'react'
 
-import { ReactComponent as ArrowIcon } from 'assets/svgs/arrow.svg'
+import ArrowIcon from 'assets/svgs/ArrowIcon'
 
 type PaginationProps = {
   pagesCount: number
@@ -29,7 +29,7 @@ const PaginationItem: FunctionComponent<PaginationItemProps> = ({ value = 1, isA
 
 const Pagination: FunctionComponent<PaginationProps> = ({
   pagesCount,
-  currentPage,
+  currentPage = 1,
   onChange,
 }) => {
 
@@ -56,7 +56,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
   }
 
   return (
-    <div className='flex gap-2 justify-center'>
+    <div className='flex gap-2 justify-center' data-testid='pagination'>
       <PaginationItem
         onClick={handlePrevClick}
         disabled={currentPage === 1}

@@ -3,9 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
-import { TranslationNamespace, addTranslationNamespace } from 'common/translations'
+import {
+  TranslationNamespace,
+  addTranslationNamespace,
+} from 'common/translations'
 import { Button, Modal, Typography, WithPreload } from 'ui-components'
-import { useGetOneQuery, useLazyDeleteOneQuery, util } from 'services/CandidateService'
+import {
+  useGetOneQuery,
+  useLazyDeleteOneQuery,
+  util,
+} from 'services/CandidateService'
 import { formatDate } from 'common/utils/common'
 import { RoutePaths } from 'containers/AppRouter'
 import { ContentSection } from 'common/types/common'
@@ -83,13 +90,11 @@ const EmployeeDetails: FunctionComponent = () => {
 
   const getContent = (title: string, info: ContentSection) => (
     <div>
-      <Typography appearance='subtitle'>
-        {t(title)}
-      </Typography>
-      <div className='grid gap-2 dark:bg-dark-100 bg-white p-4 rounded'>
-        {info.map(item => (
-          <div className='flex gap-2'>
-            <span className='font-[ceraProLight]'>{item.title}</span>
+      <Typography appearance="subtitle">{t(title)}</Typography>
+      <div className="grid gap-2 dark:bg-dark-100 bg-white p-4 rounded">
+        {info.map((item, index) => (
+          <div className="flex gap-2" key={index}>
+            <span className="font-[ceraProLight]">{item.title}</span>
             <span>{item.value}</span>
           </div>
         ))}
@@ -99,23 +104,25 @@ const EmployeeDetails: FunctionComponent = () => {
 
   return (
     <>
-      <WithPreload isSuccess={isSuccess} isLoading={isLoading} isError={isError}>
-        <div className='flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4'>
-          <Typography appearance='title'>
-            {t('title', { num: id })}
-          </Typography>
+      <WithPreload
+        isSuccess={isSuccess}
+        isLoading={isLoading}
+        isError={isError}
+      >
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 md:mb-4">
+          <Typography appearance="title">{t('title', { num: id })}</Typography>
           <div>
             <Button
-              type='secondary'
+              type="secondary"
               isLoading={false}
               onClick={() => setIsOpenModal(true)}
-              className='border-red border !text-red'
+              className="border-red border !text-red"
             >
               {t('deleteCandidate')}
             </Button>
           </div>
         </div>
-        <div className='max-w-medium flex flex-col gap-6'>
+        <div className="max-w-medium flex flex-col gap-6">
           {getContent('personalInfo', personalInfo)}
           {getContent('contactInfo', contactInfo)}
           {getContent('workInfo', workInfo)}
@@ -130,14 +137,14 @@ const EmployeeDetails: FunctionComponent = () => {
           <>
             <Button
               isLoading={deletingData.isLoading}
-              textAlign='center'
+              textAlign="center"
               onClick={() => deleteCandidate({ id })}
             >
               {t('yes')}
             </Button>
             <Button
-              textAlign='center'
-              type='secondary'
+              textAlign="center"
+              type="secondary"
               onClick={() => setIsOpenModal(false)}
             >
               {t('no')}
@@ -163,4 +170,8 @@ const EmployeeDetails: FunctionComponent = () => {
 
 export default EmployeeDetails
 
-addTranslationNamespace(TranslationNamespace.candidateDetails, candidateDetailsEn, candidateDetailsUa)
+addTranslationNamespace(
+  TranslationNamespace.candidateDetails,
+  candidateDetailsEn,
+  candidateDetailsUa
+)

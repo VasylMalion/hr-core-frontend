@@ -2,7 +2,9 @@ import { Suspense } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
 
+import { CandidateApi } from 'services/CandidateService'
 import ThemeProvider from 'common/theme/ThemeProvider'
 import SuspensePreloader from 'components/SuspensePreloader/SuspensePreloader'
 import { setupStore } from 'store/store'
@@ -17,11 +19,13 @@ const store = setupStore()
 render(
   <Suspense fallback={<SuspensePreloader fullView />}>
     <ThemeProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+      <ApiProvider api={CandidateApi}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </ApiProvider>
     </ThemeProvider>
   </Suspense>,
   document.getElementById('root')

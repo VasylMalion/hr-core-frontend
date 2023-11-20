@@ -93,8 +93,8 @@ const EmployeeDetails: FunctionComponent = () => {
         {t(title)}
       </Typography>
       <div className='grid gap-2 dark:bg-dark-100 bg-white p-4 rounded'>
-        {info.map(item => (
-          <div className='flex gap-2'>
+        {info.map((item, index) => (
+          <div className='flex gap-2' key={index}>
             <span className='font-[ceraProLight]'>{item.title}</span>
             <span>{item.value}</span>
           </div>

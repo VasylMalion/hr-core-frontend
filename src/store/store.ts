@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+  PreloadedState,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit'
 
 import { AuthApi } from 'services/AuthService'
 import { VacancyApi } from 'services/VacancyService'
@@ -17,16 +21,20 @@ const rootReducer = combineReducers({
   [authSlice.name]: authSlice.reducer,
 })
 
-export const setupStore = () => {
+export const setupStore: any = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-      AuthApi.middleware,
-      VacancyApi.middleware,
-      EmployeeApi.middleware,
-      CandidateApi.middleware,
-      PasswordApi.middleware,
-    ),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(
+        AuthApi.middleware,
+        VacancyApi.middleware,
+        EmployeeApi.middleware,
+        CandidateApi.middleware,
+        PasswordApi.middleware
+      ),
+    preloadedState,
   })
 }
 

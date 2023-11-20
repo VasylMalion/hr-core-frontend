@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode, useEffect, useRef, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ReactComponent as CloseIcon } from 'assets/svgs/close.svg'
+import CloseIcon from 'assets/svgs/CloseIcon'
 import { TranslationNamespace } from 'common/translations'
 import { Button } from 'ui-components'
 

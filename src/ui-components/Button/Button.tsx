@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, MouseEvent, memo } from 'react'
 
-import Loading from 'assets/svgs/Loading/Loading'
+import Loading from 'assets/svgs/Loading'
 
 type ButtonProps = {
   icon?: ReactNode
@@ -11,6 +11,7 @@ type ButtonProps = {
   textAlign?: 'center' | 'start' | 'end'
   isLoading?: boolean
   disabled?: boolean
+  testId?: string 
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -21,11 +22,13 @@ const Button: FunctionComponent<ButtonProps> = ({
   className,
   onClick,
   type = 'primary',
-  textAlign = 'start'
+  textAlign = 'start',
+  testId,
 }) => {
 
   return (
     <button
+      data-testid={testId}
       onClick={onClick}
       disabled={(disabled || isLoading)}
       className={`
@@ -33,7 +36,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         ${className} 
         ${disabled && '!text-[#00000042] !bg-[#0000001f] dark:!text-white dark:!bg-dark-100 cursor-not-allowed'}
         ${type === 'primary' && 'text-[white] bg-blue fill-white'}
-        ${type === 'secondary' && 'fill-gray-400 text-gray-400'}
+        ${type === 'secondary' && 'fill-gray-400 text-gray-400 dark:text-gray-100 dark:fill-gray-100'}
         ${textAlign === 'start' && 'justify-start'}
         ${textAlign === 'center' && 'justify-center'}
         ${textAlign === 'end' && 'justify-end'}

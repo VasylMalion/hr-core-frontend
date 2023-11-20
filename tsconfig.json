@@ -19,5 +19,13 @@
     "compilerOptions": {
       "module": "CommonJS"
     }
+  },
+  "include": ["src", "./config/jest/setupTests.ts", "cypress"],
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/mocks/fileMock.ts",
+      "\\.(css|less|sass|scss)$": "<rootDir>/config/jest/mocks/styleMock.ts",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/config/jest/mocks/fileMock.ts"
+    }
   }
 }
